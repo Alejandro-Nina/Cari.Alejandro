@@ -1,64 +1,79 @@
-# Proyecto de Automatización de Análisis Sísmico
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe Proyecto Sísmico</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Automatización en el Diseño Sísmico de Edificaciones</h1>
+        <nav>
+            <ul>
+                <li><a href="#generalidades">Generalidades</a></li>
+                <li><a href="#antecedentes">Antecedentes</a></li>
+                <li><a href="#planteamiento">Planteamiento del Problema</a></li>
+                <li><a href="#objetivos">Objetivos</a></li>
+                <li><a href="#justificaciones">Justificaciones</a></li>
+                <li><a href="#alcance">Alcance y Limitaciones</a></li>
+            </ul>
+        </nav>
+    </header>
 
-## 1. GENERALIDADES
+    <main>
+        <section id="generalidades">
+            <h2>1. Generalidades</h2>
+            <h3>1.1 Introducción</h3>
+            <p>El diseño de un edificio con análisis sísmico es fundamental para garantizar la seguridad y estabilidad de las edificaciones frente a los efectos de un terremoto. Este proyecto tiene como objetivo automatizar este proceso mediante herramientas computacionales que permitan realizar los cálculos necesarios de manera rápida y precisa.</p>
 
-### 1.1. Introducción
-El diseño de un edificio con análisis sísmico es fundamental en la ingeniería sísmica y estructural, especialmente en zonas propensas a efectos sísmicos. Para garantizar la seguridad y estabilidad de una estructura de hormigón armado, es necesario un estudio preciso de su respuesta sísmica (Chopa, 2012) Viéndolo desde esa perspectiva, el uso de software como ETABS, Revit, Dynamo y Python representa una oportunidad clave para desarrollar y automatizar el análisis sísmico en edificaciones (Revit, 2020).
+            <h3>1.2 Antecedentes</h3>
+            <p>El diseño con un análisis sísmico es una disciplina esencial para una estructura de gran altura, especialmente en zonas de alta actividad sísmica. Existen diferentes métodos y normativas para realizar estos análisis, siendo uno de los más utilizados el análisis de estructuras con el método de espectro de respuesta. Sin embargo, la automatización de estos cálculos sigue siendo un reto técnico que este proyecto busca resolver.</p>
+        </section>
 
-ETABS es uno de los paquetes de software más potencialmente utilizados para el análisis estructural. ETABS fue clave en la creación del modelo matemático del Burj Khalifa, el edificio más alto del mundo, diseñado por la firma Skidmore, Owings & Merrill LLP (SOM) de Chicago (CSIamerica, 2010). ETABS permite la modelación de edificaciones en 3D y la simulación de las reacciones ante las cargas sísmicas. Y viendo el lado como el software del paquete Revit y Dynamo ofrecen la creación de modelados, detallados e información de construcción (BIM) y la automatización de las tareas repetitivas (Revit, 2020). También la integración de las herramientas como Python y su interoperabilidad con el software ETABS son fundamentales para poder obtener la respuesta dinámica de la estructura (Van de Lindt, 2018).
+        <section id="planteamiento">
+            <h2>1.3 Planteamiento del Problema</h2>
+            <h3>1.3.1 Identificación del problema</h3>
+            <p>En la actualidad, los cálculos sísmicos para el diseño de edificaciones de hormigón armado suelen realizarse de manera manual o utilizando programas que requieren de entradas complejas y cálculos extensos. Este proceso puede ser tedioso y propenso a errores humanos. Además, la falta de automatización en la fase de diseño impide realizar simulaciones rápidas y precisas para diferentes escenarios sísmicos. El reto del proyecto es automatizar este proceso para facilitar el diseño estructural en regiones sísmicamente activas.</p>
+        </section>
 
-Este proyecto se centrará en el desarrollo y flujo de trabajo potencial en la combinación de los paquetes ETABS, Revit, Dynamo y Python para automatizar el análisis sísmico de la edificación. Se espera que el resultado de este trabajo contribuya de manera significativa al avance en la ingeniería sísmica, proporcionando las herramientas mencionadas y el método innovador para la evaluación y el diseño estructural ante momentos sísmicos (Naem, 2001).
+        <section id="objetivos">
+            <h2>1.5 Objetivo y acciones</h2>
+            <h3>1.5.1 Objetivo General</h3>
+            <p>Desarrollar y automatizar el análisis sísmico de edificaciones en estructuras de hormigón armado, con el fin de optimizar el proceso de diseño y mejorar la seguridad de las edificaciones frente a terremotos.</p>
 
-### 1.2. Antecedentes
-El diseño con un análisis sísmico es una disciplina esencial para una estructura, especialmente en zonas donde se pueden generar terremotos. La ingeniería sísmica debe garantizar las condiciones para que puedan resistirse de manera íntegra, minimizar riesgos de colapso y evitar pérdidas humanas. Para ello, el uso de paquetes estructurales como herramientas para tener el modelado, simulación, y comportamiento a cargas sísmicas ha cobrado gran relevancia en su uso por la precisión que calculan para los diseños y no haya fallas (Chopa, 2012; FEMA 2009).
+            <h3>1.5.2 Objetivos Específicos</h3>
+            <ul>
+                <li>Automatizar el cálculo de las fuerzas sísmicas aplicadas a las estructuras.</li>
+                <li>Desarrollar una herramienta computacional basada en un modelo estructural que permita calcular la respuesta sísmica.</li>
+                <li>Implementar un sistema que integre el análisis sísmico con el diseño estructural en tiempo real.</li>
+            </ul>
+        </section>
 
-El tiempo fue clave para el avance de la tecnología, el uso de los paquetes de diseño de Building Information Modeling (BIM) que ha transformado la manera en que trabajan en el diseño y gestionan los proyectos de construcción. Revit, desarrollado por Autodesk, es un software utilizado en diseño arquitectónico y estructural, con el que crean modelos tridimensionales precisos de las edificaciones. Este programa ayuda con la información y mejora la coordinación entre diversas disciplinas en el ámbito de la construcción (Revit, 2020). 
+        <section id="justificaciones">
+            <h2>1.6 Justificaciones</h2>
+            <h3>1.6.1 Justificación Técnica</h3>
+            <p>La justificación técnica de este proyecto se basa en la optimización de los procesos de diseño estructural y el análisis sísmico. La automatización de estos cálculos no solo mejora la eficiencia del diseño, sino que también aumenta la precisión al minimizar errores humanos. Además, al integrar estos cálculos con herramientas modernas, se agiliza el proceso y se permite evaluar rápidamente diversas configuraciones estructurales bajo distintos escenarios sísmicos.</p>
 
-Con el uso de la automatización en el flujo de trabajo para el diseño de análisis estructural se ha adquirido importancia en la ingeniería. Dynamo, el complemento visual de programación integrado en Revit, permite optimizar los procesos de las tareas repetitivas y la generación de diseños más eficientes. Su capacidad de parametrización permite personalizar el flujo de trabajo y ayuda a mejorar la productividad y minimizar las fallas (Eastman, 2011).
+            <h3>1.6.2 Justificación Económica</h3>
+            <p>El desarrollo de esta herramienta de automatización permitirá reducir los tiempos de cálculo, lo que se traduce en menores costos para los proyectos de construcción. La reducción en el tiempo de diseño también implica una disminución en los costos operativos y el tiempo de entrega del proyecto. Esto resulta en una ventaja competitiva para las empresas de construcción que adopten esta tecnología.</p>
+        </section>
 
-### 1.3. Planteamiento del Problema
+        <section id="alcance">
+            <h2>1.7 Alcance y Limitaciones</h2>
+            <h3>1.7.1 Alcance Geográfico</h3>
+            <p>El alcance geográfico de este proyecto está centrado en Bolivia, específicamente en regiones de alta actividad sísmica como Santa Cruz y Cochabamba, donde los terremotos representan una amenaza constante. A pesar de que el enfoque es local, la metodología desarrollada podría ser adaptada a otros países de América Latina con características sísmicas similares.</p>
 
-#### 1.3.1. Identificación del problema
-El diseño de edificaciones de hormigón armado con resistencia sísmica es un proceso largo que abarca desde el análisis estructural hasta la documentación del proyecto, enfrentando varios desafíos que afectan su eficiencia y precisión. La generación manual de espectros de respuesta sísmica, basada en normativas, requiere cálculos detallados e ingreso manual en ETABS, lo que incrementa el riesgo de errores y retrasa el proceso.
+            <h3>1.7.2 Alcance Temporal</h3>
+            <p>Este proyecto tiene un tiempo estimado de desarrollo de 6 meses, durante los cuales se llevará a cabo la investigación, desarrollo y pruebas de la herramienta. La implementación y pruebas iniciales se realizarán en una estructura de edificio modelo para validar la eficacia de la herramienta automatizada.</p>
 
-#### 1.4. Formulación del problema
-¿Cómo se puede desarrollar y automatizar el diseño a análisis sísmico de edificaciones de hormigón armado utilizando el software ETABS, Revit, Dynamo y Python, con el objetivo de mejorar la eficiencia en la generación de espectros de respuesta, la interoperabilidad entre plataformas y la automatización de planos detallados estructurales?
+            <h3>1.7.3 Limitaciones</h3>
+            <p>Entre las principales limitaciones del proyecto se incluyen la dependencia de la calidad de los datos ingresados, la necesidad de un software compatible con el que se desarrolle la herramienta de análisis y las limitaciones tecnológicas en el procesamiento de grandes volúmenes de datos sísmicos en tiempo real.</p>
+        </section>
+    </main>
 
-## 1.5. Objetivo y Acciones
-
-### 1.5.1. Objetivo General
-Desarrollar y automatizar el análisis sísmico de edificaciones de hormigón armado mediante el uso de ETABS, Revit, Dynamo y Python, con el fin de optimizar la generación de espectros de respuesta, mejorar la interoperabilidad entre plataformas y agilizar la documentación estructural.
-
-### 1.5.2. Objetivos Específicos
-- Automatizar la generación de espectros de respuesta sísmica mediante Python, considerando los requisitos de NB 12250 y la ASCE 7-22 para la caracterización de acción sísmica.
-- Modelar y analizar una edificación de hormigón armado en ETABS con diseño sismo resistente considerando los criterios de diseño de NB 122500 2:2021.
-- Integrar el modelo estructural de ETABS en Revit mediante el uso del plugin CSIXRevit.
-- Automatizar la generación de planos estructurales en Revit utilizando Dynamo.
-
-## 1.6. Justificaciones
-
-### 1.6.1. Justificación Técnica
-La justificación técnica de este proyecto se basa en la optimización del diseño sísmico y estructural mediante la automatización con ETABS, Revit, Dynamo y Python. Esto permite mayor precisión en los cálculos, reducción de tiempos y minimización de errores humanos.
-
-### 1.6.2. Justificación Económica
-La justificación económica se basa en la reducción de costos y tiempos en el diseño y análisis estructural. La automatización elimina tareas manuales y optimiza el proceso.
-
-### 1.6.3. Justificación Social
-Este proyecto contribuye a la mejora de la seguridad sísmica y optimización de recursos, protegiendo vidas y bienes en zonas propensas a terremotos.
-
-### 1.6.4. Justificación Institucional
-La integración de Python, ETABS, Revit y Dynamo impulsa el uso de herramientas avanzadas, mejorando la competitividad de los ingenieros civiles y posicionando a las instituciones como líderes en metodologías automatizadas.
-
-## 1.7. Alcance y Limitaciones
-
-### 1.7.1. Alcance Geográfico
-El alcance de este proyecto se centra en Bolivia, especialmente en zonas de alta actividad sísmica como Santa Cruz y Cochabamba.
-
-### 1.7.2. Alcance Temporal
-El proyecto tendrá una duración de dos semestres académicos, comenzando en la gestión I-2025 y finalizando en la gestión II-2025.
-
-### 1.7.3. Limitaciones
-- Dependencia de software y licencias.
-- Complejidad técnica en la integración de plataformas.
-- Precisión del análisis sísmico depende de la calidad del modelo y datos.
-
+    <footer>
+        <p>&copy; 2025 Proyecto Sísmico. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
