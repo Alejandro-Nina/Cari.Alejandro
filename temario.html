@@ -52,6 +52,8 @@
       color: #ffcc00;
       position: absolute;
       top: 5%;
+      z-index: 10;
+      margin-top: 20px; /* Espacio adicional */
     }
 
     /* Contenedor con las opciones */
@@ -139,12 +141,13 @@
     @media (max-width: 768px) {
       .container {
         grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
-        margin-top: 80px;
+        margin-top: 180px; /* Más espacio arriba para que no se sobreponga */
       }
 
       .main-title {
         font-size: 20px;
         top: 10%;
+        margin-top: 50px; /* Ajuste para que no se superponga */
       }
 
       .option-btn {
