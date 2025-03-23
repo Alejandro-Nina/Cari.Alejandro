@@ -16,67 +16,58 @@
       width: 100%;
       font-family: Arial, sans-serif;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
       color: white;
       background: linear-gradient(135deg, #1e3c72, #2a5298);
       padding-top: 40px;
     }
 
-    /* Título Principal */
-    .main-title {
-      font-size: 24px;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-align: center;
-      margin-bottom: 40px;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.6);
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-      width: 90%;
-      color: #ffcc00;
-    }
-
     /* Contenedor Principal */
     .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(10px);
-      border-radius: 15px;
-      padding: 30px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 20px;
+      width: 80%;
+      max-width: 1200px;
+      padding: 20px;
       text-align: center;
-      max-width: 900px;
       color: white;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
-    /* Cuadros para las opciones */
+    /* Cuadros de las opciones */
     .option-btn {
-      display: block;
       background: rgba(255, 255, 255, 0.3);
       color: white;
-      padding: 60px;
-      margin: 15px 0;
+      padding: 40px;
+      margin: 10px;
       text-decoration: none;
       border-radius: 15px;
       font-size: 18px;
       font-weight: bold;
-      width: 100%;
-      max-width: 400px;
-      text-align: center;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       background-size: cover;
       background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      height: 300px;
     }
 
+    /* Efecto de hover para los cuadros */
     .option-btn:hover {
       transform: scale(1.05);
       box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
+    }
+
+    /* Nombre debajo de la imagen */
+    .option-btn h3 {
+      margin-top: 15px;
+      font-size: 22px;
+      text-transform: uppercase;
+      color: #ffcc00;
     }
 
     /* Botón Volver */
@@ -107,6 +98,7 @@
     /* Filtro para legibilidad */
     .container {
       background: rgba(0, 0, 0, 0.5);
+      border-radius: 20px;
     }
 
     /* Pie de página */
@@ -125,12 +117,27 @@
     Desarrollo y Automatización del Análisis Sísmico con ETABS, Revit, Dynamo y Python
   </div>
 
-  <!-- Contenedor con opciones -->
+  <!-- Contenedor con opciones en dos columnas -->
   <div class="container">
-    <a class="option-btn" href="#perfil" style="background-image: url('perfil-imagen.jpg');">Perfil del Proyecto</a>
-    <a class="option-btn" href="#marco-teorico" style="background-image: url('marco-teorico-imagen.jpg');">Marco Teórico</a>
-    <a class="option-btn" href="#ingenieria" style="background-image: url('ingenieria-imagen.jpg');">Ingeniería del Proyecto</a>
-    <a class="option-btn" href="#conclusion" style="background-image: url('conclusion-imagen.jpg');">Conclusión</a>
+    <!-- Cuadro 1: Perfil del Proyecto -->
+    <a class="option-btn" href="#perfil" style="background-image: url('perfil-imagen.jpg');">
+      <h3>Perfil del Proyecto</h3>
+    </a>
+
+    <!-- Cuadro 2: Marco Teórico -->
+    <a class="option-btn" href="#marco-teorico" style="background-image: url('marco-teorico-imagen.jpg');">
+      <h3>Marco Teórico</h3>
+    </a>
+
+    <!-- Cuadro 3: Ingeniería del Proyecto -->
+    <a class="option-btn" href="#ingenieria" style="background-image: url('ingenieria-imagen.jpg');">
+      <h3>Ingeniería del Proyecto</h3>
+    </a>
+
+    <!-- Cuadro 4: Conclusión -->
+    <a class="option-btn" href="#conclusion" style="background-image: url('conclusion-imagen.jpg');">
+      <h3>Conclusión</h3>
+    </a>
   </div>
 
   <!-- Botón Volver -->
