@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Proyecto de Grado</title>
+  <title>Temario</title>
   <style>
     * {
       margin: 0;
@@ -15,16 +15,18 @@
       height: 100%;
       width: 100%;
       font-family: Arial, sans-serif;
-      background: url('FONDO REVIT.png') no-repeat center center fixed;
-      background-size: cover;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      color: white;
       text-align: center;
-      padding: 20px;
+      background: url('REVIT.png') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
     }
 
+    /* Oscurecimiento del fondo */
     body::before {
       content: "";
       position: absolute;
@@ -36,80 +38,97 @@
       z-index: -1;
     }
 
-    .title-header {
-      font-size: 32px;
+    /* Título principal */
+    .main-title {
+      font-size: 24px;
       font-weight: bold;
-      color: white;
       text-transform: uppercase;
-      margin-bottom: 20px;
-      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      width: 90%;
+      max-width: 800px;
+      color: #ffcc00;
+      position: absolute;
+      top: 5%;
     }
 
+    /* Contenedor con las opciones */
     .container {
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(10px);
-      border-radius: 15px;
-      padding: 25px;
-      max-width: 80%;
-      color: white;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 20px;
+      width: 90%;
+      max-width: 600px;
+      margin-top: 120px;
     }
 
-    .title {
+    /* Cuadros de opciones */
+    .option-btn {
+      background: rgba(255, 255, 255, 0.3);
+      color: white;
+      text-decoration: none;
+      border-radius: 15px;
       font-size: 18px;
       font-weight: bold;
-      margin-bottom: 15px;
-    }
-
-    .badge {
-      display: inline-block;
-      background-color: #ffcc00;
-      color: #000;
-      font-weight: bold;
-      border-radius: 20px;
-      padding: 8px 16px;
-      font-size: 16px;
-      margin-bottom: 15px;
-    }
-
-    .logos {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background-size: cover;
+      background-position: center;
+      width: 220px;
+      height: 220px;
       display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 15px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding-bottom: 10px;
+      position: relative;
     }
 
-    .logo {
-      width: 60px;
-      height: 60px;
-      transition: transform 0.3s ease;
+    .option-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 204, 0, 0.9);
     }
 
-    .logo:hover {
-      transform: scale(1.15);
+    /* Nombre de cada cuadro */
+    .option-btn h3 {
+      font-size: 16px;
+      text-transform: uppercase;
+      color: #ffcc00;
+      background: rgba(0, 0, 0, 0.7);
+      width: 100%;
+      text-align: center;
+      padding: 6px 0;
+      border-radius: 0 0 15px 15px;
+      position: absolute;
+      bottom: 0;
     }
 
-    .continue-btn {
+    /* Botón Volver */
+    .back-btn {
       display: inline-block;
-      padding: 12px 24px;
+      background: linear-gradient(45deg, #ff5733, #ff9966);
+      color: white;
+      padding: 12px 22px;
+      text-decoration: none;
       border-radius: 8px;
       font-size: 16px;
       font-weight: bold;
-      text-decoration: none;
-      background: linear-gradient(45deg, #ff8000, #ffcc00);
-      color: white;
+      margin-top: 20px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .continue-btn:hover {
+    .back-btn:hover {
       transform: scale(1.1);
-      box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
+      box-shadow: 0 0 10px rgba(255, 87, 51, 0.8);
     }
 
-    .author-info {
-      margin-top: 15px;
+    /* Pie de página */
+    .footer {
       font-size: 14px;
+      position: absolute;
+      bottom: 5%;
       color: white;
       text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     }
@@ -117,26 +136,33 @@
 </head>
 <body>
 
-  <div class="title-header">PROYECTO DE GRADO</div>
-
-  <div class="container">
-    <div class="title">
-      AUTOMATIZACIÓN DEL ANÁLISIS Y DISEÑO SÍSMICO DE EDIFICACIONES DE HORMIGÓN ARMADO CON ETABS, REVIT, DYNAMO Y PYTHON
-    </div>
-    
-    <div class="badge">INGENIERÍA CIVIL</div>
-    
-    <div class="logos">
-      <img src="ETABS.jpg" alt="Logo ETABS" class="logo">
-      <img src="REVIT.jpg" alt="Logo REVIT" class="logo">
-      <img src="PYTHON.jpg" alt="Logo PYTHON" class="logo">
-    </div>
-
-    <a class="continue-btn" href="temario.html">Continuar</a>
+  <!-- Título Principal -->
+  <div class="main-title">
+    Desarrollo y Automatización del Análisis Sísmico con ETABS, Revit, Dynamo y Python
   </div>
 
-  <div class="author-info">
-    <p><strong>ALEJANDRO NINA CARI</strong> - 2025</p>
+  <!-- Contenedor con opciones en dos columnas -->
+  <div class="container">
+    <a class="option-btn" href="#perfil" style="background-image: url('perfil-imagen.jpg');">
+      <h3>Perfil del Proyecto</h3>
+    </a>
+    <a class="option-btn" href="#marco-teorico" style="background-image: url('marco-teorico-imagen.jpg');">
+      <h3>Marco Teórico</h3>
+    </a>
+    <a class="option-btn" href="#ingenieria" style="background-image: url('ingenieria-imagen.jpg');">
+      <h3>Ingeniería del Proyecto</h3>
+    </a>
+    <a class="option-btn" href="#conclusion" style="background-image: url('conclusion-imagen.jpg');">
+      <h3>Conclusión</h3>
+    </a>
+  </div>
+
+  <!-- Botón Volver -->
+  <a class="back-btn" href="index.html">Volver a Inicio</a>
+
+  <!-- Pie de página con nombre -->
+  <div class="footer">
+    ALEJANDRO NINA CARI - 2025
   </div>
 
 </body>
