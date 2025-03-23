@@ -35,6 +35,7 @@
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
       width: 90%;
+      color: #ffcc00;
     }
 
     /* Título de Temarios */
@@ -45,6 +46,7 @@
       margin-top: 20px;
       margin-bottom: 15px;
       text-transform: uppercase;
+      color: #ffcc00;
     }
 
     /* Contenedor */
@@ -77,6 +79,25 @@
       box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
     }
 
+    /* Botón Volver */
+    .back-btn {
+      display: inline-block;
+      background: linear-gradient(45deg, #ff5733, #ff9966);
+      color: white;
+      padding: 15px 30px;
+      margin: 20px 0;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .back-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(255, 87, 51, 0.8);
+    }
+
     /* Fondo con imagen */
     body {
       background: url('FONDO REVIT.png') no-repeat center center fixed;
@@ -103,6 +124,9 @@
   <div class="main-title">
     DESARROLLO Y AUTOMATIZACIÓN DEL ANÁLISIS SÍSMICO DE TIPO DE EDIFICACIONES DE HORMIGÓN ARMADO CON ETABS, REVIT, DYNAMO Y PYTHON PARA LA GENERACIÓN DE ESPECTRO DE RESPUESTA
   </div>
+
+  <!-- Botón Volver -->
+  <a href="anterior-pagina.html" class="back-btn">Volver a la Página Anterior</a>
 
   <!-- Título de Temarios -->
   <div class="subtitle">Temarios</div>
