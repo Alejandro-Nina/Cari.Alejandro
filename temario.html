@@ -21,7 +21,7 @@
       justify-content: center;
       color: white;
       text-align: center;
-      background: url('FONFO REVIT.png') no-repeat center center fixed;
+      background: url('REVIT.png') no-repeat center center fixed;
       background-size: cover;
       position: relative;
     }
@@ -62,6 +62,7 @@
       width: 90%;
       max-width: 600px;
       margin-top: 120px;
+      flex-grow: 1;
     }
 
     /* Cuadros de opciones */
@@ -128,9 +129,42 @@
     .footer {
       font-size: 14px;
       position: absolute;
-      bottom: 5%;
+      bottom: 20px;
       color: white;
       text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Media Queries para pantallas pequeñas */
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+        margin-top: 80px;
+      }
+
+      .main-title {
+        font-size: 20px;
+        top: 10%;
+      }
+
+      .option-btn {
+        width: 180px;
+        height: 180px;
+      }
+
+      .footer {
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .main-title {
+        font-size: 18px;
+      }
+
+      .option-btn {
+        width: 150px;
+        height: 150px;
+      }
     }
   </style>
 </head>
