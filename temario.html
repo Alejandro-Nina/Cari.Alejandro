@@ -15,22 +15,39 @@
       height: 100%;
       width: 100%;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       color: white;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
     }
 
-    .title-header {
-      font-size: 35px;
+    /* Título Principal */
+    .main-title {
+      font-size: 28px;
       font-weight: bold;
       text-transform: uppercase;
-      margin-bottom: 20px;
       text-align: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      width: 90%;
     }
 
+    /* Título de Temarios */
+    .subtitle {
+      font-size: 22px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    /* Contenedor */
     .container {
       background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(10px);
@@ -42,6 +59,7 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
+    /* Botones */
     .option-btn {
       display: inline-block;
       background: linear-gradient(45deg, #ff8000, #ffcc00);
@@ -59,27 +77,47 @@
       box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
     }
 
-    /* Fondo con imagen de la anterior página */
+    /* Fondo con imagen */
     body {
       background: url('FONDO REVIT.png') no-repeat center center fixed;
       background-size: cover;
     }
 
-    /* Agrega un filtro al fondo para que los botones sean legibles */
+    /* Filtro para legibilidad */
     .container {
       background: rgba(0, 0, 0, 0.5);
+    }
+
+    /* Pie de página */
+    .footer {
+      margin-top: 50px;
+      font-size: 16px;
+      text-align: center;
+      color: white;
     }
   </style>
 </head>
 <body>
 
-  <div class="title-header">Temario del Proyecto</div>
+  <!-- Título Principal -->
+  <div class="main-title">
+    DESARROLLO Y AUTOMATIZACIÓN DEL ANÁLISIS SÍSMICO DE TIPO DE EDIFICACIONES DE HORMIGÓN ARMADO CON ETABS, REVIT, DYNAMO Y PYTHON PARA LA GENERACIÓN DE ESPECTRO DE RESPUESTA
+  </div>
 
+  <!-- Título de Temarios -->
+  <div class="subtitle">Temarios</div>
+
+  <!-- Contenedor con opciones -->
   <div class="container">
-    <a class="option-btn" href="#perfil">Perfil de Proyecto</a>
+    <a class="option-btn" href="#perfil">Perfil del Proyecto</a>
     <a class="option-btn" href="#marco-teorico">Marco Teórico</a>
     <a class="option-btn" href="#ingenieria">Ingeniería del Proyecto</a>
     <a class="option-btn" href="#conclusion">Conclusión</a>
+  </div>
+
+  <!-- Pie de página con nombre -->
+  <div class="footer">
+    ALEJANDRO NINA CARI - 2025
   </div>
 
 </body>
