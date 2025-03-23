@@ -53,17 +53,17 @@
       position: absolute;
       top: 5%;  /* Ajuste del título más arriba */
       z-index: 10;
-      margin-top: 20px; /* Separación aumentada */
+      margin-top: 40px; /* Más espacio arriba para separar más del título */
     }
 
     /* Contenedor con las opciones */
     .container {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      grid-gap: 15px;
+      grid-gap: 10px; /* Menos espacio entre los cuadros */
       width: 90%;
       max-width: 800px;
-      margin-top: 140px; /* Ajuste para mayor separación entre el título y los cuadros */
+      margin-top: 180px; /* Más espacio entre el título y los cuadros */
       flex-grow: 1;
     }
 
@@ -129,11 +129,11 @@
 
     /* Pie de página */
     .footer {
-      font-size: 14px;
+      font-size: 16px;
       position: relative;
       margin-top: 20px;
-      color: white;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      color: #ffcc00;  /* Cambié el color a más brillante */
+      text-shadow: 2px 2px 5px rgba(255, 204, 0, 0.8), 0 0 25px rgba(255, 204, 0, 0.8);  /* Sombra brillante */
       margin-bottom: 20px;
     }
 
@@ -141,13 +141,13 @@
     @media (max-width: 768px) {
       .container {
         grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
-        margin-top: 160px; /* Más espacio arriba */
+        margin-top: 200px; /* Más espacio arriba */
       }
 
       .main-title {
         font-size: 18px;
         top: 5%; /* Ajuste para pantallas pequeñas */
-        margin-top: 40px; /* Ajuste adicional para evitar sobreposición */
+        margin-top: 50px; /* Ajuste adicional para evitar sobreposición */
       }
 
       .option-btn {
