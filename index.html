@@ -9,63 +9,72 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Arial', sans-serif;
     }
 
-    body {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: Arial, sans-serif;
       background: linear-gradient(135deg, #1e3c72, #2a5298);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .title-header {
+      font-size: 35px;
+      font-weight: bold;
       color: white;
+      text-transform: uppercase;
+      margin-bottom: 20px;
     }
 
     .container {
       background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(10px);
-      padding: 40px;
       border-radius: 15px;
+      padding: 30px;
       text-align: center;
-      max-width: 800px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      max-width: 900px;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
     .title {
       font-size: 22px;
       font-weight: bold;
       text-transform: uppercase;
+      line-height: 1.5;
       margin-bottom: 20px;
-      color: #ffcc00;
     }
 
     .badge {
       display: inline-block;
-      background: #ff6600;
-      padding: 12px 25px;
-      border-radius: 30px;
-      font-size: 18px;
-      color: white;
+      background-color: #ffcc00;
+      color: #000;
       font-weight: bold;
-      margin-top: 15px;
+      border-radius: 30px;
+      padding: 12px 25px;
+      font-size: 18px;
+      margin-top: 20px;
     }
 
     .continue-btn {
       display: inline-block;
-      background: #ffcc00;
-      color: #000;
+      background: linear-gradient(45deg, #ff8000, #ffcc00);
+      color: white;
       padding: 15px 30px;
-      border-radius: 30px;
-      font-size: 18px;
+      margin-top: 40px;
       text-decoration: none;
-      font-weight: bold;
-      margin-top: 30px;
+      border-radius: 10px;
+      font-size: 18px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .continue-btn:hover {
       transform: scale(1.1);
-      box-shadow: 0 5px 15px rgba(255, 204, 0, 0.7);
+      box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
     }
 
     .logos {
@@ -78,36 +87,27 @@
     .logos img {
       width: 60px;
       height: 60px;
-      filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
-    }
-
-    footer {
-      margin-top: 20px;
-      font-size: 14px;
-      color: #ddd;
     }
   </style>
 </head>
 <body>
 
+  <div class="title-header">PROYECTO DE GRADO</div>
+
   <div class="container">
     <div class="title">
-      Desarrollo y automatización del análisis sísmico de edificaciones de hormigón armado con ETABS, Revit, Dynamo y Python
+      DESARROLLO Y AUTOMATIZACIÓN DEL ANÁLISIS SÍSMICO DE TIPO DE EDIFICACIONES DE HORMIGÓN ARMADO CON ETABS, REVIT, DYNAMO Y PYTHON PARA LA GENERACIÓN DE ESPECTRO DE RESPUESTA
     </div>
     
-    <div class="badge">Ingeniería Civil</div>
+    <div class="badge">INGENIERÍA CIVIL</div>
     
     <div class="logos">
       <img src="python-logo.png" alt="Python">
       <img src="etabs-logo.png" alt="ETABS">
       <img src="revit-logo.png" alt="Revit">
     </div>
-    
+
     <a class="continue-btn" href="temario.html">Continuar</a>
-    
-    <footer>
-      Alejandro Nina Cari – 2025
-    </footer>
   </div>
 
 </body>
