@@ -15,50 +15,43 @@
         /* Estilo general del body */
         body {
             font-family: 'Arial', sans-serif;
-            background: url('https://example.com/fondo.jpg') no-repeat center center fixed;
-            background-size: cover;
+            background: linear-gradient(to right, #003366, #0099cc);
             color: white;
-            line-height: 1.6;
-            padding: 20px;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            line-height: 1.8;
+            padding: 30px 20px;
         }
 
         /* Header */
         header {
             background-color: rgba(0, 77, 153, 0.8);
             color: white;
-            padding: 30px 20px;
+            padding: 40px 20px;
             text-align: center;
-            border-radius: 10px;
-            box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s;
-        }
-
-        header:hover {
-            background-color: rgba(0, 51, 102, 0.8);
+            border-radius: 15px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+            margin-bottom: 50px;
         }
 
         header h1 {
-            font-size: 2.8em;
-            margin-bottom: 10px;
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: #ffcc00;
+            text-transform: uppercase;
         }
 
         header nav {
-            margin-top: 20px;
+            margin-top: 30px;
         }
 
         header nav ul {
             list-style-type: none;
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 25px;
         }
 
         header nav ul li {
-            font-size: 1.2em;
+            font-size: 1.3em;
         }
 
         header nav ul li a {
@@ -66,70 +59,91 @@
             color: white;
             font-weight: bold;
             text-transform: uppercase;
-            transition: color 0.3s ease;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         header nav ul li a:hover {
-            color: #ffcc00;
+            background-color: #ffcc00;
+            color: #003366;
+            transform: scale(1.1);
         }
 
         /* Main Section */
         main {
             max-width: 1200px;
-            margin: 40px auto;
-            padding: 30px;
-            background-color: rgba(0, 0, 0, 0.7);
-            border-radius: 10px;
-            box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease-in-out;
-        }
-
-        main:hover {
-            transform: scale(1.02);
+            margin: 0 auto;
+            padding: 40px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.4);
         }
 
         main h2 {
-            font-size: 2.4em;
-            margin-bottom: 15px;
+            font-size: 2.6em;
+            margin-bottom: 20px;
             color: #ffcc00;
+            border-bottom: 2px solid #ffcc00;
+            padding-bottom: 10px;
         }
 
         section {
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
         section h3 {
-            font-size: 1.6em;
-            margin-bottom: 10px;
+            font-size: 1.8em;
+            margin-bottom: 15px;
             color: #ffcc00;
         }
 
         section p {
             font-size: 1.2em;
             margin-bottom: 20px;
-            color: #ccc;
-            line-height: 1.8;
+            color: #ddd;
+            line-height: 1.7;
         }
 
         section ul {
-            padding-left: 20px;
+            padding-left: 25px;
             margin-bottom: 20px;
         }
 
         section ul li {
-            font-size: 1.1em;
-            color: #ccc;
-            margin-bottom: 8px;
+            font-size: 1.2em;
+            color: #ddd;
+            margin-bottom: 12px;
         }
 
         /* Resaltado de secciones */
         section h3::after {
             content: '';
             display: block;
-            width: 50px;
-            height: 3px;
+            width: 60px;
+            height: 4px;
             background-color: #ffcc00;
-            margin-top: 5px;
+            margin-top: 8px;
+        }
+
+        /* Botón de Volver */
+        .back-btn {
+            display: inline-block;
+            background-color: #ffcc00;
+            color: #003366;
+            font-size: 1.2em;
+            font-weight: bold;
+            padding: 15px 30px;
+            border-radius: 10px;
+            margin-top: 40px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background-color: #003366;
+            color: #ffcc00;
+            transform: scale(1.1);
         }
 
         /* Footer */
@@ -137,50 +151,31 @@
             background-color: rgba(0, 51, 102, 0.8);
             color: white;
             text-align: center;
-            padding: 20px;
+            padding: 25px;
             margin-top: 50px;
-            border-radius: 10px;
-            box-shadow: 0px -10px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0px -10px 20px rgba(0, 0, 0, 0.3);
         }
 
         footer a {
             color: #ffcc00;
             text-decoration: none;
+            font-weight: bold;
         }
 
         footer a:hover {
             text-decoration: underline;
         }
 
-        /* Botón de volver */
-        .back-btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #ffcc00;
-            color: #333;
-            font-size: 1.2em;
-            font-weight: bold;
-            border-radius: 5px;
-            text-decoration: none;
-            text-transform: uppercase;
-            margin-top: 20px;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-
-        .back-btn:hover {
-            background-color: #ff9900;
-            transform: scale(1.1);
-        }
-
         /* Estilos para pantallas pequeñas */
         @media (max-width: 768px) {
             header h1 {
-                font-size: 2em;
+                font-size: 2.4em;
             }
 
             header nav ul {
                 flex-direction: column;
-                gap: 10px;
+                gap: 15px;
             }
 
             main {
@@ -192,14 +187,19 @@
             }
 
             section h2 {
-                font-size: 2em;
+                font-size: 2.2em;
             }
 
             section h3 {
-                font-size: 1.4em;
+                font-size: 1.5em;
             }
 
             section p {
+                font-size: 1.1em;
+            }
+
+            .back-btn {
+                padding: 12px 25px;
                 font-size: 1.1em;
             }
         }
@@ -224,57 +224,57 @@
         <section id="generalidades">
             <h2>1. Generalidades</h2>
             <h3>1.1 Introducción</h3>
-            <p>El diseño de un edificio con análisis sísmico es esencial para garantizar la seguridad y estabilidad de las edificaciones frente a los efectos de un terremoto. Este proyecto busca automatizar este proceso utilizando herramientas computacionales que permitan realizar cálculos rápidos y precisos.</p>
+            <p>El diseño de edificaciones con análisis sísmico es fundamental para asegurar la integridad estructural ante eventos sísmicos. En este proyecto, se busca automatizar el proceso de diseño sísmico, utilizando herramientas computacionales avanzadas que optimicen el cálculo y la simulación de la respuesta sísmica.</p>
 
             <h3>1.2 Antecedentes</h3>
-            <p>En zonas de alta actividad sísmica, el diseño de estructuras con análisis sísmico es crucial para evitar colapsos. Sin embargo, la falta de automatización del proceso sigue siendo un reto. Este proyecto tiene como objetivo automatizar los cálculos de diseño sísmico, acelerando el proceso y reduciendo los errores humanos.</p>
+            <p>En muchas regiones sísmicamente activas, como Santa Cruz y Cochabamba en Bolivia, el diseño estructural sísmico es un requisito esencial para la seguridad de los habitantes. Sin embargo, los métodos tradicionales de cálculo son lentos y propensos a errores. Este proyecto aborda esa limitación mediante la automatización de los cálculos sísmicos, mejorando la eficiencia del diseño.</p>
         </section>
 
         <section id="planteamiento">
             <h2>1.3 Planteamiento del Problema</h2>
-            <h3>1.3.1 Identificación del problema</h3>
-            <p>Actualmente, los cálculos sísmicos se realizan manualmente o mediante programas con procesos complejos. Este proyecto busca automatizar el análisis sísmico, minimizando los errores humanos y acelerando el proceso de diseño. El reto es integrar esta automatización en un sistema accesible y eficiente.</p>
+            <h3>1.3.1 Identificación del Problema</h3>
+            <p>El diseño sísmico manual o mediante herramientas tradicionales es ineficiente y está expuesto a errores humanos. La necesidad de automatizar este proceso, para garantizar diseños más rápidos, precisos y seguros, es crítica en la ingeniería estructural moderna.</p>
         </section>
 
         <section id="objetivos">
-            <h2>1.5 Objetivo y acciones</h2>
-            <h3>1.5.1 Objetivo General</h3>
-            <p>Desarrollar una herramienta computacional que automatice el análisis sísmico de edificaciones de hormigón armado, mejorando la eficiencia y precisión del diseño estructural.</p>
+            <h2>1.4 Objetivos</h2>
+            <h3>1.4.1 Objetivo General</h3>
+            <p>Crear una plataforma computacional que automatice el análisis sísmico de estructuras de hormigón armado, garantizando mayor precisión y reduciendo el tiempo de diseño.</p>
 
-            <h3>1.5.2 Objetivos Específicos</h3>
+            <h3>1.4.2 Objetivos Específicos</h3>
             <ul>
-                <li>Automatizar el cálculo de las fuerzas sísmicas aplicadas a las estructuras.</li>
-                <li>Crear una herramienta que permita realizar simulaciones rápidas de la respuesta sísmica de diferentes estructuras.</li>
-                <li>Integrar el análisis sísmico con el diseño estructural en un sistema automatizado.</li>
+                <li>Automatizar el cálculo de fuerzas sísmicas y su distribución en la estructura.</li>
+                <li>Desarrollar una herramienta para realizar simulaciones rápidas y detalladas de la respuesta sísmica.</li>
+                <li>Integrar el análisis sísmico y el diseño estructural en un flujo de trabajo automatizado y eficiente.</li>
             </ul>
         </section>
 
         <section id="justificaciones">
-            <h2>1.6 Justificaciones</h2>
-            <h3>1.6.1 Justificación Técnica</h3>
-            <p>Este proyecto permite la automatización del proceso de diseño estructural y análisis sísmico, reduciendo el tiempo de cálculo y aumentando la precisión al evitar errores humanos. El sistema facilitará el análisis de diversas configuraciones estructurales bajo diferentes condiciones sísmicas.</p>
+            <h2>1.5 Justificaciones</h2>
+            <h3>1.5.1 Justificación Técnica</h3>
+            <p>La automatización de los cálculos sísmicos reduce significativamente el riesgo de errores y mejora la precisión del diseño estructural. Esto se traduce en edificaciones más seguras y confiables.</p>
 
-            <h3>1.6.2 Justificación Económica</h3>
-            <p>La automatización reduce el tiempo de diseño, lo que implica menores costos operativos y una entrega más rápida de los proyectos. Las empresas de construcción que adopten esta tecnología tendrán una ventaja competitiva en el mercado.</p>
+            <h3>1.5.2 Justificación Económica</h3>
+            <p>Al reducir el tiempo necesario para el análisis y diseño, las empresas constructoras pueden ofrecer proyectos a menor costo, con mayor rapidez, lo que mejora su competitividad en el mercado.</p>
         </section>
 
         <section id="alcance">
-            <h2>1.7 Alcance y Limitaciones</h2>
-            <h3>1.7.1 Alcance Geográfico</h3>
-            <p>El proyecto está centrado en Bolivia, particularmente en regiones sísmicamente activas como Santa Cruz y Cochabamba. Aunque el enfoque es local, la metodología podría adaptarse a otros países de América Latina con características sísmicas similares.</p>
+            <h2>1.6 Alcance y Limitaciones</h2>
+            <h3>1.6.1 Alcance Geográfico</h3>
+            <p>Este proyecto tiene un enfoque en Bolivia, especialmente en regiones con alta actividad sísmica. Sin embargo, la metodología podría ser aplicada en otras zonas de América Latina.</p>
 
-            <h3>1.7.2 Alcance Temporal</h3>
-            <p>El proyecto tiene un tiempo estimado de desarrollo de 6 meses, durante los cuales se realizarán pruebas y validaciones de la herramienta en una estructura de ejemplo.</p>
+            <h3>1.6.2 Alcance Temporal</h3>
+            <p>Se estima que el proyecto estará completo en 6 meses, con la validación de la herramienta en un modelo estructural representativo.</p>
 
-            <h3>1.7.3 Limitaciones</h3>
-            <p>Las limitaciones incluyen la necesidad de datos precisos para el análisis sísmico y la capacidad del software para manejar grandes volúmenes de datos en tiempo real.</p>
+            <h3>1.6.3 Limitaciones</h3>
+            <p>El proyecto depende de la disponibilidad de datos sísmicos precisos y de la capacidad del software para procesar grandes volúmenes de datos en tiempo real.</p>
         </section>
-        
-        <a class="back-btn" href="temario.html">Volver atrás</a>
+
+        <a class="back-btn" href="temario.html">Volver a Temario</a>
     </main>
 
     <footer>
-        <p>&copy; 2025 Proyecto Sísmico. Todos los derechos reservados. ALEJANDRO NINA CARI <a href="#">jimmy.nina@ucb.edu.bo</a></p>
+        <p>&copy; 2025 Proyecto Sísmico. Todos los derechos reservados. ALEJANDRO NINA CARI <a href="mailto:jimmy.nina@ucb.edu.bo">jimmy.nina@ucb.edu.bo</a></p>
     </footer>
 </body>
 </html>
