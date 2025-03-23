@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Temario</title>
+  <title>Proyecto de Grado</title>
   <style>
     * {
       margin: 0;
@@ -15,115 +15,128 @@
       height: 100%;
       width: 100%;
       font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
       background: url('FONDO REVIT.png') no-repeat center center fixed;
       background-size: cover;
-      color: white;
-      text-align: center;
-    }
-
-    /* Contenedor principal */
-    .container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.6);
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    }
-
-    /* Título principal */
-    .main-title {
-      font-size: 24px;
-      font-weight: bold;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      padding: 10px;
-      background: rgba(0, 0, 0, 0.6);
-      border-radius: 10px;
-      color: #ffcc00;
-    }
-
-    /* Cuadros de opciones */
-    .option {
-      width: 150px;
-      height: 150px;
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(5px);
-      border-radius: 10px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      text-decoration: none;
+      text-align: center;
+      padding: 20px;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: -1;
+    }
+
+    .title-header {
+      font-size: 32px;
+      font-weight: bold;
       color: white;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 25px;
+      max-width: 80%;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .badge {
+      display: inline-block;
+      background-color: #ffcc00;
+      color: #000;
+      font-weight: bold;
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    .logos {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.15);
+    }
+
+    .continue-btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 8px;
       font-size: 16px;
       font-weight: bold;
+      text-decoration: none;
+      background: linear-gradient(45deg, #ff8000, #ffcc00);
+      color: white;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .option:hover {
+    .continue-btn:hover {
       transform: scale(1.1);
       box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
     }
 
-    /* Botón de volver */
-    .back-btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: linear-gradient(45deg, #ff5733, #ff9966);
+    .author-info {
+      margin-top: 15px;
+      font-size: 14px;
       color: white;
-      text-decoration: none;
-      border-radius: 10px;
-      font-size: 18px;
-      font-weight: bold;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .back-btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 15px rgba(255, 87, 51, 0.8);
-    }
-
-    /* Pie de página */
-    .footer {
-      font-size: 16px;
-      font-weight: bold;
-      color: #FFD700;
-      margin-top: 20px;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 8px 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     }
   </style>
 </head>
 <body>
 
-  <!-- Título Principal -->
-  <div class="main-title">
-    Desarrollo y Automatización del Análisis Sísmico
-  </div>
+  <div class="title-header">PROYECTO DE GRADO</div>
 
-  <!-- Contenedor de opciones -->
   <div class="container">
-    <a class="option" href="#perfil">Perfil del Proyecto</a>
-    <a class="option" href="#marco-teorico">Marco Teórico</a>
-    <a class="option" href="#ingenieria">Ingeniería del Proyecto</a>
-    <a class="option" href="#conclusion">Conclusión</a>
+    <div class="title">
+      AUTOMATIZACIÓN DEL ANÁLISIS Y DISEÑO SÍSMICO DE EDIFICACIONES DE HORMIGÓN ARMADO CON ETABS, REVIT, DYNAMO Y PYTHON
+    </div>
+    
+    <div class="badge">INGENIERÍA CIVIL</div>
+    
+    <div class="logos">
+      <img src="ETABS.jpg" alt="Logo ETABS" class="logo">
+      <img src="REVIT.jpg" alt="Logo REVIT" class="logo">
+      <img src="PYTHON.jpg" alt="Logo PYTHON" class="logo">
+    </div>
+
+    <a class="continue-btn" href="temario.html">Continuar</a>
   </div>
 
-  <!-- Botón Volver -->
-  <a class="back-btn" href="index.html">Volver a Inicio</a>
-
-  <!-- Pie de página con nombre -->
-  <div class="footer">
-    ALEJANDRO NINA CARI - 2025
+  <div class="author-info">
+    <p><strong>ALEJANDRO NINA CARI</strong> - 2025</p>
   </div>
 
 </body>
