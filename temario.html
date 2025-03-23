@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Opciones del Proyecto</title>
+  <title>Temario</title>
   <style>
     * {
       margin: 0;
@@ -14,94 +14,72 @@
     html, body {
       height: 100%;
       width: 100%;
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       background: linear-gradient(135deg, #1e3c72, #2a5298);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      color: white;
     }
 
     .title-header {
-      font-size: 45px;
+      font-size: 35px;
       font-weight: bold;
-      color: white;
       text-transform: uppercase;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       text-align: center;
-      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
     }
 
     .container {
       background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(15px);
-      border-radius: 25px;
-      padding: 50px;
-      text-align: center;
-      max-width: 1000px;
-      color: white;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
-    }
-
-    .option-btn {
-      display: block;
-      background: linear-gradient(45deg, #ff8000, #ffcc00);
-      color: white;
-      padding: 18px 35px;
-      margin-top: 30px;
-      text-decoration: none;
+      backdrop-filter: blur(10px);
       border-radius: 15px;
-      font-size: 24px;
-      text-transform: uppercase;
-      font-weight: bold;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      padding: 30px;
+      text-align: center;
+      max-width: 900px;
+      color: white;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
+    .option-btn {
+      display: inline-block;
+      background: linear-gradient(45deg, #ff8000, #ffcc00);
+      color: white;
+      padding: 15px 30px;
+      margin: 10px 0;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 18px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
     .option-btn:hover {
-      transform: scale(1.05);
-      background: linear-gradient(45deg, #ffcc00, #ff8000);
+      transform: scale(1.1);
       box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
     }
 
-    .option-btn:active {
-      transform: scale(1);
+    /* Fondo con imagen de la anterior página */
+    body {
+      background: url('FONDO REVIT.png') no-repeat center center fixed;
+      background-size: cover;
     }
 
-    .options-list {
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-      justify-content: center;
-      align-items: center;
+    /* Agrega un filtro al fondo para que los botones sean legibles */
+    .container {
+      background: rgba(0, 0, 0, 0.5);
     }
-
-    .footer-text {
-      margin-top: 40px;
-      font-size: 18px;
-      color: #ffffff;
-      font-weight: lighter;
-      text-align: center;
-      opacity: 0.7;
-    }
-
   </style>
 </head>
 <body>
 
-  <div class="title-header">Opciones del Proyecto</div>
+  <div class="title-header">Temario del Proyecto</div>
 
   <div class="container">
-    <div class="options-list">
-      <a href="#perfil" class="option-btn">Perfil de Proyecto</a>
-      <a href="#marco-teorico" class="option-btn">Marco Teórico</a>
-      <a href="#ingenieria" class="option-btn">Ingeniería del Proyecto</a>
-      <a href="#conclusion" class="option-btn">Conclusión</a>
-    </div>
-  </div>
-
-  <div class="footer-text">
-    <p>Desarrollado por Alejandro Nina Cari - 2025</p>
+    <a class="option-btn" href="#perfil">Perfil de Proyecto</a>
+    <a class="option-btn" href="#marco-teorico">Marco Teórico</a>
+    <a class="option-btn" href="#ingenieria">Ingeniería del Proyecto</a>
+    <a class="option-btn" href="#conclusion">Conclusión</a>
   </div>
 
 </body>
