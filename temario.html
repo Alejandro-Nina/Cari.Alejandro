@@ -40,10 +40,10 @@
 
     /* Título principal */
     .main-title {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: bold;
       text-transform: uppercase;
-      padding: 12px;
+      padding: 10px;
       background: rgba(0, 0, 0, 0.7);
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -51,19 +51,19 @@
       max-width: 800px;
       color: #ffcc00;
       position: absolute;
-      top: 0%;  /* Ajuste del título más arriba */
+      top: 5%;  /* Ajuste del título más arriba */
       z-index: 10;
-      margin-top: 30px; /* Ajuste para mayor separación */
+      margin-top: 15px; /* Menor separación */
     }
 
     /* Contenedor con las opciones */
     .container {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      grid-gap: 20px;
+      grid-gap: 15px;
       width: 90%;
-      max-width: 600px;
-      margin-top: 200px; /* Ajuste mayor para evitar sobreposición con el título */
+      max-width: 800px;
+      margin-top: 120px; /* Ajuste para evitar que se sobrepongan los cuadros */
       flex-grow: 1;
     }
 
@@ -73,14 +73,14 @@
       color: white;
       text-decoration: none;
       border-radius: 15px;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: bold;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       background-size: cover;
       background-position: center;
       width: 100%;
-      height: 200px; /* Ajuste de tamaño */
+      height: 150px; /* Ajuste de tamaño */
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -96,7 +96,7 @@
 
     /* Nombre de cada cuadro */
     .option-btn h3 {
-      font-size: 16px;
+      font-size: 14px;
       text-transform: uppercase;
       color: #ffcc00;
       background: rgba(0, 0, 0, 0.7);
@@ -134,28 +134,28 @@
       margin-top: 20px;
       color: white;
       text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-      margin-bottom: 20px; /* Espacio adicional debajo */
+      margin-bottom: 20px;
     }
 
     /* Media Queries para pantallas pequeñas */
     @media (max-width: 768px) {
       .container {
         grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
-        margin-top: 250px; /* Más espacio arriba */
+        margin-top: 150px; /* Más espacio arriba */
       }
 
       .main-title {
-        font-size: 20px;
+        font-size: 18px;
         top: 5%; /* Ajuste para pantallas pequeñas */
-        margin-top: 60px; /* Ajuste adicional para evitar sobreposición */
+        margin-top: 40px; /* Ajuste adicional para evitar sobreposición */
       }
 
       .option-btn {
-        height: 180px; /* Ajuste para pantallas más pequeñas */
+        height: 130px; /* Ajuste para pantallas más pequeñas */
       }
 
       .option-btn h3 {
-        font-size: 14px; /* Ajuste para títulos */
+        font-size: 12px; /* Ajuste para títulos */
       }
 
       .footer {
@@ -165,15 +165,15 @@
 
     @media (max-width: 480px) {
       .main-title {
-        font-size: 18px;
+        font-size: 16px;
       }
 
       .option-btn {
-        height: 150px; /* Ajuste para pantallas muy pequeñas */
+        height: 110px; /* Ajuste para pantallas muy pequeñas */
       }
 
       .option-btn h3 {
-        font-size: 12px;
+        font-size: 10px;
       }
     }
   </style>
