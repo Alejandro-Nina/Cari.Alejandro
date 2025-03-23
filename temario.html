@@ -6,7 +6,7 @@
   <title>Temario</title>
   <style>
     * {
-      margin: 2;
+      margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
@@ -19,23 +19,21 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: white;
-      text-align: center;
       background: url('FONDO REVIT.png') no-repeat center center fixed;
       background-size: cover;
-      position: relative;
+      color: white;
+      text-align: center;
     }
 
-    /* Oscurecimiento del fondo */
-    body::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+    /* Contenedor principal */
+    .container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      padding: 20px;
       background: rgba(0, 0, 0, 0.6);
-      z-index: -1;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     }
 
     /* Título principal */
@@ -43,89 +41,65 @@
       font-size: 24px;
       font-weight: bold;
       text-transform: uppercase;
-      padding: 12px;
-      background: rgba(0, 0, 0, 0.7);
+      margin-bottom: 20px;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.6);
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-      width: 90%;
-      max-width: 800px;
       color: #ffcc00;
-      position: absolute;
-      top: 5%;
-    }
-
-    /* Contenedor con las opciones */
-    .container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap: 20px;
-      width: 90%;
-      max-width: 500px;
-      margin-top: 120px;
     }
 
     /* Cuadros de opciones */
-    .option-btn {
+    .option {
+      width: 150px;
+      height: 150px;
       background: rgba(255, 255, 255, 0.2);
-      color: white;
-      text-decoration: none;
-      border-radius: 15px;
-      font-size: 18px;
-      font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      background-size: cover;
-      background-position: center;
-      width: 200px;
-      height: 200px;
+      backdrop-filter: blur(5px);
+      border-radius: 10px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
       align-items: center;
-      padding-bottom: 10px;
-    }
-
-    .option-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(255, 204, 0, 0.9);
-    }
-
-    /* Nombre de cada cuadro */
-    .option-btn h3 {
-      font-size: 16px;
-      text-transform: uppercase;
-      color: #ffcc00;
-      background: rgba(0, 0, 0, 0.7);
-      width: 100%;
-      text-align: center;
-      padding: 6px 0;
-      border-radius: 0 0 15px 15px;
-    }
-
-    /* Botón Volver */
-    .back-btn {
-      display: inline-block;
-      background: linear-gradient(45deg, #ff5733, #ff9966);
-      color: white;
-      padding: 12px 22px;
+      justify-content: center;
       text-decoration: none;
-      border-radius: 8px;
+      color: white;
       font-size: 16px;
       font-weight: bold;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .option:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
+    }
+
+    /* Botón de volver */
+    .back-btn {
+      display: inline-block;
       margin-top: 20px;
+      padding: 10px 20px;
+      background: linear-gradient(45deg, #ff5733, #ff9966);
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .back-btn:hover {
       transform: scale(1.1);
-      box-shadow: 0 0 10px rgba(255, 87, 51, 0.8);
+      box-shadow: 0 0 15px rgba(255, 87, 51, 0.8);
     }
 
     /* Pie de página */
     .footer {
-      font-size: 14px;
-      position: absolute;
-      bottom: 5%;
+      font-size: 16px;
+      font-weight: bold;
+      color: #FFD700;
+      margin-top: 20px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 8px 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
     }
   </style>
 </head>
@@ -133,23 +107,15 @@
 
   <!-- Título Principal -->
   <div class="main-title">
-    Desarrollo y Automatización del Análisis Sísmico con ETABS, Revit, Dynamo y Python
+    Desarrollo y Automatización del Análisis Sísmico
   </div>
 
-  <!-- Contenedor con opciones en dos columnas -->
+  <!-- Contenedor de opciones -->
   <div class="container">
-    <a class="option-btn" href="#perfil" style="background-image: url('perfil-imagen.jpg');">
-      <h3>Perfil del Proyecto</h3>
-    </a>
-    <a class="option-btn" href="#marco-teorico" style="background-image: url('marco-teorico-imagen.jpg');">
-      <h3>Marco Teórico</h3>
-    </a>
-    <a class="option-btn" href="#ingenieria" style="background-image: url('ingenieria-imagen.jpg');">
-      <h3>Ingeniería del Proyecto</h3>
-    </a>
-    <a class="option-btn" href="#conclusion" style="background-image: url('conclusion-imagen.jpg');">
-      <h3>Conclusión</h3>
-    </a>
+    <a class="option" href="#perfil">Perfil del Proyecto</a>
+    <a class="option" href="#marco-teorico">Marco Teórico</a>
+    <a class="option" href="#ingenieria">Ingeniería del Proyecto</a>
+    <a class="option" href="#conclusion">Conclusión</a>
   </div>
 
   <!-- Botón Volver -->
