@@ -116,6 +116,25 @@
       box-shadow: 0 0 18px rgba(255, 204, 0, 0.8);
     }
 
+    /* Botón Volver */
+    .back-btn {
+      display: inline-block;
+      background: linear-gradient(45deg, #ff5733, #ff9966);
+      color: white;
+      padding: 18px 35px;
+      margin-top: 20px;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .back-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 18px rgba(255, 87, 51, 0.8);
+    }
+
     .logos {
       display: flex;
       justify-content: center;
@@ -166,6 +185,9 @@
     </div>
 
     <a class="continue-btn" href="temario.html">Continuar</a>
+
+    <!-- Botón Volver -->
+    <a class="back-btn" href="inicio.html">Volver a Inicio</a>
   </div>
 
   <!-- Información de autor y año -->
