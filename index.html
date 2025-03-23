@@ -15,7 +15,7 @@
       height: 100%;
       width: 100%;
       font-family: Arial, sans-serif;
-      background: url('FONDO REVIT.png') no-repeat center center fixed; /* Tu imagen de fondo */
+      background: url('revit_modelado.jpg') no-repeat center center fixed; /* Tu imagen de fondo */
       background-size: cover;
       display: flex;
       flex-direction: column;
@@ -37,13 +37,35 @@
       z-index: -1; /* Asegura que el filtro esté detrás del contenido */
     }
 
+    /* Estilo de "PROYECTO DE GRADO" */
     .title-header {
-      font-size: 36px;
+      font-size: 48px;
       font-weight: bold;
       color: white;
       text-transform: uppercase;
       margin-bottom: 30px;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+      text-align: center;
+      background: linear-gradient(45deg, #ff8000, #ffcc00);
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: titleAnim 4s ease-in-out infinite;
+      text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Animación para el título */
+    @keyframes titleAnim {
+      0% {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
+      50% {
+        transform: translateY(10px);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
     }
 
     .container {
