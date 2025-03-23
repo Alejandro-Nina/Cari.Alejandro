@@ -1,214 +1,220 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Temario</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe Proyecto Sísmico</title>
+    <style>
+        /* Reset de estilos básicos */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Estilo general del body */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
 
-    html, body {
-      height: 100%;
-      width: 100%;
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      color: white;
-      text-align: center;
-      background: url('FONDO REVIT.png') no-repeat center center fixed;
-      background-size: cover;
-      position: relative;
-    }
+        /* Header */
+        header {
+            background-color: #004d99;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
 
-    /* Oscurecimiento del fondo */
-    body::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      z-index: -1;
-    }
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
 
-    /* Título principal */
-    .main-title {
-      font-size: 20px;
-      font-weight: bold;
-      text-transform: uppercase;
-      padding: 10px;
-      background: rgba(0, 0, 0, 0.7);
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-      width: 90%;
-      max-width: 800px;
-      color: #ffcc00;
-      position: absolute;
-      top: 5%;  /* Ajuste del título más arriba */
-      z-index: 10;
-      margin-top: 40px; /* Más espacio arriba para separar más del título */
-    }
+        /* Navbar */
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
 
-    /* Contenedor con las opciones */
-    .container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap: 10px; /* Menos espacio entre los cuadros */
-      width: 90%;
-      max-width: 800px;
-      margin-top: 180px; /* Más espacio entre el título y los cuadros */
-      flex-grow: 1;
-    }
+        nav ul li {
+            margin: 0 15px;
+        }
 
-    /* Cuadros de opciones */
-    .option-btn {
-      background: rgba(255, 255, 255, 0.3);
-      color: white;
-      text-decoration: none;
-      border-radius: 15px;
-      font-size: 16px;
-      font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      background-size: cover;
-      background-position: center;
-      width: 100%;
-      height: 140px; /* Ajuste de tamaño */
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: center;
-      padding-bottom: 10px;
-      position: relative;
-    }
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
 
-    .option-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(255, 204, 0, 0.9);
-    }
+        nav ul li a:hover {
+            color: #ffcc00;
+        }
 
-    /* Nombre de cada cuadro */
-    .option-btn h3 {
-      font-size: 14px;
-      text-transform: uppercase;
-      color: #ffcc00;
-      background: rgba(0, 0, 0, 0.7);
-      width: 100%;
-      text-align: center;
-      padding: 6px 0;
-      border-radius: 0 0 15px 15px;
-      position: absolute;
-      bottom: 0;
-    }
+        /* Main Section */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+        }
 
-    /* Botón Volver */
-    .back-btn {
-      display: inline-block;
-      background: linear-gradient(45deg, #ff5733, #ff9966);
-      color: white;
-      padding: 12px 22px;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: bold;
-      margin-top: 10px; /* Menos espacio entre los cuadros y el botón */
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+        section {
+            margin-bottom: 40px;
+        }
 
-    .back-btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 10px rgba(255, 87, 51, 0.8);
-    }
+        section h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #003366;
+        }
 
-    /* Pie de página */
-    .footer {
-      font-size: 16px;
-      position: relative;
-      margin-top: 20px;
-      color: white;  /* Mantenerlo blanco */
-      font-weight: bold;  /* Agregar negrita */
-      text-shadow: 2px 2px 5px rgba(255, 204, 0, 0.8), 0 0 25px rgba(255, 204, 0, 0.8);  /* Sombra brillante */
-      margin-bottom: 20px;
-    }
+        section h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #0066cc;
+        }
 
-    /* Media Queries para pantallas pequeñas */
-    @media (max-width: 768px) {
-      .container {
-        grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
-        margin-top: 200px; /* Más espacio arriba */
-      }
+        section p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: #555;
+        }
 
-      .main-title {
-        font-size: 18px;
-        top: 5%; /* Ajuste para pantallas pequeñas */
-        margin-top: 50px; /* Ajuste adicional para evitar sobreposición */
-      }
+        section ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
 
-      .option-btn {
-        height: 120px; /* Ajuste para pantallas más pequeñas */
-      }
+        section ul li {
+            font-size: 1.1em;
+            color: #555;
+        }
 
-      .option-btn h3 {
-        font-size: 12px; /* Ajuste para títulos */
-      }
+        /* Footer */
+        footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 50px;
+        }
 
-      .footer {
-        font-size: 12px;
-      }
-    }
+        /* Estilo de enlaces dentro del footer */
+        footer a {
+            color: #ffcc00;
+            text-decoration: none;
+        }
 
-    @media (max-width: 480px) {
-      .main-title {
-        font-size: 16px;
-      }
+        footer a:hover {
+            text-decoration: underline;
+        }
 
-      .option-btn {
-        height: 110px; /* Ajuste para pantallas muy pequeñas */
-      }
+        /* Resaltado de secciones */
+        section h3::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: #ffcc00;
+            margin-top: 5px;
+        }
 
-      .option-btn h3 {
-        font-size: 10px;
-      }
-    }
-  </style>
+        /* Estilos para pantallas pequeñas */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            main {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <h1>Automatización en el Diseño Sísmico de Edificaciones</h1>
+        <nav>
+            <ul>
+                <li><a href="#generalidades">Generalidades</a></li>
+                <li><a href="#antecedentes">Antecedentes</a></li>
+                <li><a href="#planteamiento">Planteamiento del Problema</a></li>
+                <li><a href="#objetivos">Objetivos</a></li>
+                <li><a href="#justificaciones">Justificaciones</a></li>
+                <li><a href="#alcance">Alcance y Limitaciones</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <!-- Título Principal -->
-  <div class="main-title">
-    Desarrollo y Automatización del Análisis Sísmico con ETABS, Revit, Dynamo y Python
-  </div>
+    <main>
+        <section id="generalidades">
+            <h2>1. Generalidades</h2>
+            <h3>1.1 Introducción</h3>
+            <p>El diseño de un edificio con análisis sísmico es fundamental para garantizar la seguridad y estabilidad de las edificaciones frente a los efectos de un terremoto. Este proyecto tiene como objetivo automatizar este proceso mediante herramientas computacionales que permitan realizar los cálculos necesarios de manera rápida y precisa.</p>
 
-  <!-- Contenedor con opciones en dos columnas -->
-  <div class="container">
-    <a class="option-btn" href="#perfil" style="background-image: url('perfil-imagen.jpg');">
-      <h3>Perfil del Proyecto</h3>
-    </a>
-    <a class="option-btn" href="#marco-teorico" style="background-image: url('marco-teorico-imagen.jpg');">
-      <h3>Marco Teórico</h3>
-    </a>
-    <a class="option-btn" href="#ingenieria" style="background-image: url('ingenieria-imagen.jpg');">
-      <h3>Ingeniería del Proyecto</h3>
-    </a>
-    <a class="option-btn" href="#conclusion" style="background-image: url('conclusion-imagen.jpg');">
-      <h3>Conclusión</h3>
-    </a>
-  </div>
+            <h3>1.2 Antecedentes</h3>
+            <p>El diseño con un análisis sísmico es una disciplina esencial para una estructura de gran altura, especialmente en zonas de alta actividad sísmica. Existen diferentes métodos y normativas para realizar estos análisis, siendo uno de los más utilizados el análisis de estructuras con el método de espectro de respuesta. Sin embargo, la automatización de estos cálculos sigue siendo un reto técnico que este proyecto busca resolver.</p>
+        </section>
 
-  <!-- Botón Volver -->
-  <a class="back-btn" href="index.html">Volver a Inicio</a>
+        <section id="planteamiento">
+            <h2>1.3 Planteamiento del Problema</h2>
+            <h3>1.3.1 Identificación del problema</h3>
+            <p>En la actualidad, los cálculos sísmicos para el diseño de edificaciones de hormigón armado suelen realizarse de manera manual o utilizando programas que requieren de entradas complejas y cálculos extensos. Este proceso puede ser tedioso y propenso a errores humanos. Además, la falta de automatización en la fase de diseño impide realizar simulaciones rápidas y precisas para diferentes escenarios sísmicos. El reto del proyecto es automatizar este proceso para facilitar el diseño estructural en regiones sísmicamente activas.</p>
+        </section>
 
-  <!-- Pie de página con nombre -->
-  <div class="footer">
-    ALEJANDRO NINA CARI - 2025
-  </div>
+        <section id="objetivos">
+            <h2>1.5 Objetivo y acciones</h2>
+            <h3>1.5.1 Objetivo General</h3>
+            <p>Desarrollar y automatizar el análisis sísmico de edificaciones en estructuras de hormigón armado, con el fin de optimizar el proceso de diseño y mejorar la seguridad de las edificaciones frente a terremotos.</p>
 
+            <h3>1.5.2 Objetivos Específicos</h3>
+            <ul>
+                <li>Automatizar el cálculo de las fuerzas sísmicas aplicadas a las estructuras.</li>
+                <li>Desarrollar una herramienta computacional basada en un modelo estructural que permita calcular la respuesta sísmica.</li>
+                <li>Implementar un sistema que integre el análisis sísmico con el diseño estructural en tiempo real.</li>
+            </ul>
+        </section>
+
+        <section id="justificaciones">
+            <h2>1.6 Justificaciones</h2>
+            <h3>1.6.1 Justificación Técnica</h3>
+            <p>La justificación técnica de este proyecto se basa en la optimización de los procesos de diseño estructural y el análisis sísmico. La automatización de estos cálculos no solo mejora la eficiencia del diseño, sino que también aumenta la precisión al minimizar errores humanos. Además, al integrar estos cálculos con herramientas modernas, se agiliza el proceso y se permite evaluar rápidamente diversas configuraciones estructurales bajo distintos escenarios sísmicos.</p>
+
+            <h3>1.6.2 Justificación Económica</h3>
+            <p>El desarrollo de esta herramienta de automatización permitirá reducir los tiempos de cálculo, lo que se traduce en menores costos para los proyectos de construcción. La reducción en el tiempo de diseño también implica una disminución en los costos operativos y el tiempo de entrega del proyecto. Esto resulta en una ventaja competitiva para las empresas de construcción que adopten esta tecnología.</p>
+        </section>
+
+        <section id="alcance">
+            <h2>1.7 Alcance y Limitaciones</h2>
+            <h3>1.7.1 Alcance Geográfico</h3>
+            <p>El alcance geográfico de este proyecto está centrado en Bolivia, específicamente en regiones de alta actividad sísmica como Santa Cruz y Cochabamba, donde los terremotos representan una amenaza constante. A pesar de que el enfoque es local, la metodología desarrollada podría ser adaptada a otros países de América Latina con características sísmicas similares.</p>
+
+            <h3>1.7.2 Alcance Temporal</h3>
+            <p>Este proyecto tiene un tiempo estimado de desarrollo de 6 meses, durante los cuales se llevará a cabo la investigación, desarrollo y pruebas de la herramienta. La implementación y pruebas iniciales se realizarán en una estructura de edificio modelo para validar la eficacia de la herramienta automatizada.</p>
+
+            <h3>1.7.3 Limitaciones</h3>
+            <p>Entre las principales limitaciones del proyecto se incluyen la dependencia de la calidad de los datos ingresados, la necesidad de un software compatible con el que se desarrolle la herramienta de análisis y las limitaciones tecnológicas en el procesamiento de grandes volúmenes de datos sísmicos en tiempo real.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Proyecto Sísmico. Todos los derechos reservados. <a href="#">Contactar</a></p>
+    </footer>
 </body>
 </html>
