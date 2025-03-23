@@ -53,7 +53,7 @@
       position: absolute;
       top: 5%;  /* Ajuste del título más arriba */
       z-index: 10;
-      margin-top: 15px; /* Menor separación */
+      margin-top: 20px; /* Separación aumentada */
     }
 
     /* Contenedor con las opciones */
@@ -63,7 +63,7 @@
       grid-gap: 15px;
       width: 90%;
       max-width: 800px;
-      margin-top: 120px; /* Ajuste para evitar que se sobrepongan los cuadros */
+      margin-top: 140px; /* Ajuste para mayor separación entre el título y los cuadros */
       flex-grow: 1;
     }
 
@@ -80,7 +80,7 @@
       background-size: cover;
       background-position: center;
       width: 100%;
-      height: 150px; /* Ajuste de tamaño */
+      height: 140px; /* Ajuste de tamaño */
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -118,7 +118,7 @@
       border-radius: 8px;
       font-size: 16px;
       font-weight: bold;
-      margin-top: 20px;
+      margin-top: 10px; /* Menos espacio entre los cuadros y el botón */
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
@@ -141,7 +141,7 @@
     @media (max-width: 768px) {
       .container {
         grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
-        margin-top: 150px; /* Más espacio arriba */
+        margin-top: 160px; /* Más espacio arriba */
       }
 
       .main-title {
@@ -151,7 +151,7 @@
       }
 
       .option-btn {
-        height: 130px; /* Ajuste para pantallas más pequeñas */
+        height: 120px; /* Ajuste para pantallas más pequeñas */
       }
 
       .option-btn h3 {
