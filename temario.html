@@ -21,69 +21,64 @@
       justify-content: center;
       color: white;
       background: linear-gradient(135deg, #1e3c72, #2a5298);
-      padding-top: 20px;
+      text-align: center;
     }
 
     /* Título Principal */
     .main-title {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: bold;
       text-transform: uppercase;
-      text-align: center;
-      margin-bottom: 40px;
-      padding: 20px;
+      padding: 10px;
       background: rgba(0, 0, 0, 0.6);
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-      width: 90%;
+      width: 80%;
       color: #ffcc00;
+      margin-bottom: 15px;
     }
 
     /* Contenedor Principal */
     .container {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      grid-gap: 20px;
-      width: 80%;
-      max-width: 1200px;
-      padding: 20px;
-      text-align: center;
-      color: white;
+      grid-gap: 10px;
+      width: 70%;
+      max-width: 600px;
     }
 
     /* Cuadros de las opciones */
     .option-btn {
       background: rgba(255, 255, 255, 0.3);
       color: white;
-      padding: 40px;
-      margin: 10px;
+      padding: 20px;
       text-decoration: none;
-      border-radius: 15px;
-      font-size: 18px;
+      border-radius: 10px;
+      font-size: 14px;
       font-weight: bold;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       background-size: cover;
       background-position: center;
+      height: 120px;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       align-items: center;
-      height: 300px;
     }
 
     /* Efecto de hover para los cuadros */
     .option-btn:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
+      box-shadow: 0 0 10px rgba(255, 204, 0, 0.8);
     }
 
     /* Nombre debajo de la imagen */
     .option-btn h3 {
-      margin-top: 15px;
-      font-size: 22px;
+      font-size: 14px;
       text-transform: uppercase;
       color: #ffcc00;
+      margin-top: 5px;
     }
 
     /* Botón Volver */
@@ -91,38 +86,24 @@
       display: inline-block;
       background: linear-gradient(45deg, #ff5733, #ff9966);
       color: white;
-      padding: 15px 30px;
-      margin-top: 30px;
+      padding: 10px 20px;
       text-decoration: none;
-      border-radius: 10px;
-      font-size: 18px;
+      border-radius: 8px;
+      font-size: 14px;
       font-weight: bold;
+      margin-top: 10px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .back-btn:hover {
       transform: scale(1.1);
-      box-shadow: 0 0 15px rgba(255, 87, 51, 0.8);
-    }
-
-    /* Fondo con imagen */
-    body {
-      background: url('FONDO REVIT.png') no-repeat center center fixed;
-      background-size: cover;
-    }
-
-    /* Filtro para legibilidad */
-    .container {
-      background: rgba(0, 0, 0, 0.5);
-      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(255, 87, 51, 0.8);
     }
 
     /* Pie de página */
     .footer {
-      margin-top: 50px;
-      font-size: 16px;
-      text-align: center;
-      color: white;
+      font-size: 12px;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -135,22 +116,15 @@
 
   <!-- Contenedor con opciones en dos columnas -->
   <div class="container">
-    <!-- Cuadro 1: Perfil del Proyecto -->
     <a class="option-btn" href="#perfil" style="background-image: url('perfil-imagen.jpg');">
       <h3>Perfil del Proyecto</h3>
     </a>
-
-    <!-- Cuadro 2: Marco Teórico -->
     <a class="option-btn" href="#marco-teorico" style="background-image: url('marco-teorico-imagen.jpg');">
       <h3>Marco Teórico</h3>
     </a>
-
-    <!-- Cuadro 3: Ingeniería del Proyecto -->
     <a class="option-btn" href="#ingenieria" style="background-image: url('ingenieria-imagen.jpg');">
       <h3>Ingeniería del Proyecto</h3>
     </a>
-
-    <!-- Cuadro 4: Conclusión -->
     <a class="option-btn" href="#conclusion" style="background-image: url('conclusion-imagen.jpg');">
       <h3>Conclusión</h3>
     </a>
