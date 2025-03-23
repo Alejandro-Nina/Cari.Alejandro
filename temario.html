@@ -26,7 +26,7 @@
       position: relative;
     }
 
-    /* Efecto de oscurecimiento en el fondo */
+    /* Oscurecimiento del fondo */
     body::before {
       content: "";
       position: absolute;
@@ -38,45 +38,46 @@
       z-index: -1;
     }
 
-    /* Título */
+    /* Título principal */
     .main-title {
-      font-size: 22px;
+      font-size: 24px;
       font-weight: bold;
       text-transform: uppercase;
-      padding: 10px;
+      padding: 12px;
       background: rgba(0, 0, 0, 0.7);
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-      width: 80%;
+      width: 90%;
+      max-width: 800px;
       color: #ffcc00;
       position: absolute;
       top: 5%;
     }
 
-    /* Contenedor */
+    /* Contenedor con las opciones */
     .container {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      grid-gap: 15px;
-      width: 80%;
-      max-width: 700px;
-      margin-top: 100px;
+      grid-gap: 20px;
+      width: 90%;
+      max-width: 500px;
+      margin-top: 120px;
     }
 
-    /* Cuadros */
+    /* Cuadros de opciones */
     .option-btn {
       background: rgba(255, 255, 255, 0.2);
       color: white;
       text-decoration: none;
       border-radius: 15px;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: bold;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       background-size: cover;
       background-position: center;
-      width: 150px;
-      height: 150px;
+      width: 200px;
+      height: 200px;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -85,19 +86,19 @@
     }
 
     .option-btn:hover {
-      transform: scale(1.08);
+      transform: scale(1.05);
       box-shadow: 0 0 15px rgba(255, 204, 0, 0.9);
     }
 
-    /* Nombre debajo de la imagen */
+    /* Nombre de cada cuadro */
     .option-btn h3 {
-      font-size: 14px;
+      font-size: 16px;
       text-transform: uppercase;
       color: #ffcc00;
       background: rgba(0, 0, 0, 0.7);
       width: 100%;
       text-align: center;
-      padding: 5px 0;
+      padding: 6px 0;
       border-radius: 0 0 15px 15px;
     }
 
@@ -106,10 +107,10 @@
       display: inline-block;
       background: linear-gradient(45deg, #ff5733, #ff9966);
       color: white;
-      padding: 10px 20px;
+      padding: 12px 22px;
       text-decoration: none;
       border-radius: 8px;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: bold;
       margin-top: 20px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -122,8 +123,7 @@
 
     /* Pie de página */
     .footer {
-      font-size: 12px;
-      margin-top: 10px;
+      font-size: 14px;
       position: absolute;
       bottom: 5%;
     }
