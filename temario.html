@@ -54,21 +54,24 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
-    /* Opciones Cuadradas */
+    /* Cuadros para las opciones */
     .option-btn {
       display: block;
-      background: linear-gradient(45deg, #ff8000, #ffcc00);
+      background: rgba(255, 255, 255, 0.3);
       color: white;
-      padding: 20px;
+      padding: 60px;
       margin: 15px 0;
       text-decoration: none;
-      border-radius: 10px;
+      border-radius: 15px;
       font-size: 18px;
       font-weight: bold;
       width: 100%;
+      max-width: 400px;
       text-align: center;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background-size: cover;
+      background-position: center;
     }
 
     .option-btn:hover {
@@ -124,10 +127,10 @@
 
   <!-- Contenedor con opciones -->
   <div class="container">
-    <a class="option-btn" href="#perfil">Perfil del Proyecto</a>
-    <a class="option-btn" href="#marco-teorico">Marco Teórico</a>
-    <a class="option-btn" href="#ingenieria">Ingeniería del Proyecto</a>
-    <a class="option-btn" href="#conclusion">Conclusión</a>
+    <a class="option-btn" href="#perfil" style="background-image: url('perfil-imagen.jpg');">Perfil del Proyecto</a>
+    <a class="option-btn" href="#marco-teorico" style="background-image: url('marco-teorico-imagen.jpg');">Marco Teórico</a>
+    <a class="option-btn" href="#ingenieria" style="background-image: url('ingenieria-imagen.jpg');">Ingeniería del Proyecto</a>
+    <a class="option-btn" href="#conclusion" style="background-image: url('conclusion-imagen.jpg');">Conclusión</a>
   </div>
 
   <!-- Botón Volver -->
