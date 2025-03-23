@@ -77,8 +77,8 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       background-size: cover;
       background-position: center;
-      width: 220px;
-      height: 220px;
+      width: 100%;
+      height: 200px; /* Ajuste de tamaño en pantallas grandes */
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -148,8 +148,11 @@
       }
 
       .option-btn {
-        width: 180px;
-        height: 180px;
+        height: 180px; /* Ajuste de tamaño para pantallas más pequeñas */
+      }
+
+      .option-btn h3 {
+        font-size: 14px; /* Ajuste de tamaño para títulos */
       }
 
       .footer {
@@ -163,8 +166,11 @@
       }
 
       .option-btn {
-        width: 150px;
-        height: 150px;
+        height: 150px; /* Ajuste de tamaño para pantallas muy pequeñas */
+      }
+
+      .option-btn h3 {
+        font-size: 12px;
       }
     }
   </style>
