@@ -1,104 +1,94 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto de Grado</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: white;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyecto de Grado</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: white;
+    }
 
-        header, footer {
-            background-color: #000;
-            color: white;
-            text-align: center;
-            padding: 20px 10px;
-            font-weight: bold;
-        }
+    header, footer {
+      background-color: #000;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-weight: bold;
+    }
 
-        .main {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 60px 20px;
-        }
+    .container {
+      text-align: center;
+      padding: 60px 20px;
+    }
 
-        .main h2 {
-            font-size: 18px;
-            color: #333;
-            margin-bottom: 20px;
-        }
+    .title {
+      font-size: 20px;
+      font-weight: bold;
+      text-transform: uppercase;
+      max-width: 800px;
+      margin: 0 auto 30px auto;
+      line-height: 1.5;
+    }
 
-        .title {
-            font-size: 22px;
-            font-weight: bold;
-            max-width: 800px;
-            margin-bottom: 40px;
-        }
+    .badge {
+      display: inline-block;
+      background-color: #cce8f9;
+      color: #000;
+      font-weight: bold;
+      border-radius: 30px;
+      padding: 12px 25px;
+      font-size: 16px;
+      margin-top: 20px;
+    }
 
-        .badge {
-            background-color: #cce6f6;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 16px;
-            color: #000;
-            margin-bottom: 40px;
-        }
+    .continue-btn {
+      display: inline-block;
+      background-color: #000;
+      color: white;
+      padding: 10px 20px;
+      margin-top: 40px;
+      text-decoration: none;
+      border-radius: 3px;
+      position: relative;
+    }
 
-        .continue-btn {
-            display: flex;
-            align-items: center;
-            background-color: #111;
-            color: white;
-            text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 5px;
-            font-size: 14px;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
+    .continue-btn::after {
+      content: "➔";
+      margin-left: 10px;
+    }
 
-        .continue-btn:hover {
-            background-color: #444;
-        }
-
-        .continue-btn i {
-            margin-left: 10px;
-        }
-
-        footer {
-            font-size: 14px;
-        }
-    </style>
-    <!-- Íconos -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    .continue-btn:hover {
+      background-color: #333;
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        PROYECTO DE GRADO
-    </header>
+  <header>
+    PROYECTO DE GRADO
+  </header>
 
-    <div class="main">
-        <div class="title">
-            DESARROLLO Y AUTOMATIZACIÓN DEL ANÁLISIS SÍSMICO DE TIPO DE EDIFICACIONES DE HORMIGÓN ARMADO CON ETABS, REVIT, DYNAMO Y PYTHON PARA LA GENERACIÓN DE ESPECTRO DE RESPUESTA
-        </div>
-
-        <div class="badge">INGENIERÍA CIVIL</div>
-
-        <a href="temario.html" class="continue-btn">
-            Continuar <i class="fas fa-arrow-right"></i>
-        </a>
+  <div class="container">
+    <div class="title">
+      DESARROLLO Y AUTOMATIZACIÓN DEL ANÁLISIS SÍSMICO DE TIPO DE EDIFICACIONES DE HORMIGÓN ARMADO CON ETABS, REVIT, DYNAMO Y PYTHON PARA LA GENERACIÓN DE ESPECTRO DE RESPUESTA
     </div>
+    
+    <div class="badge">
+      INGENIERÍA CIVIL
+    </div>
+    
+    <br>
+    
+    <a class="continue-btn" href="temario.html">Continuar</a>
+  </div>
 
-    <footer>
-        ALEJANDRO NINA CARI – 2025
-    </footer>
+  <footer>
+    ALEJANDRO NINA CARI – 2025
+  </footer>
 
 </body>
 </html>
+
