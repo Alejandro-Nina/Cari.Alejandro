@@ -1,214 +1,460 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Temario</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+# --------------------------------------------------------------------
+# UNIVERSIDAD CATÓLICA BOLIVIANA SAN PABLO – PROYECTO DE GRADO 2025
+# “Automatización del Cálculo del Espectro de Respuesta Sísmica (NB-DSR-23 – Bolivia)”
+# Autor: Jimmy Alejandro Nina Cari
+# Correo: jimmy.nina@ucb.edu.bo
+# Versión: 2.0 Profesional – NB-DSR-23 (2023)
+# --------------------------------------------------------------------
+
+import numpy as np
+import matplotlib.pyplot as plt
+import tkinter as tk
+from tkinter import ttk, filedialog, messagebox
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import Table, TableStyle, Paragraph, Spacer, SimpleDocTemplate, Image as RLImage
+from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet
+from PIL import Image, ImageTk
+import mplcursors, json, csv, os, datetime
+from math import sqrt, pi
+
+# ==============================
+# CONFIGURACIÓN DE ESTILO OSCURO
+# ==============================
+COLOR_BG = "#000000"
+COLOR_PANEL = "#1e1e1e"
+COLOR_ACCENT = "#5016EF"
+COLOR_PRIMARY = "#19E184"
+COLOR_TEXT = "#f8f5f5"
+COLOR_ENTRY = "#2a2a2a"
+FONT_TITLE = ("Segoe UI", 16, "bold")
+FONT_LABEL = ("Segoe UI", 10, "bold")
+FONT_ENTRY = ("Segoe UI", 10)
+FONT_RES = ("Consolas", 9)
+G = 9.81
+
+# ==============================
+# TABLAS NORMATIVAS NB-DSR-23
+# ==============================
+
+# Factores FA y FV (Tablas 3.3 y 3.4)
+FA_TABLE = {
+    "S0": [(0.067,0.8),(0.133,0.8),(0.2,0.8),(0.267,0.8),(float("inf"),0.8)],
+    "S1": [(0.067,0.9),(0.133,0.9),(0.2,0.9),(0.267,0.9),(float("inf"),0.9)],
+    "S2": [(0.067,1.3),(0.133,1.3),(0.2,1.2),(0.267,1.1),(float("inf"),1.1)],
+    "S3": [(0.067,1.6),(0.133,1.4),(0.2,1.2),(0.267,1.1),(float("inf"),1.1)],
+    "S4": [(0.067,2.4),(0.133,1.7),(0.2,1.3),(0.267,1.2),(float("inf"),1.2)],
+}
+FV_TABLE = {
+    "S0": [(0.044,0.8),(0.089,0.8),(0.133,0.8),(0.178,0.8),(float("inf"),0.8)],
+    "S1": [(0.044,0.8),(0.089,0.8),(0.133,0.8),(0.178,0.8),(float("inf"),0.8)],
+    "S2": [(0.044,1.5),(0.089,1.5),(0.133,1.5),(0.178,1.5),(float("inf"),1.4)],
+    "S3": [(0.044,2.4),(0.089,2.2),(0.133,2.0),(0.178,1.9),(float("inf"),1.7)],
+    "S4": [(0.044,4.2),(0.089,3.3),(0.133,2.8),(0.178,2.4),(float("inf"),2.4)],
+}
+
+# Factor de Importancia (Tabla 2.2)
+IE_DICT = {"I":1.0,"II":1.0,"III":1.3,"IV":1.5}
+
+# Reducción sísmica R (Capítulo 4 NB-DSR-23)
+R_TABLE = {
+    "Marcos dúctiles de hormigón armado":8,
+    "Muros estructurales de hormigón":5,
+    "Sistemas duales (marco+muros)":6,
+    "Estructuras de acero dúctiles":8,
+    "Sistemas prefabricados con conexión dúctil":5,
+    "Estructuras de albañilería reforzada":4,
+    "Estructuras de albañilería confinada":3,
+    "Otros sistemas especiales":3,
+}
+
+# ==============================
+# FUNCIONES DE CÁLCULO NB-DSR-23
+# ==============================
+def lookup_coeff(tabla,suelo,S0):
+    for umbral,valor in tabla[suelo]:
+        if S0 <= umbral:
+            return valor
+    return tabla[suelo][-1][1]
+
+def periodos(Fa,Fv):
+    T0 = 0.15*(Fv/Fa)
+    Ts = 0.5*(Fv/Fa)
+    Tl = 4.0*(Fv/Fa)
+    return T0,Ts,Tl
+
+def Sa_elastico(T,Fa,Fv,S0,T0,Ts,Tl):
+    if T < T0:
+        return Fa*S0*(1 + 1.5*(T/T0))
+    elif T0 <= T <= Ts:
+        return 2.5*Fa*S0
+    elif Ts < T <= Tl:
+        return (1.25*Fv*S0)/T
+    else:
+        return (1.25*Fv*S0*Tl)/(T**2)
+
+def Sa_diseno(Sae,Ie,Tau,FIT,R,G,eta):
+    return Sae*Ie*Tau*FIT/R*G*eta
+
+def Sd_pseudo(T,Sa):
+    """Desplazamiento pseudo-espectral [m]"""
+    if T == 0: return 0
+    return (T**2/(4*pi**2))*Sa
+
+# ==============================
+# MANEJO DE CONFIGURACIÓN (JSON)
+# ==============================
+CONFIG_FILE = "config.json"
+
+def guardar_config(data):
+    try:
+        with open(CONFIG_FILE,"w") as f:
+            json.dump(data,f,indent=4)
+    except Exception as e:
+        print("Error guardando configuración:", e)
+
+def cargar_config():
+    if not os.path.exists(CONFIG_FILE):
+        return {}
+    try:
+        with open(CONFIG_FILE,"r") as f:
+            return json.load(f)
+    except:
+        return {}
+
+# ==============================
+# CÁLCULO PRINCIPAL DEL ESPECTRO
+# ==============================
+def calcular_espectros(params):
+    S0 = params["S0"]
+    Ie = params["Ie"]
+    R = params["R"]
+    Ip = params["Ip"]
+    Ia = params["Ia"]
+    Tau = params["Tau"]
+    suelo = params["suelo"]
+    Cd = params["Cd"]
+    xi = params["xi"]  # amortiguamiento
+    eta = sqrt(10/(5+xi))  # factor correctivo por amortiguamiento
+    FIT = max(1 - Ip - Ia, 0.5)
+
+    Fa = lookup_coeff(FA_TABLE, suelo, S0)
+    Fv = lookup_coeff(FV_TABLE, suelo, S0)
+    T0, Ts, Tl = periodos(Fa, Fv)
+
+    Tn = np.arange(0, 10.05, 0.05)
+    Sa_e, Sa_d, Sd_d = [], [], []
+
+    for T in Tn:
+        Sae = Sa_elastico(T, Fa, Fv, S0, T0, Ts, Tl)
+        Sad = Sa_diseno(Sae, Ie, Tau, FIT, R, G, eta)
+        Sdd = Sd_pseudo(T, Sad)
+        Sa_e.append(Sae)
+        Sa_d.append(Sad)
+        Sd_d.append(Sdd)
+
+    resultados = {
+        "T": Tn,
+        "Sa_el": Sa_e,
+        "Sa_dis": Sa_d,
+        "Sd_dis": Sd_d,
+        "Fa": Fa, "Fv": Fv, "FIT": FIT, "eta": eta,
+        "T0": T0, "Ts": Ts, "Tl": Tl
     }
+    return resultados
 
-    html, body {
-      height: 100%;
-      width: 100%;
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      color: white;
-      text-align: center;
-      background: url('FONDO REVIT.png') no-repeat center center fixed;
-      background-size: cover;
-      position: relative;
-    }
+# ==============================
+# EXPORTACIONES DE ARCHIVOS
+# ==============================
+def exportar_csv(resultados):
+    f = filedialog.asksaveasfilename(defaultextension=".csv")
+    if not f: return
+    with open(f,"w",newline="") as file:
+        w = csv.writer(file)
+        w.writerow(["T(s)","Sa_el(g)","Sa_dis(m/s²)","Sd_dis(m)"])
+        for i in range(len(resultados["T"])):
+            w.writerow([
+                f"{resultados['T'][i]:.2f}",
+                f"{resultados['Sa_el'][i]:.5f}",
+                f"{resultados['Sa_dis'][i]:.5f}",
+                f"{resultados['Sd_dis'][i]:.5f}"
+            ])
+    messagebox.showinfo("Éxito","Archivo CSV exportado correctamente.")
 
-    /* Oscurecimiento del fondo */
-    body::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      z-index: -1;
-    }
+def exportar_png(figura):
+    f = filedialog.asksaveasfilename(defaultextension=".png")
+    if not f: return
+    figura.savefig(f,bbox_inches="tight",dpi=200,facecolor="#000000")
+    messagebox.showinfo("Éxito","Gráfica guardada correctamente.")
 
-    /* Título principal */
-    .main-title {
-      font-size: 20px;
-      font-weight: bold;
-      text-transform: uppercase;
-      padding: 10px;
-      background: rgba(0, 0, 0, 0.7);
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-      width: 90%;
-      max-width: 800px;
-      color: #ffcc00;
-      position: absolute;
-      top: 5%;  /* Ajuste del título más arriba */
-      z-index: 10;
-      margin-top: 40px; /* Más espacio arriba para separar más del título */
-    }
+# ==============================
+# EXPORTAR PDF PROFESIONAL (UCB)
+# ==============================
+def exportar_pdf(resultados, figura_sa, figura_sd, params):
+    f = filedialog.asksaveasfilename(defaultextension=".pdf")
+    if not f: return
 
-    /* Contenedor con las opciones */
-    .container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap: 10px; /* Menos espacio entre los cuadros */
-      width: 90%;
-      max-width: 800px;
-      margin-top: 180px; /* Más espacio entre el título y los cuadros */
-      flex-grow: 1;
-    }
+    img_sa = "temp_Sa.png"
+    img_sd = "temp_Sd.png"
+    figura_sa.savefig(img_sa,dpi=200,bbox_inches="tight",facecolor="#000")
+    figura_sd.savefig(img_sd,dpi=200,bbox_inches="tight",facecolor="#000")
 
-    /* Cuadros de opciones */
-    .option-btn {
-      background: rgba(255, 255, 255, 0.3);
-      color: white;
-      text-decoration: none;
-      border-radius: 15px;
-      font-size: 16px;
-      font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      background-size: cover;
-      background-position: center;
-      width: 100%;
-      height: 140px; /* Ajuste de tamaño */
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: center;
-      padding-bottom: 10px;
-      position: relative;
-    }
+    doc = SimpleDocTemplate(f,pagesize=letter)
+    styles = getSampleStyleSheet()
+    story = []
 
-    .option-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(255, 204, 0, 0.9);
-    }
+    story.append(Paragraph("<b>UNIVERSIDAD CATÓLICA BOLIVIANA SAN PABLO</b>",styles["Title"]))
+    story.append(Paragraph("Proyecto de Grado 2025 – Automatización del Cálculo del Espectro NB-DSR-23",styles["Normal"]))
+    story.append(Spacer(1,8))
+    story.append(Paragraph(f"<b>Autor:</b> Jimmy Alejandro Nina Cari<br/><b>Correo:</b> jimmy.nina@ucb.edu.bo",styles["Normal"]))
+    story.append(Spacer(1,8))
+    story.append(Paragraph(f"<b>Fecha:</b> {datetime.datetime.now().strftime('%d/%m/%Y %H:%M')}",styles["Normal"]))
+    story.append(Spacer(1,10))
 
-    /* Nombre de cada cuadro */
-    .option-btn h3 {
-      font-size: 14px;
-      text-transform: uppercase;
-      color: #ffcc00;
-      background: rgba(0, 0, 0, 0.7);
-      width: 100%;
-      text-align: center;
-      padding: 6px 0;
-      border-radius: 0 0 15px 15px;
-      position: absolute;
-      bottom: 0;
-    }
+    story.append(Paragraph(f"""
+    <b>Parámetros NB-DSR-23:</b><br/>
+    Zona Sísmica S₀ = {params['S0']} g<br/>
+    Tipo de Suelo = {params['suelo']} | Sistema Estructural: {params['sistema']} (R={params['R']})<br/>
+    Iₑ = {params['Ie']} | τ = {params['Tau']} | ξ = {params['xi']}% | η = {resultados['eta']:.3f}<br/>
+    FIT = {resultados['FIT']:.3f} | Cd = {params['Cd']}<br/>
+    T₀ = {resultados['T0']:.3f}s | Tₛ = {resultados['Ts']:.3f}s | Tₗ = {resultados['Tl']:.3f}s
+    """, styles["Normal"]))
+    story.append(Spacer(1,10))
 
-    /* Botón Volver */
-    .back-btn {
-      display: inline-block;
-      background: linear-gradient(45deg, #ff5733, #ff9966);
-      color: white;
-      padding: 12px 22px;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: bold;
-      margin-top: 10px; /* Menos espacio entre los cuadros y el botón */
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+    story.append(Paragraph("<b>Espectro de Aceleración (Sa)</b>",styles["Heading2"]))
+    story.append(RLImage(img_sa,width=430,height=250))
+    story.append(Spacer(1,10))
 
-    .back-btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 10px rgba(255, 87, 51, 0.8);
-    }
+    story.append(Paragraph("<b>Espectro de Desplazamiento (Sd)</b>",styles["Heading2"]))
+    story.append(RLImage(img_sd,width=430,height=250))
+    story.append(Spacer(1,10))
 
-    /* Pie de página */
-    .footer {
-      font-size: 16px;
-      position: relative;
-      margin-top: 20px;
-      color: white;  /* Mantenerlo blanco */
-      font-weight: bold;  /* Agregar negrita */
-      text-shadow: 2px 2px 5px rgba(255, 204, 0, 0.8), 0 0 25px rgba(255, 204, 0, 0.8);  /* Sombra brillante */
-      margin-bottom: 20px;
-    }
+    story.append(Paragraph("<i>Generado automáticamente por EspectroNBDS23 – Profesional v2.0</i>",styles["Italic"]))
+    doc.build(story)
+    os.remove(img_sa)
+    os.remove(img_sd)
+    messagebox.showinfo("Éxito","PDF exportado correctamente.")
 
-    /* Media Queries para pantallas pequeñas */
-    @media (max-width: 768px) {
-      .container {
-        grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
-        margin-top: 200px; /* Más espacio arriba */
-      }
+# ==============================
+# INTERFAZ GRÁFICA PRINCIPAL (TKINTER)
+# ==============================
+def iniciar_interfaz():
+    root = tk.Tk()
+    root.title("💠 Espectro de Respuesta Sísmica – NB-DSR-23 Profesional")
+    root.configure(bg=COLOR_BG)
+    root.geometry("1150x700")
+    root.minsize(1000,650)
 
-      .main-title {
-        font-size: 18px;
-        top: 5%; /* Ajuste para pantallas pequeñas */
-        margin-top: 50px; /* Ajuste adicional para evitar sobreposición */
-      }
+    # --- ENCABEZADO ---
+    frame_top = tk.Frame(root,bg=COLOR_BG)
+    frame_top.pack(fill=tk.X,pady=6)
+    try:
+        logo = Image.open("img/ucb_logo.png")
+        logo = logo.resize((60,80))
+        logo = ImageTk.PhotoImage(logo)
+        tk.Label(frame_top,image=logo,bg=COLOR_BG).pack(side=tk.LEFT,padx=10)
+    except:
+        pass
+    tk.Label(frame_top,text="UNIVERSIDAD CATÓLICA BOLIVIANA SAN PABLO\nPROYECTO DE GRADO 2025 – NB-DSR-23",
+             bg=COLOR_BG,fg=COLOR_ACCENT,font=FONT_TITLE,justify="center").pack(side=tk.LEFT,anchor="w")
 
-      .option-btn {
-        height: 120px; /* Ajuste para pantallas más pequeñas */
-      }
+    # --- CUERPO PRINCIPAL ---
+    frame_main = tk.Frame(root,bg=COLOR_BG)
+    frame_main.pack(fill=tk.BOTH,expand=True)
 
-      .option-btn h3 {
-        font-size: 12px; /* Ajuste para títulos */
-      }
+    # PANEL IZQUIERDO (Entradas)
+    panel = tk.Frame(frame_main,bg=COLOR_PANEL,bd=2,relief="ridge")
+    panel.pack(side=tk.LEFT,fill=tk.Y,padx=10,pady=10)
 
-      .footer {
-        font-size: 12px;
-      }
-    }
+    # Cargar configuración previa
+    cfg = cargar_config()
 
-    @media (max-width: 480px) {
-      .main-title {
-        font-size: 16px;
-      }
+    campos = [
+        ("S₀ (Pseudoacel. g)", cfg.get("S0",0.24)),
+        ("Factor de Importancia", cfg.get("Ie","II")),
+        ("Sistema estructural", cfg.get("sistema","Marcos dúctiles de hormigón armado")),
+        ("Irregularidad en Planta (Ip)", cfg.get("Ip",0)),
+        ("Irregularidad en Altura (Ia)", cfg.get("Ia",0)),
+        ("Amplificación Topográfica (τ)", cfg.get("Tau",1.0)),
+        ("Tipo de Suelo", cfg.get("suelo","S2")),
+        ("Cd (Ductilidad)", cfg.get("Cd",5.5)),
+        ("ξ (Amortiguamiento %)", cfg.get("xi",5.0)),
+    ]
 
-      .option-btn {
-        height: 110px; /* Ajuste para pantallas muy pequeñas */
-      }
+    entradas = {}
 
-      .option-btn h3 {
-        font-size: 10px;
-      }
-    }
-  </style>
-</head>
-<body>
+    for i,(txt,val) in enumerate(campos):
+        tk.Label(panel,text=txt,bg=COLOR_PANEL,fg=COLOR_TEXT,font=FONT_LABEL).grid(row=i,column=0,sticky="w",pady=3,padx=4)
+        if "Importancia" in txt:
+            combo = ttk.Combobox(panel,values=list(IE_DICT.keys()),state="readonly",width=8)
+            combo.grid(row=i,column=1,pady=2); combo.set(val)
+            entradas["Ie"]=combo
+        elif "Sistema" in txt:
+            combo = ttk.Combobox(panel,values=list(R_TABLE.keys()),state="readonly",width=30)
+            combo.grid(row=i,column=1,pady=2); combo.set(val)
+            entradas["sistema"]=combo
+        elif "Suelo" in txt:
+            combo = ttk.Combobox(panel,values=list(FA_TABLE.keys()),state="readonly",width=8)
+            combo.grid(row=i,column=1,pady=2); combo.set(val)
+            entradas["suelo"]=combo
+        else:
+            e = tk.Entry(panel,width=10,bg=COLOR_ENTRY,fg="white",insertbackground="white",font=FONT_ENTRY)
+            e.grid(row=i,column=1,pady=2)
+            e.insert(0,str(val))
+            entradas[txt]=e
 
-  <!-- Título Principal -->
-  <div class="main-title">
-    Desarrollo y Automatización del Análisis Sísmico con ETABS, Revit, Dynamo y Python
-  </div>
+    # --- Pestañas de gráficos ---
+    notebook = ttk.Notebook(frame_main)
+    notebook.pack(side=tk.RIGHT,fill=tk.BOTH,expand=True,padx=10,pady=10)
 
-  <!-- Contenedor con opciones en dos columnas -->
-  <div class="container">
-    <a class="option-btn" href="perfil.html" style="background-image: url('perfil-imagen.jpg');">
-      <h3>Perfil del Proyecto</h3>
-    </a>
-    <a class="option-btn" href="marco-teorico.html" style="background-image: url('marco-teorico-imagen.jpg');">
-      <h3>Marco Teórico</h3>
-    </a>
-    <a class="option-btn" href="ingenieria.html" style="background-image: url('ingenieria-imagen.jpg');">
-      <h3>Ingeniería del Proyecto</h3>
-    </a>
-    <a class="option-btn" href="conclusion.html" style="background-image: url('conclusion-imagen.jpg');">
-      <h3>Conclusión</h3>
-    </a>
-  </div>
+    # --- Pestaña 1: Espectro de Aceleración ---
+    tab_sa = tk.Frame(notebook,bg=COLOR_BG)
+    notebook.add(tab_sa,text="Espectro de Aceleración (Sa)")
+    fig_sa = plt.Figure(figsize=(6,5),dpi=100,facecolor="#000000")
+    ax_sa = fig_sa.add_subplot(111)
+    canvas_sa = FigureCanvasTkAgg(fig_sa,master=tab_sa)
+    canvas_sa.get_tk_widget().pack(fill=tk.BOTH,expand=True)
 
-  <!-- Botón Volver -->
-  <a class="back-btn" href="index.html">Volver a Inicio</a>
+    # --- Pestaña 2: Espectro de Desplazamiento ---
+    tab_sd = tk.Frame(notebook,bg=COLOR_BG)
+    notebook.add(tab_sd,text="Espectro de Desplazamiento (Sd)")
+    fig_sd = plt.Figure(figsize=(6,5),dpi=100,facecolor="#000000")
+    ax_sd = fig_sd.add_subplot(111)
+    canvas_sd = FigureCanvasTkAgg(fig_sd,master=tab_sd)
+    canvas_sd.get_tk_widget().pack(fill=tk.BOTH,expand=True)
 
-  <!-- Pie de página con nombre -->
-  <div class="footer">
-    ALEJANDRO NINA CARI - 2025
-  </div>
+    # --- Pestaña 3: Comparación ---
+    tab_cmp = tk.Frame(notebook,bg=COLOR_BG)
+    notebook.add(tab_cmp,text="Comparación de Espectros")
+    fig_cmp = plt.Figure(figsize=(6,5),dpi=100,facecolor="#000000")
+    ax_cmp = fig_cmp.add_subplot(111)
+    canvas_cmp = FigureCanvasTkAgg(fig_cmp,master=tab_cmp)
+    canvas_cmp.get_tk_widget().pack(fill=tk.BOTH,expand=True)
 
-</body>
-</html>
+    # ==============================
+    # FUNCIONES INTERNAS
+    # ==============================
+    def ejecutar_calculo():
+        try:
+            params = {
+                "S0": float(entradas["S₀ (Pseudoacel. g)"].get()),
+                "Ie": IE_DICT[entradas["Ie"].get()],
+                "sistema": entradas["sistema"].get(),
+                "R": R_TABLE[entradas["sistema"].get()],
+                "Ip": float(entradas["Irregularidad en Planta (Ip)"].get()),
+                "Ia": float(entradas["Irregularidad en Altura (Ia)"].get()),
+                "Tau": float(entradas["Amplificación Topográfica (τ)"].get()),
+                "suelo": entradas["suelo"].get(),
+                "Cd": float(entradas["Cd (Ductilidad)"].get()),
+                "xi": float(entradas["ξ (Amortiguamiento %)"].get()),
+            }
+        except:
+            messagebox.showerror("Error","Por favor ingrese los valores correctamente."); return
+
+        # Guardar configuración
+        guardar_config(params)
+        res = calcular_espectros(params)
+
+        # --- Gráfica Sa ---
+        ax_sa.clear()
+        ax_sa.set_facecolor("#000000")
+        ax_sa.plot(res["T"],res["Sa_el"],"--",color=COLOR_ACCENT,linewidth=2.0,label="Sa Elástico (g)")
+        ax_sa.plot(res["T"],res["Sa_dis"],color=COLOR_PRIMARY,linewidth=2.5,label="Sa Diseño (m/s²)")
+        ax_sa.set_xlabel("Período (s)",color="white"); ax_sa.set_ylabel("Aceleración (m/s²)",color="white")
+        ax_sa.grid(True,linestyle="--",alpha=0.4); ax_sa.tick_params(colors="white")
+        ax_sa.legend(facecolor="#222",edgecolor="#555",labelcolor="white",fontsize=8)
+        mplcursors.cursor(ax_sa,hover=True)
+        canvas_sa.draw()
+
+        # --- Gráfica Sd ---
+        ax_sd.clear()
+        ax_sd.set_facecolor("#000000")
+        ax_sd.plot(res["T"],res["Sd_dis"],color=COLOR_ACCENT,linewidth=2.5,label="Sd (m)")
+        ax_sd.set_xlabel("Período (s)",color="white"); ax_sd.set_ylabel("Desplazamiento (m)",color="white")
+        ax_sd.grid(True,linestyle="--",alpha=0.4); ax_sd.tick_params(colors="white")
+        ax_sd.legend(facecolor="#222",edgecolor="#555",labelcolor="white",fontsize=8)
+        mplcursors.cursor(ax_sd,hover=True)
+        canvas_sd.draw()
+
+        # Guardar para exportar
+        global resultados_global, params_global, fig_sa_global, fig_sd_global
+        resultados_global = res
+        params_global = params
+        fig_sa_global = fig_sa
+        fig_sd_global = fig_sd
+        messagebox.showinfo("Cálculo completado","El espectro ha sido calculado correctamente según NB-DSR-23.")
+
+    # --- Cargar espectro externo (comparación) ---
+    def cargar_espectro_externo():
+        file = filedialog.askopenfilename(filetypes=[("CSV","*.csv")])
+        if not file: return
+        T, Sa = [], []
+        with open(file,"r") as f:
+            reader = csv.reader(f)
+            next(reader)
+            for row in reader:
+                try:
+                    T.append(float(row[0])); Sa.append(float(row[1]))
+                except: pass
+        ax_cmp.clear()
+        ax_cmp.set_facecolor("#000000")
+        ax_cmp.plot(resultados_global["T"],resultados_global["Sa_dis"],color=COLOR_PRIMARY,linewidth=2.5,label="NB-DSR-23 Diseño")
+        ax_cmp.plot(T,Sa,"--",color=COLOR_ACCENT,linewidth=2,label="Espectro Externo (CSV)")
+        ax_cmp.set_xlabel("Período (s)",color="white"); ax_cmp.set_ylabel("Aceleración (m/s²)",color="white")
+        ax_cmp.grid(True,linestyle="--",alpha=0.4); ax_cmp.tick_params(colors="white")
+        ax_cmp.legend(facecolor="#222",edgecolor="#555",labelcolor="white",fontsize=8)
+        mplcursors.cursor(ax_cmp,hover=True)
+        canvas_cmp.draw()
+
+    # --- BOTONES ---
+    tk.Button(panel,text="Calcular y Graficar",bg=COLOR_ACCENT,fg="white",font=FONT_LABEL,
+              relief="flat",command=ejecutar_calculo).grid(row=10,column=0,columnspan=2,pady=5,ipadx=5)
+    tk.Button(panel,text="Exportar CSV",bg=COLOR_PRIMARY,fg="black",font=FONT_LABEL,relief="flat",
+              command=lambda: exportar_csv(resultados_global)).grid(row=11,column=0,columnspan=2,pady=3)
+    tk.Button(panel,text="Guardar PNG",bg=COLOR_PRIMARY,fg="black",font=FONT_LABEL,relief="flat",
+              command=lambda: exportar_png(fig_sa_global)).grid(row=12,column=0,columnspan=2,pady=3)
+    tk.Button(panel,text="Exportar PDF",bg=COLOR_PRIMARY,fg="black",font=FONT_LABEL,relief="flat",
+              command=lambda: exportar_pdf(resultados_global,fig_sa_global,fig_sd_global,params_global)).grid(row=13,column=0,columnspan=2,pady=3)
+    tk.Button(panel,text="Comparar con CSV externo",bg="#4444FF",fg="white",font=FONT_LABEL,relief="flat",
+              command=cargar_espectro_externo).grid(row=14,column=0,columnspan=2,pady=5)
+
+    root.mainloop()
+
+# ==============================
+# PUNTO DE ENTRADA PRINCIPAL
+# ==============================
+if __name__ == "__main__":
+    try:
+        iniciar_interfaz()
+    except Exception as e:
+        print("Error en la ejecución:", e)
+        messagebox.showerror("Error crítico", f"Ocurrió un error inesperado:\n{e}")
+
+# --------------------------------------------------------------------
+# 🧱 INSTRUCCIONES PARA COMPILAR A .EXE (Windows)
+# --------------------------------------------------------------------
+# 1️⃣ Instalar dependencias:
+#     pip install matplotlib numpy reportlab pillow mplcursors
+#
+# 2️⃣ Instalar PyInstaller:
+#     pip install pyinstaller
+#
+# 3️⃣ Ubicarte en la carpeta del proyecto y ejecutar:
+#     pyinstaller --noconsole --onefile EspectroNBDS23_Professional.py
+#
+# 4️⃣ Se generará un archivo en /dist:
+#     EspectroNBDS23_Professional.exe
+#
+# 5️⃣ Copiar también las carpetas necesarias:
+#     /img/ucb_logo.png   → logo institucional (opcional)
+#     /export/            → donde se guardan los PDF, CSV y PNG
+#     /config.json        → configuración persistente
+#
+# 6️⃣ Ejecutar el .exe y disfrutar la herramienta profesional
+#     "Espectro de Respuesta Sísmica NB-DSR-23 – Bolivia"
+#
+# --------------------------------------------------------------------
+# Fin del programa – Versión Profesional 2.0
+# --------------------------------------------------------------------
+
