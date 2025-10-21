@@ -1,3 +1,57 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EspectroNBDS23 – Código (Python)</title>
+
+  <!-- Highlight.js (tema oscuro) -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark-dimmed.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#0b0e11; --panel:#11161c; --text:#e8eef7; --accent:#19E184; --muted:#7b8a9a;
+      --btn:#18212b; --btnb:#2a3644;
+    }
+    html, body { background: var(--bg); color: var(--text); margin: 0; font-family: ui-sans-serif, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+    .wrap{ max-width: 1100px; margin: 24px auto 80px; padding: 0 16px; }
+    header h1{ margin:0 0 6px 0; font-size: 1.6rem; }
+    header p{ margin:0; color: var(--muted); }
+    .card{ background: var(--panel); border:1px solid #1f2833; border-radius: 14px; padding: 14px; margin-top: 18px; }
+    .toolbar{ display:flex; gap:10px; justify-content:flex-end; margin:10px 4px 6px; }
+    .btn{ background: var(--btn); color: var(--text); border:1px solid var(--btnb); padding:8px 12px; border-radius:10px; cursor:pointer; font-weight:600; }
+    .btn:hover{ filter: brightness(1.08); }
+    pre{ margin:0; border-radius: 10px; overflow:auto; }
+    .foot{ margin-top: 14px; color: var(--muted); font-size:.9rem; }
+    a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>EspectroNBDS23 – Código fuente (Python)</h1>
+      <p>NB-DSR-23 (Bolivia) · GUI Tkinter · Exportación CSV/PNG/PDF</p>
+    </header>
+
+    <div class="card">
+      <div class="toolbar">
+        <button class="btn" id="copyBtn">Copiar</button>
+        <button class="btn" id="downloadBtn">Descargar .py</button>
+      </div>
+
+      <pre><code class="language-python" id="codeBlock"></code></pre>
+
+      <div class="foot">
+        Autor: <b>Jimmy Alejandro Nina Cari</b> · Correo: <a href="mailto:jimmy.nina@ucb.edu.bo">jimmy.nina@ucb.edu.bo</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tu código Python como plantilla de texto -->
+  <script id="pySource" type="text/plain">
 # --------------------------------------------------------------------
 # UNIVERSIDAD CATÓLICA BOLIVIANA SAN PABLO – PROYECTO DE GRADO 2025
 # “Automatización del Cálculo del Espectro de Respuesta Sísmica (NB-DSR-23 – Bolivia)”
@@ -457,4 +511,38 @@ if __name__ == "__main__":
 # --------------------------------------------------------------------
 # Fin del programa – Versión Profesional 2.0
 # --------------------------------------------------------------------
+  </script>
 
+  <script>
+    // Inserta el código en el bloque <code> y activa highlight
+    const src = document.getElementById('pySource').textContent.trimStart();
+    const codeEl = document.getElementById('codeBlock');
+    codeEl.textContent = src;
+    hljs.highlightElement(codeEl);
+
+    // Copiar al portapapeles
+    document.getElementById('copyBtn').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(src);
+        const b = document.getElementById('copyBtn');
+        const old = b.textContent;
+        b.textContent = '¡Copiado!';
+        setTimeout(()=> b.textContent = old, 1200);
+      } catch(e){ alert('No se pudo copiar: ' + e); }
+    });
+
+    // Descargar como .py
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      const blob = new Blob([src], { type: 'text/x-python;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'EspectroNBDS23_Professional.py';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+  </script>
+</body>
+</html>
