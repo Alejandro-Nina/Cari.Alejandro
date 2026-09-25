@@ -1,548 +1,581 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>EspectroNBDS23 – Código (Python)</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Resuelve vigas hiperestáticas con cargas puntuales, distribuidas y momentos. Calcula reacciones, cortante, momento flector y deformada con el método de rigidez.">
+<meta name="theme-color" content="#111e36"><title>Vigas · CARI — Laboratorio interactivo</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23142c40'/%3E%3Cpath d='M5 13h22M8 15l-4 9h8zm16 0-4 9h8z' stroke='%234ae0c2' fill='none' stroke-width='2'/%3E%3C/svg%3E">
+<style>:root{color-scheme:light;--navy:#142c40;--ink:#203649;--muted:#596d7c;--teal:#087f75;--mint:#3bdfbf;--line:#dbe4e9;--paper:#f2f6f8;--orange:#c76624;--blue:#3d68b0;--purple:#735aa2;--font:Inter,"Segoe UI",Arial,sans-serif}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 var(--font)}button,input,select{font:inherit}button,select,summary{cursor:pointer}button{transition:background .15s,color .15s}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid #27acb1;outline-offset:3px}button{border:0}a{color:var(--teal)}h1,h2,h3,p{margin:0}h1{font-size:25px;letter-spacing:-.6px;line-height:1.35}h2{font-size:25px;letter-spacing:-.7px;font-weight:650}h3{font-size:16px;font-weight:650}.topbar{height:76px;padding:0 36px;display:flex;align-items:center;gap:28px;background:var(--navy);color:white}.brand{color:white;text-decoration:none;display:flex;gap:13px;align-items:center;font-size:25px;font-weight:600;letter-spacing:-.7px}.brand svg{color:var(--mint)}.brand b{font-size:17px;letter-spacing:2px}.brand-divider{color:#627a8e;margin:0 10px;font-weight:300}.header-label{color:#c7d5df;font-size:12px;letter-spacing:2px;flex:1;padding-left:26px;border-left:1px solid #3d5060}.academic{font-size:13px;background:#284254;border:1px solid #456272;border-radius:30px;padding:5px 12px;color:#e0f1f6}.workspace{display:grid;grid-template-columns:370px minmax(0,1fr);max-width:1660px;margin:auto;align-items:start}.editor{background:#fff;border-right:1px solid var(--line);min-width:0;align-self:stretch}.editor-heading{padding:28px 24px 20px}.eyebrow{font-size:12px;font-weight:750;letter-spacing:1.8px;color:var(--teal);margin-bottom:7px}.editor-heading p{font-size:14px;color:var(--muted);margin-top:9px;max-width:300px}.example-box{padding:0 24px 23px}.example-box label{font-size:13px;color:var(--muted);display:block;margin-bottom:7px}.inline{display:flex;gap:8px;align-items:center}.inline select{min-width:0;flex:1}.square{background:#eaf3f3;color:var(--teal);width:40px;height:40px;flex-shrink:0;border:1px solid #c9dddd;border-radius:6px;font-size:23px;line-height:1}.square:hover{background:#d3eaea}.input-section{border-top:1px solid var(--line)}.input-section>summary{padding:17px 24px;list-style:none;display:flex;justify-content:space-between;align-items:center;font-size:15px;font-weight:650}.input-section>summary::-webkit-details-marker,.method-panel>summary::-webkit-details-marker{display:none}.input-section>summary>span:first-child{display:flex;gap:10px;align-items:center}.step-number{border:1px solid #cedde3;color:var(--teal);border-radius:6px;font-size:12px;width:23px;height:23px;display:inline-flex;align-items:center;justify-content:center}.section-count{color:var(--muted);font-size:12px;font-weight:450}.section-body{padding:0 24px 20px}.helper{color:var(--muted);font-size:13px;line-height:1.6;margin:0 0 12px}.unit-pair{display:grid;grid-template-columns:1fr 1.2fr 1.3fr;gap:10px;font-size:12px;color:var(--muted);margin:14px 20px 8px 0}.unit-pair b{font-weight:500;color:var(--ink)}.span-row{padding:11px 10px 12px;background:#f6f8fa;border:1px solid #e0e7ed;border-radius:7px;margin-bottom:9px}.row-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;color:var(--muted);font-size:12px;letter-spacing:.3px}.remove{color:#71828f;border-radius:4px;background:transparent;min-width:28px;min-height:28px;font-size:21px;line-height:1}.remove:hover{color:#a92336;background:#f9e6e8}.span-inputs{display:grid;grid-template-columns:1fr 1.2fr 1.3fr;gap:8px}.span-inputs label,.load-fields label,.support-fields label,.inertia-fields label,.inertia-help>label{font-size:12px;color:var(--muted);display:block}.field-label{display:block;margin-bottom:3px}input[type=number],select{width:100%;height:38px;border:1px solid #cdd8e0;background:white;border-radius:5px;color:var(--ink);padding:6px 9px;font-size:14px;min-width:0}input[type=number]{font-variant-numeric:tabular-nums;-moz-appearance:textfield}input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}input:invalid{border-color:#c9434c}select{padding-right:22px}.add-button{width:100%;background:transparent;color:var(--teal);border:1px dashed #b7cfce;border-radius:5px;padding:8px 10px;font-size:14px;margin:3px 0 10px;text-align:center}.add-button:hover{background:#eff8f6}.length-total{display:flex;justify-content:space-between;align-items:center;margin-top:15px;font-size:13px;color:var(--muted)}.length-total strong{color:var(--ink);font-size:16px;font-variant-numeric:tabular-nums}.inertia-help{font-size:13px;margin-top:4px}.inertia-help summary{color:var(--teal);font-size:13px}.inertia-fields{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.inertia-help p{margin:8px 0}.secondary{border:1px solid #c2d7d7;background:white;color:var(--teal);border-radius:5px;padding:7px 11px}.small-button{font-size:13px;margin-top:10px}.support-row{padding:10px 0;border-bottom:1px solid #e7edf1}.support-row:first-child{padding-top:0}.support-row:last-child{border:0}.support-fields{display:grid;grid-template-columns:25px 1fr 70px 25px;gap:7px;align-items:end}.support-letter{font-size:13px;font-weight:700;color:var(--teal);align-self:center;padding-top:13px}.support-fields .remove{height:38px;min-width:24px}.load-convention{font-size:12px;color:var(--muted);padding:9px 11px;border-radius:5px;background:#fdf4eb;margin:0 0 13px;line-height:1.7}.load-convention b{color:#975117;font-weight:600}.load-row{padding:11px 11px 13px;border:1px solid #dfe6ec;border-left:3px solid #ca7c42;border-radius:5px;margin-bottom:10px}.load-row .row-heading{color:#8f531f}.load-fields{display:grid;grid-template-columns:1fr 1fr;gap:9px}.add-load-label{font-size:13px;color:var(--muted);display:block;margin:14px 0 6px}.solve-box{padding:22px 24px 28px;border-top:1px solid var(--line);background:white;position:sticky;bottom:0;z-index:4;box-shadow:0 -8px 15px #20364906}.primary{background:var(--teal);color:white;border-radius:6px;font-weight:650;font-size:15px;min-height:47px;width:100%;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 3px 6px #087f751c}.primary:hover{background:#05685f}.primary span{font-size:22px;line-height:1}.solve-box p{font-size:12px;text-align:center;color:var(--muted);margin-top:8px}.results{padding:28px 30px 30px;min-width:0}.results-heading{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:24px}.badge{font-size:12px;white-space:nowrap;color:#326b70;background:#e4f1f0;border:1px solid #d2e5e3;padding:5px 10px;border-radius:5px}.panel{background:white;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 3px 10px #142c4003}.panel-title{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 22px}.legend{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}.legend-line{display:inline-block;width:17px;height:3px;margin-left:8px}.beam-color{background:var(--navy)}.load-color{background:var(--orange)}.beam-panel{background-image:radial-gradient(#d9e4eb 0.7px,transparent 0.7px);background-size:16px 16px}.beam-panel .panel-title{background:#ffffffdb}.beam-scroll{overflow-x:auto}.beam-panel svg{width:100%;display:block;min-width:550px}.beam-footer{display:flex;justify-content:space-between;gap:10px;padding:13px 22px;background:#f9fbfc;border-top:1px solid #e6edf1;font-size:12px;color:var(--muted)}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}.metric{background:white;border:1px solid var(--line);border-radius:8px;padding:17px 19px;min-width:0;position:relative}.metric:first-child{border-top:3px solid var(--teal);padding-top:15px}.metric:nth-child(2){border-top:3px solid var(--blue);padding-top:15px}.metric:nth-child(3){border-top:3px solid var(--purple);padding-top:15px}.metric>span{font-size:12px;display:block;color:var(--muted)}.metric strong{font-size:25px;letter-spacing:-.7px;font-weight:650;display:block;margin:5px 0 1px;white-space:normal;font-variant-numeric:tabular-nums}.metric strong em{font-style:normal;font-size:13px;font-weight:500;letter-spacing:0;color:var(--muted);margin-left:4px}.metric small{font-size:12px;color:var(--muted)}.chart-header{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:0 20px;border-bottom:1px solid var(--line)}.tabs{display:flex;gap:18px;min-width:0}.tabs button{border-radius:0;background:transparent;padding:17px 0 14px;border-bottom:3px solid transparent;color:var(--muted);font-size:14px;font-weight:550;white-space:nowrap}.tabs button[aria-selected=true]{border-bottom-color:var(--teal);color:var(--teal)}.tabs span{font-size:12px;margin-left:6px;color:#8aa0ae}.chart-unit{font-size:12px;color:var(--muted)}#chartSvg{display:block;width:100%;touch-action:pan-y}.chart-caption{display:flex;justify-content:space-between;gap:10px;padding:0 22px 17px;color:var(--muted);font-size:12px}.station{padding:18px 22px;background:#f8fafb;border-top:1px solid var(--line)}.station-position{display:flex;align-items:center;gap:10px;font-size:13px}.station-position label{font-weight:600}.input-with-unit{display:flex;align-items:center;background:white;border:1px solid #cdd8e0;border-radius:5px;width:95px}.input-with-unit input{border:0;width:68px;background:none}.input-with-unit span{color:var(--muted);font-size:12px}.station-position select{max-width:160px;font-size:12px}input[type=range]{width:100%;accent-color:var(--teal);margin:16px 0 12px;min-height:20px}.station-values{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.station-values>div{display:flex;gap:8px;align-items:baseline}.station-values span{font-size:13px;color:var(--muted)}.station-values b{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}.reactions-panel{margin-top:18px}.table-scroll{overflow:auto}table{border-collapse:collapse;width:100%;font-size:14px;white-space:nowrap}th{text-align:right;background:#f7fafb;color:var(--muted);font-size:12px;font-weight:550;padding:10px 20px;border-bottom:1px solid var(--line)}td{padding:12px 20px;border-bottom:1px solid #ebf0f3;text-align:right;font-variant-numeric:tabular-nums}th:first-child,td:first-child,th:nth-child(2),td:nth-child(2){text-align:left}td:first-child{font-weight:650;color:var(--teal)}tbody tr:last-child td{border:0}.table-note{font-size:12px;color:var(--muted);padding:14px 22px;border-top:1px solid #ebf0f3}.subtle{background:#f2f7f7;border-color:transparent;font-size:12px}.method-panel{margin-top:18px}.method-panel>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:21px 22px}.method-panel .eyebrow{font-size:11px;margin-bottom:4px}.method-chevron{color:var(--teal);font-size:22px}.method-content{padding:0 22px 24px}.method-step{border-top:1px solid var(--line);padding:19px 0}.method-step h4{font-size:15px;margin:0 0 9px}.method-step p{font-size:14px;color:var(--muted);margin:8px 0;line-height:1.7}.formula{font-family:"Cambria Math",Georgia,serif;background:#f4f8fa;padding:14px 16px;border-radius:5px;overflow:auto;font-size:17px;margin:12px 0}.matrix{font-family:"Cambria Math",Georgia,serif;display:grid;grid-template-columns:auto 1fr;align-items:center;gap:16px}.matrix table{border-left:2px solid #879eab;border-right:2px solid #879eab;max-width:450px}.matrix td{border:0;text-align:center;padding:7px 10px;font-size:15px;color:var(--ink);font-weight:400}.method-content details{margin-top:13px}.method-content details>summary{font-size:14px;color:var(--teal);margin-bottom:10px}.method-content table th,.method-content table td{padding:9px 12px}.method-content .table-scroll{border:1px solid var(--line);border-radius:5px;margin-top:10px}.balance{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}.balance span{background:#edf6f3;color:#226657;padding:8px 13px;border-radius:5px;font-size:13px}.notes{font-size:12px;color:var(--muted);line-height:1.7;padding:24px 3px}.notes b{font-size:13px;color:#526977;font-weight:600}.notes p{margin-top:7px;max-width:1000px}.error,.stale{padding:13px 16px;border-radius:6px;margin:0 0 16px;font-size:14px}.error{background:#fff0f0;border:1px solid #eebbc0;color:#992d3a}.stale{background:#fff6e3;border:1px solid #ead3a0;color:#876016}[hidden]{display:none!important}.muted-results{opacity:.5}.empty{font-size:13px;color:var(--muted);padding:6px 0 14px}svg text{font-family:var(--font)}.diagram-cursor{pointer-events:none}
+@media(min-width:1500px){.workspace{grid-template-columns:400px minmax(0,1fr)}.results{padding:30px 40px}.editor-heading,.example-box,.section-body,.solve-box{padding-left:30px;padding-right:30px}.input-section>summary{padding-left:30px;padding-right:30px}}
+@media(max-width:1150px){.workspace{grid-template-columns:330px minmax(0,1fr)}.results{padding:24px 20px}.results-heading{align-items:flex-start}.results-heading h2{font-size:22px}.results-heading>.badge{display:none}.editor-heading,.example-box,.section-body,.solve-box{padding-left:18px;padding-right:18px}.input-section>summary{padding-left:18px;padding-right:18px}.metric{padding:14px 12px}.metric strong{font-size:22px}.station-values{grid-template-columns:1fr 1fr;row-gap:10px}.tabs{gap:14px}.tabs span{display:none}.chart-caption{flex-direction:column;gap:3px}.metric>span{min-height:36px}.metrics{gap:9px}.legend{display:none}}
+@media(max-width:800px){.topbar{padding:0 18px;height:66px}.header-label{display:none}.academic{margin-left:auto}.brand{font-size:22px}.brand b{font-size:14px}.workspace{grid-template-columns:1fr}.editor{border-right:0;border-bottom:1px solid var(--line)}.editor-heading{padding-top:22px}.editor-heading p{max-width:none}.example-box{max-width:480px}.section-body{padding-bottom:15px}.input-section>summary{padding-top:14px;padding-bottom:14px}.solve-box{position:static;padding-top:18px;padding-bottom:19px}.results{padding:24px 16px}.results-heading h2{font-size:24px}.results-heading{margin-bottom:18px}.beam-scroll{overflow:auto}.beam-panel svg{min-width:650px}.metrics{gap:8px}.metric strong{font-size:22px}.metric strong em{display:block;margin:0}.metric>span{min-height:36px}.metric small{font-size:11px}.chart-header{padding:0 14px}.tabs{gap:18px}.tabs button{font-size:13px}.panel-title{padding:16px}.reactions-panel .panel-title{align-items:flex-start;flex-direction:column;gap:7px}.station{padding:15px}.chart-caption{padding:0 15px 14px}th,td{padding:10px 15px}.method-content{padding:0 16px 20px}.method-panel>summary{padding:18px 16px}.matrix{grid-template-columns:1fr}.metric{padding:13px 10px}.span-inputs{grid-template-columns:1fr 1fr 1fr}.support-fields{grid-template-columns:30px 1fr 85px 30px}.unit-pair{grid-template-columns:1fr 1fr 1fr}.load-fields{grid-template-columns:1fr 1fr}.beam-footer{padding:12px 15px}.beam-footer span:first-child{max-width:60%}}
+@media(max-width:390px){.brand-divider{margin:0 5px}.academic{font-size:11px;padding:5px 8px}.station-position{flex-wrap:wrap}.station-position select{max-width:150px}.metrics{grid-template-columns:1fr}.metric>span{min-height:0}.metric strong em{display:inline;margin-left:5px}.tabs{gap:12px}.station-values b{font-size:13px}.beam-footer{flex-direction:column}.beam-footer span:first-child{max-width:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
-  <!-- Highlight.js (tema oscuro) -->
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark-dimmed.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+.span-inputs label,.load-fields label,.support-fields label,.inertia-fields label,.inertia-help>label{font-size:14px}#diagram{overflow-x:auto}#chartSvg{min-width:620px}
 
-  <style>
-    :root{
-      --bg:#0b0e11; --panel:#11161c; --text:#e8eef7; --accent:#19E184; --muted:#7b8a9a;
-      --btn:#18212b; --btnb:#2a3644;
-    }
-    html, body { background: var(--bg); color: var(--text); margin: 0; font-family: ui-sans-serif, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
-    .wrap{ max-width: 1100px; margin: 24px auto 80px; padding: 0 16px; }
-    header h1{ margin:0 0 6px 0; font-size: 1.6rem; }
-    header p{ margin:0; color: var(--muted); }
-    .card{ background: var(--panel); border:1px solid #1f2833; border-radius: 14px; padding: 14px; margin-top: 18px; }
-    .toolbar{ display:flex; gap:10px; justify-content:flex-end; margin:10px 4px 6px; }
-    .btn{ background: var(--btn); color: var(--text); border:1px solid var(--btnb); padding:8px 12px; border-radius:10px; cursor:pointer; font-weight:600; }
-    .btn:hover{ filter: brightness(1.08); }
-    pre{ margin:0; border-radius: 10px; overflow:auto; }
-    .foot{ margin-top: 14px; color: var(--muted); font-size:.9rem; }
-    a { color: var(--accent); text-decoration: none; }
-  </style>
+:root{--navy:#15213a;--ink:#273750;--muted:#64758d;--teal:#5362c8;--mint:#8dbaff;--line:#e0e6f0;--paper:#f2f4fa;--purple:#8253c6;--blue:#148ba9;--orange:#df7a28}html{scroll-behavior:smooth;scroll-padding-top:20px}body{background:linear-gradient(115deg,#f4f6fc,#edf2f9)}.topbar{background:#111e36;height:78px;padding:0 34px;border-bottom:1px solid #364968}.brand svg{color:#9fc2ff}.brand b{color:#8caafa}.header-label{font-size:12px;letter-spacing:1.5px}.academic{color:#c3d9ff;background:#253859;border-color:#3d5276}.header-nav{display:flex;gap:22px;margin-right:12px}.header-nav a{font-size:13px;color:#c9d5e9;text-decoration:none}.header-nav a:hover{color:white}.project-toolbar{max-width:1600px;margin:auto;padding:15px 30px;display:flex;justify-content:space-between;gap:16px;align-items:center;font-size:13px;color:#7a889e}.project-toolbar b{font-weight:600;color:#52657e}.toolbar-divider{margin:0 12px;color:#b5bfd0}.project-toolbar>div{display:flex;gap:8px}.project-toolbar button{background:white;border:1px solid #dce3ee;border-radius:7px;color:#556a86;padding:7px 11px;font-size:12px}.project-toolbar button:hover{color:#384fbe;border-color:#abbbea}.workspace{grid-template-columns:346px minmax(0,1fr);gap:26px;max-width:1600px;padding:5px 30px 40px;align-items:start}.editor{border:1px solid #dce4ef;border-radius:14px;box-shadow:0 8px 26px #30487109;align-self:start;position:sticky;top:16px;max-height:calc(100vh - 32px);overflow-y:auto;scrollbar-width:thin;scrollbar-color:#b8c7dd transparent}.editor-heading{background:linear-gradient(110deg,#f3f5ff,#fff);padding:24px 21px 19px}.eyebrow{color:#7686a5;letter-spacing:1.65px}.editor-heading .eyebrow{color:#6e79c5;font-size:11px}.editor-heading h1{font-size:24px;color:#263b60}.editor-heading p{font-size:13px;line-height:1.65}.example-box{padding:0 21px 21px;background:linear-gradient(110deg,#f3f5ff,#fff)}.section-body{padding:0 21px 20px}.input-section>summary{padding:16px 21px;color:#3a4c67}.step-number{background:#edf0fc;border:0;color:#6675cd;width:24px;height:24px}.input-section:nth-of-type(2) .step-number{background:#e5f4fa;color:#2490ae}.input-section:nth-of-type(3) .step-number{background:#fff0df;color:#c77b2d}.span-row{background:#f7f8fe;border-color:#e3e7f5}.load-row{border-color:#e8e4de;border-left-color:#e0a24c;background:#fffdfa}.row-heading{letter-spacing:.7px;font-size:11px}.unit-pair{display:none}.add-button{border-color:#bcc7e2;color:#6475b4}.square{background:#e8edfc;color:#5c6fc2;border-color:#d8e0f7}.solve-box{padding:20px 21px 16px;background:#fff;box-shadow:0 -8px 20px #13294508}.primary{background:linear-gradient(100deg,#5563d7,#485abc);border-radius:8px;box-shadow:0 5px 12px #4357c333;font-size:16px}.primary:hover{background:linear-gradient(100deg,#4855c4,#3a4ca9)}input[type=range]{accent-color:#7c6bd4}input[type=number],select{border-radius:6px;border-color:#d4ddec;color:#344864}.results{padding:12px 0 0;min-width:0}.results-heading{margin-bottom:22px}.results-heading .eyebrow{font-size:11px;color:#8b98b0;letter-spacing:2px}.results-heading h2{font-size:29px;color:#223550;letter-spacing:-1px}.results-heading>.badge{background:#e6ecff;border-color:#d6defa;color:#667ac4}.panel{border-color:#dfe5ef;border-radius:12px;box-shadow:0 4px 15px #25396a05}.spatial-panel{background:#15243c;border-radius:15px;overflow:hidden;box-shadow:0 12px 30px #1c305622;color:#e3edfd;border:1px solid #2b3d5a}.spatial-top{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 24px 0}.scene-kicker{font-size:10px;font-weight:600;letter-spacing:2px;color:#84a1c9}.spatial-top h3{font-size:17px;letter-spacing:-.2px;font-weight:500;margin-top:4px;color:#e3edfd}.material-switch{display:flex;gap:3px;padding:4px;border:1px solid #3a4b67;border-radius:8px;background:#17283f}.material-switch button{font-size:12px;padding:7px 10px;background:transparent;border-radius:5px;color:#b6c7e2}.material-switch button[aria-pressed=true]{color:white;background:#3c5179;box-shadow:0 2px 4px #0002}.scene-wrap{position:relative}.scene-wrap canvas{display:block;width:100%;height:390px;cursor:grab;touch-action:none}.scene-wrap canvas:active{cursor:grabbing}.scene-tip{position:absolute;left:24px;top:17px;font-size:11px;color:#7893b9;pointer-events:none}.scene-tip span{margin:0 7px;color:#52678a}.scene-corner{position:absolute;right:22px;bottom:18px;text-align:right;pointer-events:none}.scene-corner span{display:block;font-size:12px;color:#91a9cc;margin-bottom:3px}.scene-corner b{display:block;font-size:11px;font-weight:400;color:#7694bc}.scene-camera{position:absolute;left:24px;bottom:15px;display:flex;gap:7px}.scene-camera button{color:#a9bfdc;background:#273854bd;border:1px solid #3a4f71;border-radius:6px;padding:6px 9px;font-size:11px}.scene-camera button:hover{background:#415a83}.scene-controls{display:flex;gap:15px;flex-wrap:wrap;align-items:center;border-top:1px solid #31425e;padding:17px 22px;background:#192940}.play-button{padding:9px 12px;border:1px solid #607ee2;border-radius:6px;color:#e1e9ff;background:#3c5298;font-size:12px;font-weight:500}.play-button:hover{background:#4f67b1}.play-button[aria-pressed=true]{background:#644f9d;border-color:#8c7cc1}.check-label{display:inline-flex;align-items:center;gap:7px;font-size:12px;cursor:pointer;color:inherit}.check-label input{margin:0;width:14px;height:14px;accent-color:#7e97ef}.scene-controls .check-label{color:#b7c6dd}.amplification{display:flex;align-items:center;gap:8px;font-size:12px;color:#99afd0;margin-left:auto}.amplification input[type=range]{width:76px;min-height:16px;margin:0;accent-color:#8daaff}.amplification output{font-size:11px;min-width:37px;color:#c3d4ef;font-variant-numeric:tabular-nums}.scene-note{display:flex;justify-content:space-between;gap:15px;font-size:11px;color:#8ba4c7;padding:10px 22px 13px;background:#17263b;line-height:1.6}.swatch{width:8px;height:8px;border-radius:2px;display:inline-block;margin-right:6px}.swatch.negative{background:#ac7cfa}.swatch.positive{background:#2ed5ac;margin-left:10px}.section-heading{margin:27px 0 13px;display:flex;align-items:center;justify-content:space-between;gap:12px}.section-heading>div{display:flex;align-items:center;gap:10px}.section-heading h3{font-size:16px;color:#405474}.section-heading>span{font-size:12px;color:#91a0b5}.number-tile{width:27px;height:27px;display:inline-flex;justify-content:center;align-items:center;border-radius:7px;font-size:11px;font-weight:700}.blue-tile{background:#dfeafa;color:#5186c9}.orange-tile{background:#ffebd8;color:#cf8535}.purple-tile{background:#ebe3fa;color:#9170be}.beam-panel{background-size:17px 17px;background-image:radial-gradient(#d5e0ed .75px,transparent .75px)}.beam-panel .panel-title h3{font-size:14px;font-weight:500;color:#697f9a}.beam-footer{background:#f6f8fc;color:#7f8fa6}.force-legend{display:flex;gap:17px;flex-wrap:wrap;font-size:12px;color:#7e8da4}.force-legend .applied{background:#d97c22}.force-legend .reaction{background:#168daa}.force-legend .couple{background:#8650c9}.freebody-panel .check-label{color:#687f9c}.freebody-panel svg{display:block;width:100%;min-width:700px}.equilibrium-strip{display:flex;justify-content:space-between;gap:12px;padding:13px 22px;background:#f0f8fa;color:#4e919f;border-top:1px solid #ddecf0;font-size:12px}.equilibrium-strip span:last-child{color:#8b9dad}.metrics{gap:15px;margin:0 0 18px}.metric{padding:20px 21px;border-radius:10px;overflow:hidden}.metric:first-child{background:linear-gradient(120deg,#fff,#f1edfb);border:1px solid #ded7ef;border-left:4px solid #9470cf;padding-top:20px}.metric:nth-child(2){background:linear-gradient(120deg,#fff,#e7f6fa);border:1px solid #d3e7ed;border-left:4px solid #4babc0;padding-top:20px}.metric:nth-child(3){background:linear-gradient(120deg,#fff,#fff3e7);border:1px solid #eedcc7;border-left:4px solid #dea158;padding-top:20px}.metric:first-child strong{color:#7954b1}.metric:nth-child(2) strong{color:#26899e}.metric:nth-child(3) strong{color:#c38939}.metric strong{font-size:29px;margin:5px 0;font-weight:600}.metric>span{font-size:12px;min-height:0}.metric small{font-size:11px;color:#8997ac}.chart-header{background:#f9faff}.tabs button[aria-selected=true]{color:#8253c6;border-color:#9570cc}.tabs button{font-size:14px}.station{background:#f5f8fc}.station-values b{color:#4c6381}.comparison-heading{display:flex;justify-content:space-between;align-items:center;margin:26px 2px 13px;color:#617791}.comparison-heading h3{font-size:14px;font-weight:500}.all-diagrams{border:1px solid #dfe5ef;border-radius:12px;overflow:hidden;background:white}.mini-chart+.mini-chart{border-top:1px solid #e6ebf3}.mini-heading{display:flex;align-items:center;gap:9px;padding:14px 20px 0}.mini-heading>span{background:color-mix(in srgb,var(--chart-color) 12%,white);color:var(--chart-color);width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600}.mini-heading h4{font-size:13px;color:#637891;font-weight:500;margin:0}.mini-heading b{font-size:11px;color:#899ab0;font-weight:400;margin-left:auto}.mini-scroll{overflow:auto}.mini-scroll svg{display:block;width:100%;min-width:620px;cursor:crosshair}.section-panel{margin-top:23px}.section-panel .eyebrow{font-size:10px;color:#9b7fca}.section-panel h3{font-size:16px}.section-inspector{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(230px,1fr);gap:15px;align-items:center;padding:0 20px 20px}.section-inspector svg{width:100%;display:block}.cut-readout{padding:8px 12px}.cut-readout>div:not(.critical-actions){display:flex;align-items:center;gap:12px;margin-bottom:13px}.cut-icon{width:37px;height:37px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:500}.shear-icon{background:#e6f5fa;color:#3399b4}.moment-icon{background:#f0eafb;color:#936bcc}.cut-readout p{font-size:12px;color:#8b9bb0}.cut-readout strong{display:block;font-size:18px;font-weight:600;color:#536b8a;font-variant-numeric:tabular-nums}.cut-readout p.cut-explainer{font-size:13px;color:#768ba5;line-height:1.65;margin-top:16px}.critical-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}.critical-actions button{background:#f5f7fc;border:1px solid #dde5f1;color:#7488a8;font-size:11px;padding:6px 9px;border-radius:5px}.critical-actions button:hover{color:#7954b1;border-color:#c0adda}.reactions-panel .subtle{color:#699793;background:#edf6f6}.reactions-panel th{background:#f6f8fc;color:#8a9bb0}.reactions-panel td{color:#607998}.reactions-panel td:first-child{color:#637ec3}.notes{color:#8b98ad;font-size:12px}.notes b{color:#72859d}.method-panel .eyebrow{color:#9e89b8}.method-panel h3{color:#6d7e96}.toast{position:fixed;bottom:24px;right:24px;z-index:30;max-width:min(430px,calc(100vw - 36px));background:#203657;color:#e5efff;padding:15px 20px;border:1px solid #48638b;border-radius:10px;box-shadow:0 10px 25px #1e305733;font-size:14px}.toast-error{background:#6e3345;border-color:#a46272}.stale{border-color:#e9cea2;background:#fff5e5}.spatial-panel button:focus-visible,.spatial-panel input:focus-visible{outline-color:#a8c1ff}.table-note{color:#8799b0;font-size:12px}.mini-chart,.spatial-panel,.panel,.metrics{animation:appear .4s ease-out}@keyframes appear{from{opacity:.4;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@media(min-width:1500px){.workspace{grid-template-columns:370px minmax(0,1fr)}.results{padding:12px 0 0}.editor-heading,.example-box,.section-body,.solve-box{padding-left:23px;padding-right:23px}.input-section>summary{padding-left:23px;padding-right:23px}.scene-wrap canvas{height:440px}}
+@media(max-width:1200px){.header-label{display:none}.header-nav{margin-left:auto}.project-toolbar{padding:15px 22px}.workspace{grid-template-columns:314px minmax(0,1fr);gap:20px;padding-left:22px;padding-right:22px}.results-heading h2{font-size:26px}.spatial-top{align-items:flex-start;padding:20px 19px 0;gap:12px}.material-switch{flex-wrap:wrap;justify-content:center}.material-switch button{padding:6px 7px;font-size:11px}.scene-wrap canvas{height:350px}.scene-controls{gap:13px;padding:15px 18px}.amplification{margin-left:0}.scene-tip{font-size:10px;left:19px}.section-heading>span{display:none}.section-inspector{grid-template-columns:1fr}.section-inspector svg{max-width:560px;margin:auto}.cut-readout{display:grid;grid-template-columns:1fr 1fr;gap:5px 15px;padding:0 8px}.cut-readout .cut-explainer,.critical-actions{grid-column:1/-1}.metric{padding:16px 14px!important}.metric strong{font-size:25px}.metric>span{min-height:36px}.spatial-top h3{font-size:15px}.scene-note{flex-wrap:wrap}.freebody-panel .panel-title{flex-wrap:wrap}.equilibrium-strip{flex-wrap:wrap}.equilibrium-strip span:last-child{width:100%}.editor-heading,.example-box,.section-body,.solve-box{padding-left:16px;padding-right:16px}.input-section>summary{padding-left:16px;padding-right:16px}.section-body label{font-size:13px}.span-inputs{gap:6px}.span-inputs input{padding-left:7px;padding-right:7px}}
+@media(max-width:800px){.topbar{height:auto;min-height:72px;flex-wrap:wrap;padding:16px 19px;gap:12px}.header-nav{order:3;width:100%;justify-content:space-around;border-top:1px solid #344763;padding-top:12px;margin:0}.header-nav a{font-size:12px}.academic{font-size:11px}.project-toolbar{padding:14px 16px;align-items:flex-start;flex-direction:column;gap:11px}.project-toolbar>span{font-size:12px}.project-toolbar>div{flex-wrap:wrap}.project-toolbar button{font-size:11px}.workspace{display:flex;flex-direction:column;gap:20px;padding:0 14px 30px}.editor{width:100%;position:relative;top:auto;max-height:none;overflow:visible}.editor-heading{border-radius:14px 14px 0 0}.results{width:100%;padding:0}.solve-box{border-radius:0 0 14px 14px}.results-heading{padding:2px 3px;margin-bottom:17px}.results-heading h2{font-size:27px}.results-heading .eyebrow{font-size:10px}.spatial-top{padding:20px 16px 0;flex-direction:column;gap:13px}.material-switch button{padding:7px 12px;font-size:12px}.scene-wrap canvas{height:330px}.scene-tip{display:none}.scene-camera{left:14px;bottom:12px}.scene-corner{right:14px;bottom:47px}.scene-controls{gap:15px 14px;padding:16px}.scene-controls .play-button{width:100%;text-align:center;font-size:13px}.scene-controls .check-label{font-size:12px}.amplification{width:100%;justify-content:space-between;gap:10px;margin:0}.amplification input[type=range]{flex:1;max-width:150px}.scene-note{font-size:11px;padding:10px 16px 14px}.section-heading{margin-top:25px}.section-heading h3{font-size:14px}.metrics{gap:7px}.metric{padding:13px 10px!important}.metric strong{font-size:23px}.metric>span{font-size:11px}.metric small{font-size:10px}.metric strong em{font-size:12px}.panel-title{padding:16px}.force-legend{gap:13px;font-size:11px}.freebody-panel .check-label{font-size:12px}.equilibrium-strip{padding:12px 16px;font-size:11px}.comparison-heading h3{font-size:13px}.section-inspector{padding:0 9px 19px;gap:0}.section-inspector svg{min-width:0}.section-panel .panel-title{flex-direction:column;align-items:flex-start;gap:10px}.cut-readout{padding:0 12px}.cut-readout strong{font-size:17px}.section-panel .table-note{line-height:1.7}.mini-heading{padding-left:15px}.scene-wrap canvas:focus-visible{outline-offset:-4px}.metric:first-child,.metric:nth-child(2),.metric:nth-child(3){border-left-width:3px}.project-toolbar button{min-height:35px}.header-nav a{padding:2px 6px}.notes{padding:22px 4px}}
+@media(max-width:390px){.metrics{grid-template-columns:1fr}.metric>span{min-height:0}.metric small{font-size:12px}.metric strong{font-size:27px}.metric strong em{display:inline}.scene-wrap canvas{height:300px}.scene-controls .check-label{font-size:11px}.scene-controls{gap:12px}.cut-readout{grid-template-columns:1fr}.cut-readout .cut-explainer,.critical-actions{grid-column:1}.scene-corner b{max-width:190px;font-size:10px}}
+@media print{body{background:white}.topbar{background:#fff;color:#223550;border:0;padding:0 0 15px;height:auto}.brand,.brand b{color:#223550}.header-label,.academic,.header-nav,.project-toolbar,.editor,.scene-controls,.scene-camera,.scene-tip,.comparison-heading,.critical-actions,.station input,.station select,.section-heading>span{display:none!important}.workspace{display:block;padding:0}.results{padding:0}.results-heading{margin:12px 0}.spatial-panel{break-inside:avoid;box-shadow:none}.scene-wrap canvas{height:340px}.scene-note{color:#a9c0dc}.panel,.metrics,.all-diagrams{break-inside:avoid;box-shadow:none;margin-top:12px}.mini-chart{break-inside:avoid}.mini-scroll,.beam-scroll,.table-scroll,#diagram{overflow:visible}svg,#chartSvg,.mini-scroll svg{min-width:0!important;max-width:100%}.panel,.spatial-panel{border:1px solid #c4ccda}.table-scroll table{font-size:11px}.method-content .table-scroll{overflow:hidden}.metrics{grid-template-columns:repeat(3,1fr)}.method-panel{break-inside:auto}.method-step{break-inside:avoid}.results-heading>.badge{display:block}.toast{display:none!important}.muted-results{opacity:1}*{-webkit-print-color-adjust:exact;print-color-adjust:exact;animation:none!important}.notes{font-size:10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.mini-chart,.spatial-panel,.panel,.metrics{animation:none}.primary{transition:none}}
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <h1>EspectroNBDS23 – Código fuente (Python)</h1>
-      <p>NB-DSR-23 (Bolivia) · GUI Tkinter · Exportación CSV/PNG/PDF</p>
-    </header>
-
-    <div class="card">
-      <div class="toolbar">
-        <button class="btn" id="copyBtn">Copiar</button>
-        <button class="btn" id="downloadBtn">Descargar .py</button>
-      </div>
-
-      <pre><code class="language-python" id="codeBlock"></code></pre>
-
-      <div class="foot">
-        Autor: <b>Jimmy Alejandro Nina Cari</b> · Correo: <a href="mailto:jimmy.nina@ucb.edu.bo">jimmy.nina@ucb.edu.bo</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Tu código Python como plantilla de texto -->
-  <script id="pySource" type="text/plain">
-# --------------------------------------------------------------------
-# UNIVERSIDAD CATÓLICA BOLIVIANA SAN PABLO – PROYECTO DE GRADO 2025
-# “Automatización del Cálculo del Espectro de Respuesta Sísmica (NB-DSR-23 – Bolivia)”
-# Autor: Jimmy Alejandro Nina Cari
-# Correo: jimmy.nina@ucb.edu.bo
-# Versión: 2.0 Profesional – NB-DSR-23 (2023)
-# --------------------------------------------------------------------
-
-import numpy as np
-import matplotlib.pyplot as plt
-import tkinter as tk
-from tkinter import ttk, filedialog, messagebox
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from reportlab.lib.pagesizes import letter
-from reportlab.platypus import Table, TableStyle, Paragraph, Spacer, SimpleDocTemplate, Image as RLImage
-from reportlab.lib import colors
-from reportlab.lib.styles import getSampleStyleSheet
-from PIL import Image, ImageTk
-import mplcursors, json, csv, os, datetime
-from math import sqrt, pi
-
-# ==============================
-# CONFIGURACIÓN DE ESTILO OSCURO
-# ==============================
-COLOR_BG = "#000000"
-COLOR_PANEL = "#1e1e1e"
-COLOR_ACCENT = "#5016EF"
-COLOR_PRIMARY = "#19E184"
-COLOR_TEXT = "#f8f5f5"
-COLOR_ENTRY = "#2a2a2a"
-FONT_TITLE = ("Segoe UI", 16, "bold")
-FONT_LABEL = ("Segoe UI", 10, "bold")
-FONT_ENTRY = ("Segoe UI", 10)
-FONT_RES = ("Consolas", 9)
-G = 9.81
-
-# ==============================
-# TABLAS NORMATIVAS NB-DSR-23
-# ==============================
-
-# Factores FA y FV (Tablas 3.3 y 3.4)
-FA_TABLE = {
-    "S0": [(0.067,0.8),(0.133,0.8),(0.2,0.8),(0.267,0.8),(float("inf"),0.8)],
-    "S1": [(0.067,0.9),(0.133,0.9),(0.2,0.9),(0.267,0.9),(float("inf"),0.9)],
-    "S2": [(0.067,1.3),(0.133,1.3),(0.2,1.2),(0.267,1.1),(float("inf"),1.1)],
-    "S3": [(0.067,1.6),(0.133,1.4),(0.2,1.2),(0.267,1.1),(float("inf"),1.1)],
-    "S4": [(0.067,2.4),(0.133,1.7),(0.2,1.3),(0.267,1.2),(float("inf"),1.2)],
-}
-FV_TABLE = {
-    "S0": [(0.044,0.8),(0.089,0.8),(0.133,0.8),(0.178,0.8),(float("inf"),0.8)],
-    "S1": [(0.044,0.8),(0.089,0.8),(0.133,0.8),(0.178,0.8),(float("inf"),0.8)],
-    "S2": [(0.044,1.5),(0.089,1.5),(0.133,1.5),(0.178,1.5),(float("inf"),1.4)],
-    "S3": [(0.044,2.4),(0.089,2.2),(0.133,2.0),(0.178,1.9),(float("inf"),1.7)],
-    "S4": [(0.044,4.2),(0.089,3.3),(0.133,2.8),(0.178,2.4),(float("inf"),2.4)],
-}
-
-# Factor de Importancia (Tabla 2.2)
-IE_DICT = {"I":1.0,"II":1.0,"III":1.3,"IV":1.5}
-
-# Reducción sísmica R (Capítulo 4 NB-DSR-23)
-R_TABLE = {
-    "Marcos dúctiles de hormigón armado":8,
-    "Muros estructurales de hormigón":5,
-    "Sistemas duales (marco+muros)":6,
-    "Estructuras de acero dúctiles":8,
-    "Sistemas prefabricados con conexión dúctil":5,
-    "Estructuras de albañilería reforzada":4,
-    "Estructuras de albañilería confinada":3,
-    "Otros sistemas especiales":3,
-}
-
-# ==============================
-# FUNCIONES DE CÁLCULO NB-DSR-23
-# ==============================
-def lookup_coeff(tabla,suelo,S0):
-    for umbral,valor in tabla[suelo]:
-        if S0 <= umbral:
-            return valor
-    return tabla[suelo][-1][1]
-
-def periodos(Fa,Fv):
-    T0 = 0.15*(Fv/Fa)
-    Ts = 0.5*(Fv/Fa)
-    Tl = 4.0*(Fv/Fa)
-    return T0,Ts,Tl
-
-def Sa_elastico(T,Fa,Fv,S0,T0,Ts,Tl):
-    if T < T0:
-        return Fa*S0*(1 + 1.5*(T/T0))
-    elif T0 <= T <= Ts:
-        return 2.5*Fa*S0
-    elif Ts < T <= Tl:
-        return (1.25*Fv*S0)/T
-    else:
-        return (1.25*Fv*S0*Tl)/(T**2)
-
-def Sa_diseno(Sae,Ie,Tau,FIT,R,G,eta):
-    return Sae*Ie*Tau*FIT/R*G*eta
-
-def Sd_pseudo(T,Sa):
-    """Desplazamiento pseudo-espectral [m]"""
-    if T == 0: return 0
-    return (T**2/(4*pi**2))*Sa
-
-# ==============================
-# MANEJO DE CONFIGURACIÓN (JSON)
-# ==============================
-CONFIG_FILE = "config.json"
-
-def guardar_config(data):
-    try:
-        with open(CONFIG_FILE,"w") as f:
-            json.dump(data,f,indent=4)
-    except Exception as e:
-        print("Error guardando configuración:", e)
-
-def cargar_config():
-    if not os.path.exists(CONFIG_FILE):
-        return {}
-    try:
-        with open(CONFIG_FILE,"r") as f:
-            return json.load(f)
-    except:
-        return {}
-
-# ==============================
-# CÁLCULO PRINCIPAL DEL ESPECTRO
-# ==============================
-def calcular_espectros(params):
-    S0 = params["S0"]
-    Ie = params["Ie"]
-    R = params["R"]
-    Ip = params["Ip"]
-    Ia = params["Ia"]
-    Tau = params["Tau"]
-    suelo = params["suelo"]
-    Cd = params["Cd"]
-    xi = params["xi"]  # amortiguamiento
-    eta = sqrt(10/(5+xi))  # factor correctivo por amortiguamiento
-    FIT = max(1 - Ip - Ia, 0.5)
-
-    Fa = lookup_coeff(FA_TABLE, suelo, S0)
-    Fv = lookup_coeff(FV_TABLE, suelo, S0)
-    T0, Ts, Tl = periodos(Fa, Fv)
-
-    Tn = np.arange(0, 10.05, 0.05)
-    Sa_e, Sa_d, Sd_d = [], [], []
-
-    for T in Tn:
-        Sae = Sa_elastico(T, Fa, Fv, S0, T0, Ts, Tl)
-        Sad = Sa_diseno(Sae, Ie, Tau, FIT, R, G, eta)
-        Sdd = Sd_pseudo(T, Sad)
-        Sa_e.append(Sae)
-        Sa_d.append(Sad)
-        Sd_d.append(Sdd)
-
-    resultados = {
-        "T": Tn,
-        "Sa_el": Sa_e,
-        "Sa_dis": Sa_d,
-        "Sd_dis": Sd_d,
-        "Fa": Fa, "Fv": Fv, "FIT": FIT, "eta": eta,
-        "T0": T0, "Ts": Ts, "Tl": Tl
+<header class="topbar"><a class="brand" href="#" aria-label="Vigas CARI, inicio"><svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><path d="M4 12H32M9 15L4 26H14ZM27 15L22 26H32Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M18 3V10M15 7L18 10L21 7" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Vigas <span class="brand-divider">/</span> <b>CARI</b></span></a><span class="header-label">LABORATORIO INTERACTIVO</span><nav class="header-nav" aria-label="Secciones"><a href="#modelEditor">Modelo</a><a href="#spatialPanel">Vista espacial</a><a href="#diagramsPanel">Diagramas</a></nav><span class="academic">Edición visual</span></header>
+<div class="project-toolbar"><span><b>Vigas continuas</b> <span class="toolbar-divider">/</span> Análisis elástico en 2D</span><div><button id="saveModel" type="button">↓ Guardar modelo</button><button id="openModel" type="button">↑ Abrir modelo</button><button id="printReport" type="button">Imprimir</button><input id="modelFile" type="file" accept=".json,application/json" hidden></div></div>
+<main class="workspace">
+<aside class="editor" id="modelEditor" aria-label="Definición de la viga">
+<div class="editor-heading"><div class="eyebrow">01 / MODELO</div><h1>Define tu viga</h1><p>Las posiciones se miden desde el extremo izquierdo.</p></div>
+<div class="example-box"><label for="example">Empezar con un ejemplo</label><div class="inline"><select id="example"><option value="continuous">Continua · dos vanos</option><option value="propped">Empotrada y apoyada</option><option value="fixed">Biempotrada</option><option value="simple">Simplemente apoyada</option><option value="cantilever">Voladizo</option><option value="triangular">Carga triangular</option><option value="appliedMoment">Cargas y momento aplicado</option><option value="variable">Tres vanos · rigidez variable</option></select><button id="loadExample" class="square" title="Cargar el ejemplo seleccionado" aria-label="Cargar el ejemplo seleccionado">↺</button></div></div>
+<details class="input-section" open><summary><span><span class="step-number">1</span> Tramos y rigidez</span><span class="section-count" id="spanCount"></span></summary><div class="section-body"><p class="helper">Tramos consecutivos, unidos con continuidad.</p><div class="unit-pair"><span>Longitud <b>m</b></span><span>E <b>MPa</b></span><span>I <b>cm⁴</b></span></div><div id="spans"></div><button type="button" class="add-button" id="addSpan">＋ Añadir tramo</button><details class="inertia-help"><summary>Calcular I de una sección rectangular</summary><div class="inertia-fields"><label>Base b (cm)<input id="rectB" type="number" min="0.1" step="any" value="30"></label><label>Altura h (cm)<input id="rectH" type="number" min="0.1" step="any" value="50"></label></div><p id="inertiaOutput"></p><label>Aplicar al tramo<select id="inertiaSpan"></select></label><button type="button" id="useInertia" class="secondary small-button">Usar esta inercia</button><p class="helper">I = b·h³/12; h es la dimensión vertical.</p></details><div class="length-total">Longitud total <strong id="totalLength"></strong></div></div></details>
+<details class="input-section" open><summary><span><span class="step-number">2</span> Apoyos</span><span class="section-count" id="supportCount"></span></summary><div class="section-body"><div id="supports"></div><button type="button" class="add-button" id="addSupport">＋ Añadir apoyo</button><p class="helper">Articulado y rodillo restringen el desplazamiento vertical. El empotramiento también restringe el giro.</p></div></details>
+<details class="input-section" open><summary><span><span class="step-number">3</span> Cargas</span><span class="section-count" id="loadCount"></span></summary><div class="section-body"><div class="load-convention"><b>↓ Positivo</b> en fuerzas y cargas distribuidas.<br><b>↺ Positivo</b> en momentos. Usa negativos para invertir.</div><div id="loads"></div><label class="add-load-label" for="newLoadType">Nueva carga</label><div class="inline"><select id="newLoadType"><option value="point">Puntual · kN</option><option value="dist">Distribuida · kN/m</option><option value="moment">Momento · kN·m</option></select><button id="addLoad" class="square" aria-label="Añadir la carga seleccionada">＋</button></div></div></details>
+<div class="solve-box"><button class="primary" id="solve">Calcular viga <span aria-hidden="true">→</span></button><p id="editStatus" role="status">Modelo listo para calcular</p></div>
+</aside>
+<section class="results" aria-label="Análisis de la viga">
+<div class="results-heading"><div><div class="eyebrow">EXPLORA · CARGA · COMPRENDE</div><h2>Tu viga, en perspectiva.</h2></div><span id="modelBadge" class="badge">Viga continua</span></div>
+<div id="error" class="error" role="alert" hidden></div><div id="stale" class="stale" hidden>Hay cambios en el modelo. Pulsa <b>Calcular viga</b> para actualizar los resultados.</div>
+<section class="spatial-panel" id="spatialPanel" aria-labelledby="spatialTitle"><div class="spatial-top"><div><span class="scene-kicker">01 / VISTA ESPACIAL</span><h3 id="spatialTitle">Del modelo a la estructura</h3></div><div class="material-switch" role="group" aria-label="Apariencia de la viga"><button data-material="concrete" aria-pressed="true">Hormigón</button><button data-material="steel" aria-pressed="false">Acero</button><button data-material="wood" aria-pressed="false">Madera</button></div></div><div class="scene-wrap"><canvas id="beamCanvas" width="1200" height="510" tabindex="0" aria-label="Vista espacial de la viga. Arrastra para girar; con el teclado, usa las flechas. Los controles Vista frontal y Restablecer ofrecen posiciones predefinidas.">Vista espacial de la viga. El esquema y los resultados numéricos aparecen debajo.</canvas><div class="scene-tip">Arrastra para girar <span>·</span> Flechas del teclado para orientar</div><div class="scene-corner"><span id="sceneSpanLabel"></span><b id="sceneStateLabel">Geometría sin deformar</b></div><div class="scene-camera"><button id="frontView" aria-label="Mostrar vista frontal">Frontal</button><button id="resetView" aria-label="Restablecer la cámara">↺ Restablecer</button></div></div><div class="scene-controls"><button id="animateScene" aria-pressed="false" class="play-button">▶ Animar deformación</button><label class="check-label"><input id="showDeformed" type="checkbox">Deformada</label><label class="check-label"><input id="colorMoment" type="checkbox">Color por momento</label><label class="check-label"><input id="showSceneLoads" type="checkbox" checked>Cargas</label><label class="amplification">Ampliar flecha<input id="amplification" type="range" min="0" max="100" value="40"><output id="amplificationValue">—</output></label></div><div class="scene-note"><span>Apariencia y sección ilustrativas. El cálculo utiliza E e I de los tramos.</span><span id="momentColorLegend" hidden><i class="swatch negative"></i> M− <i class="swatch positive"></i> M+</span></div></section>
+<div class="section-heading"><div><span class="number-tile blue-tile">02</span><h3>Esquema estructural</h3></div><span>La misma viga, idealizada</span></div>
+<div class="panel beam-panel"><div class="panel-title"><h3>Geometría, apoyos y cargas</h3><div class="legend"><span class="legend-line beam-color"></span>Viga<span class="legend-line load-color"></span>Cargas</div></div><div class="beam-scroll"><svg id="beamSvg" viewBox="0 0 960 280" role="img" aria-label="Viga con sus apoyos, cargas y longitudes"></svg></div><div class="beam-footer"><span id="beamLabel"></span><span>m · kN · MPa · cm⁴</span></div></div>
+<div id="solvedResults">
+<div class="section-heading"><div><span class="number-tile orange-tile">03</span><h3>Fuerzas que actúan en la viga</h3></div><span>Cuerpo libre · equilibrio</span></div>
+<div class="panel freebody-panel"><div class="panel-title"><div class="force-legend"><span><i class="swatch applied"></i>Cargas aplicadas</span><span><i class="swatch reaction"></i>Reacciones</span><span><i class="swatch couple"></i>Momentos</span></div><label class="check-label"><input type="checkbox" id="showResultants">Mostrar resultantes de q</label></div><div class="beam-scroll"><svg id="freeBodySvg" viewBox="0 0 960 360" role="img" aria-label="Diagrama de cuerpo libre con todas las cargas, reacciones y momentos"></svg></div><div class="equilibrium-strip"><span id="balanceFy"></span><span id="balanceMz"></span><span>↑ Fuerza positiva · ↺ Momento positivo</span></div></div>
+<div class="section-heading" id="diagramsPanel"><div><span class="number-tile purple-tile">04</span><h3>Respuesta de la estructura</h3></div><span>Valores reales del cálculo</span></div>
+<div class="metrics"><div class="metric"><span>Momento máximo absoluto</span><strong id="maxM">—</strong><small id="maxMX"></small></div><div class="metric"><span>Cortante máximo absoluto</span><strong id="maxV">—</strong><small id="maxVX"></small></div><div class="metric"><span>Flecha máxima absoluta</span><strong id="maxD">—</strong><small id="maxDX"></small></div></div>
+<div class="panel chart-panel"><div class="chart-header"><div class="tabs" role="tablist" aria-label="Diagrama de resultados"><button id="tabM" role="tab" aria-selected="true" aria-controls="diagram" data-chart="M">Momento <span>M</span></button><button id="tabV" role="tab" aria-selected="false" aria-controls="diagram" tabindex="-1" data-chart="V">Cortante <span>V</span></button><button id="tabv" role="tab" aria-selected="false" aria-controls="diagram" tabindex="-1" data-chart="v">Deformada <span>δ</span></button></div><span id="chartUnit" class="chart-unit">kN·m</span></div><div id="diagram" role="tabpanel" aria-labelledby="tabM"><svg id="chartSvg" viewBox="0 0 960 270" role="img" aria-label="Diagrama de momento flector"></svg><div class="chart-caption"><span id="chartConvention"></span><span id="chartExtrema"></span></div></div><div class="station"><div class="station-position"><label for="stationX">Consultar en x</label><div class="input-with-unit"><input id="stationX" type="number" min="0" value="2.5" step="any"><span>m</span></div><select id="stationSide" aria-label="Lado de la sección"><option value="right">Lado derecho (+)</option><option value="left">Lado izquierdo (−)</option></select></div><input id="stationSlider" type="range" min="0" max="10" step="0.01" value="2.5" aria-label="Posición de la sección"><div class="station-values"><div><span>V</span><b id="stationV"></b></div><div><span>M</span><b id="stationM"></b></div><div><span>δ</span><b id="stationD"></b></div><div><span>θ</span><b id="stationT"></b></div></div></div></div>
+<div class="comparison-heading"><h3>Los tres diagramas, alineados</h3><label class="check-label"><input id="showAllDiagrams" type="checkbox" checked>Mostrar</label></div><div id="extraDiagrams" class="all-diagrams"></div>
+<div class="panel section-panel"><div class="panel-title"><div><div class="eyebrow">CORTE EN LA SECCIÓN</div><h3 id="cutTitle">¿Qué ocurre dentro de la viga?</h3></div><span class="badge" id="cutLocation"></span></div><div class="section-inspector"><svg id="cutSvg" viewBox="0 0 540 265" role="img" aria-label="Esfuerzos internos en la sección elegida"></svg><div class="cut-readout"><div><span class="cut-icon shear-icon">V</span><p>Cortante<strong id="cutV"></strong></p></div><div><span class="cut-icon moment-icon">M</span><p>Momento flector<strong id="cutM"></strong></p></div><p class="cut-explainer" id="cutExplanation"></p><div class="critical-actions"><button id="goMaxMoment">Ir a |M| máximo</button><button id="goMaxDeflection">Ir a |δ| máxima</button></div></div></div><p class="table-note">Corte sobre el cuerpo izquierdo: V positivo hacia abajo y M positivo antihorario en la cara de corte. El cursor de los diagramas y la vista espacial indican la misma posición.</p></div>
+<div class="panel reactions-panel"><div class="panel-title"><h3>Reacciones en los apoyos</h3><span class="badge subtle" id="equilibriumBadge">Equilibrio verificado</span></div><div class="table-scroll"><table><thead><tr><th>Apoyo</th><th>Tipo</th><th>x (m)</th><th>Ry (kN)</th><th>Mz (kN·m)</th></tr></thead><tbody id="reactions"></tbody></table></div><p class="table-note">Ry positivo ↑ · Mz positivo ↺. Un valor negativo indica el sentido contrario.</p></div>
+<details class="panel method-panel"><summary><div><div class="eyebrow">03 / PROCEDIMIENTO</div><h3>Ver cómo se resuelve</h3></div><span class="method-chevron">＋</span></summary><div id="methodContent" class="method-content"></div></details>
+</div>
+<footer class="notes"><b>Modelo académico · Euler–Bernoulli</b><p>Análisis elástico lineal, pequeñas deformaciones y rigidez constante en cada tramo. Sin deformación por cortante, rótulas internas, asentamientos ni efectos axiales. El peso propio solo se incluye si lo introduces como carga distribuida. Los apoyos admiten reacciones en ambos sentidos; no se analiza levantamiento.</p><p>La herramienta resuelve el modelo indicado; no dimensiona ni verifica una estructura para construcción.</p></footer>
+</section></main>
+<noscript>Activa JavaScript en tu navegador para utilizar la calculadora.</noscript>
+<script>'use strict';
+// All solver quantities use kN, m and radians; positive vertical = upward.
+const BeamEngine = (() => {
+  const fail = message => { throw new Error(message); };
+  function validate(m) {
+    if (!m || !Array.isArray(m.spans) || !Array.isArray(m.supports) || !Array.isArray(m.loads)) fail('El modelo está incompleto.');
+    if (!m.spans.length || m.spans.length > 20) fail('Define entre 1 y 20 tramos.');
+    if (m.supports.length > 40 || m.loads.length > 80) fail('El límite es de 40 apoyos y 80 cargas.');
+    const finite = v => typeof v === 'number' && Number.isFinite(v);
+    m.spans.forEach((s,i) => { if (![s.L,s.E,s.I].every(finite) || s.L <= 0 || s.E <= 0 || s.I <= 0) fail(`Tramo ${i+1}: longitud, E e I deben ser positivos.`); });
+    const L=m.spans.reduce((a,s)=>a+s.L,0), tol=L*1e-9;
+    if (L < 0.001 || L > 10000) fail('La longitud total debe estar entre 0,001 y 10 000 m.');
+    m.supports.forEach((s,i)=>{
+      if (!finite(s.x) || s.x<0 || s.x>L) fail(`Apoyo ${i+1}: la posición debe estar entre 0 y ${L} m.`);
+      if (!['pin','roller','fixed'].includes(s.type)) fail('Tipo de apoyo desconocido.');
+      if (m.supports.some((t,j)=>j<i && Math.abs(t.x-s.x)<tol)) fail('Dos apoyos no pueden ocupar la misma posición.');
+    });
+    const restrained=m.supports.reduce((a,s)=>a+(s.type==='fixed'?2:1),0);
+    if (restrained<2) fail('Viga inestable: añade dos apoyos en posiciones distintas o un empotramiento.');
+    m.loads.forEach((p,i)=>{
+      if (!['point','dist','moment'].includes(p.type)) fail('Tipo de carga desconocido.');
+      if(p.type==='dist') {
+        if (![p.a,p.b,p.q0,p.q1].every(finite) || p.a<0 || p.b>L || p.b-p.a<=tol) fail(`Carga ${i+1}: revisa el intervalo (0 ≤ inicio < fin ≤ ${L} m) y las intensidades.`);
+      } else if (![p.x,p.value].every(finite) || p.x<0 || p.x>L) fail(`Carga ${i+1}: revisa la magnitud y la posición entre 0 y ${L} m.`);
+    });
+    return {L,tol,restrained};
+  }
+  const polynomial = (p,x) => p.reduceRight((v,c)=>v*x+c,0);
+  function roots(p,a,b) {
+    p=p.slice(); while(p.length>1 && p[p.length-1]===0) p.pop();
+    if(p.length<=1) return [];
+    if(p.length===2) {const x=-p[0]/p[1];return x>=a && x<=b?[x]:[];}
+    const turns=roots(p.slice(1).map((v,i)=>v*(i+1)),a,b), cuts=[a,...turns,b], out=[];
+    const scale=Math.max(...p.map((v,i)=>Math.abs(v)*Math.max(1,Math.abs(a),Math.abs(b))**i),1e-30);
+    for (const x of cuts) if(Math.abs(polynomial(p,x))<scale*1e-12) out.push(x);
+    for(let i=1;i<cuts.length;i++) {
+      let lo=cuts[i-1],hi=cuts[i],fl=polynomial(p,lo),fh=polynomial(p,hi);
+      if(fl*fh>=0) continue;
+      for(let j=0;j<65;j++){const mid=(lo+hi)/2,fm=polynomial(p,mid);if(fl*fm<=0){hi=mid;fh=fm;}else{lo=mid;fl=fm;}}
+      out.push((lo+hi)/2);
     }
-    return resultados
+    return out.filter((x,i)=>!out.slice(0,i).some(y=>Math.abs(x-y)<(b-a)*1e-10));
+  }
+  function solveSPD(A,b) {
+    const n=b.length;if(!n)return [];
+    const d=A.map((r,i)=>Math.sqrt(r[i]));
+    if(d.some(x=>!Number.isFinite(x)||x<=0))fail('Viga inestable o rigidez no válida.');
+    const C=Array.from({length:n},()=>new Float64Array(n));
+    for(let i=0;i<n;i++)for(let j=0;j<=i;j++){
+      let sum=A[i][j]/d[i]/d[j];for(let k=0;k<j;k++)sum-=C[i][k]*C[j][k];
+      if(i===j){if(sum<1e-12)fail('El sistema es inestable o está mal condicionado. Revisa apoyos, distancias muy pequeñas y contrastes de rigidez.');C[i][j]=Math.sqrt(sum);}
+      else C[i][j]=sum/C[j][j];
+    }
+    const y=new Float64Array(n),z=new Float64Array(n);
+    for(let i=0;i<n;i++){let v=b[i]/d[i];for(let j=0;j<i;j++)v-=C[i][j]*y[j];y[i]=v/C[i][i];}
+    for(let i=n-1;i>=0;i--){let v=y[i];for(let j=i+1;j<n;j++)v-=C[j][i]*z[j];z[i]=v/C[i][i];}
+    return Array.from(z,(v,i)=>v/d[i]);
+  }
+  function solve(model) {
+    const {L,tol,restrained}=validate(model);
+    let boundaries=[0],length=0;
+    for(const s of model.spans){length+=s.L;boundaries.push(length);}
+    const raw=[...boundaries,...model.supports.map(s=>s.x)];
+    for(const p of model.loads)raw.push(...(p.type==='dist'?[p.a,p.b]:[p.x]));
+    raw.sort((a,b)=>a-b);const nodes=[];
+    for(const x of raw)if(!nodes.length||x-nodes[nodes.length-1]>tol)nodes.push(x);
+    if(nodes.some((x,i)=>i&&x-nodes[i-1]<L*1e-7))fail('Hay posiciones demasiado próximas entre sí. Sepáralas o hazlas coincidir exactamente.');
+    const n=nodes.length*2,K=Array.from({length:n},()=>new Float64Array(n)),F=new Float64Array(n),elements=[];
+    const nodeIndex=x=>nodes.findIndex(y=>Math.abs(x-y)<=tol);
+    for(let e=0;e<nodes.length-1;e++){
+      const a=nodes[e],b=nodes[e+1],h=b-a,mid=(a+b)/2;
+      const si=boundaries.findIndex((x,j)=>j<boundaries.length-1 && mid>=x && mid<boundaries[j+1]);
+      const s=model.spans[si],EI=s.E*1000*s.I*1e-8;
+      if(!Number.isFinite(EI) || EI<=0)fail('Rigidez EI fuera de rango.');
+      let qa=0,qb=0;
+      for(const p of model.loads)if(p.type==='dist'&&mid>p.a&&mid<p.b){
+        qa-=p.q0+(p.q1-p.q0)*(a-p.a)/(p.b-p.a);
+        qb-=p.q0+(p.q1-p.q0)*(b-p.a)/(p.b-p.a);
+      }
+      const k=[[12,6*h,-12,6*h],[6*h,4*h*h,-6*h,2*h*h],[-12,-6*h,12,-6*h],[6*h,2*h*h,-6*h,4*h*h]].map(row=>row.map(v=>v*EI/h**3));
+      const f=[h*(7*qa+3*qb)/20,h*h*(3*qa+2*qb)/60,h*(3*qa+7*qb)/20,-h*h*(2*qa+3*qb)/60];
+      const ids=[2*e,2*e+1,2*e+2,2*e+3];
+      ids.forEach((ii,i)=>{F[ii]+=f[i];ids.forEach((jj,j)=>K[ii][jj]+=k[i][j]);});
+      elements.push({a,b,h,EI,qa,qb,k,f,ids,span:si});
+    }
+    for(const p of model.loads)if(p.type!=='dist')F[2*nodeIndex(p.x)+(p.type==='moment'?1:0)]+=p.type==='moment'?p.value:-p.value;
+    const constrained=new Set();
+    for(const s of model.supports){const i=nodeIndex(s.x);constrained.add(2*i);if(s.type==='fixed')constrained.add(2*i+1);}
+    const free=Array.from({length:n},(_,i)=>i).filter(i=>!constrained.has(i));
+    const Kff=free.map(i=>free.map(j=>K[i][j])),Ff=free.map(i=>F[i]),df=solveSPD(Kff,Ff),d=new Float64Array(n);
+    free.forEach((j,i)=>d[j]=df[i]);
+    const R=K.map((row,i)=>row.reduce((a,v,j)=>a+v*d[j],0)-F[i]);
+    for(const e of elements){
+      e.d=e.ids.map(i=>d[i]);e.r=e.k.map((row,i)=>row.reduce((v,k,j)=>v+k*e.d[j],0)-e.f[i]);
+      const qx=(e.qb-e.qa)/e.h;
+      e.V=[e.r[0],e.qa,qx/2];e.M=[-e.r[1],e.r[0],e.qa/2,qx/6];
+      e.v=[e.d[0],e.d[1],-e.r[1]/(2*e.EI),e.r[0]/(6*e.EI),e.qa/(24*e.EI),qx/(120*e.EI)];
+      e.theta=e.v.slice(1).map((v,i)=>v*(i+1));
+    }
+    const field=(e,t)=>({x:e.a+t,V:polynomial(e.V,t),M:polynomial(e.M,t),v:polynomial(e.v,t),theta:polynomial(e.theta,t)});
+    const extrema={};
+    for(const key of ['V','M','v']){
+      const candidates=elements.flatMap(e=>[0,e.h,...roots(e[key].slice(1).map((v,i)=>v*(i+1)),0,e.h)].map(t=>field(e,t)));
+      extrema[key]={min:candidates.reduce((a,b)=>a[key]<b[key]?a:b),max:candidates.reduce((a,b)=>a[key]>b[key]?a:b),abs:candidates.reduce((a,b)=>Math.abs(a[key])>Math.abs(b[key])?a:b)};
+    }
+    const reactions=model.supports.map((s,i)=>({...s,label:String.fromCharCode(65+i%26)+(i>=26?'2':''),R:R[2*nodeIndex(s.x)],M:s.type==='fixed'?R[2*nodeIndex(s.x)+1]:0}));
+    let appliedForce=0,appliedMoment=0,forceScale=0,momentScale=0;
+    for(const p of model.loads){
+      if(p.type==='point'){appliedForce-=p.value;appliedMoment-=p.value*p.x;forceScale+=Math.abs(p.value);momentScale+=Math.abs(p.value*p.x);}
+      else if(p.type==='moment'){appliedMoment+=p.value;momentScale+=Math.abs(p.value);}
+      else{const h=p.b-p.a,w=h*(p.q0+p.q1)/2,m=w*p.a+h*h*(p.q0+2*p.q1)/6;appliedForce-=w;appliedMoment-=m;forceScale+=h*(Math.abs(p.q0)+Math.abs(p.q1))/2;momentScale+=Math.abs(w*p.a)+h*h*(Math.abs(p.q0)+2*Math.abs(p.q1))/6;}
+    }
+    const balanceForce=appliedForce+reactions.reduce((v,r)=>v+r.R,0),balanceMoment=appliedMoment+reactions.reduce((v,r)=>v+r.R*r.x+r.M,0);
+    if(![...d,...R,balanceForce,balanceMoment].every(Number.isFinite))fail('El cálculo excedió el rango numérico. Revisa las unidades.');
+    if(Math.abs(balanceForce)>1e-6*Math.max(1,forceScale)||Math.abs(balanceMoment)>1e-6*Math.max(1,momentScale))fail('No se alcanzó una precisión suficiente. Revisa la geometría y los valores de rigidez.');
+    function at(x,side='right'){
+      x=Math.max(0,Math.min(L,x));
+      const e=(side==='left'?[...elements].reverse().find(e=>x>e.a+tol&&x<=e.b+tol):elements.find(e=>x>=e.a-tol&&x<e.b-tol))||(x<=tol?elements[0]:elements[elements.length-1]);
+      return field(e,Math.max(0,Math.min(e.h,x-e.a)));
+    }
+    return {L,nodes,elements,d:Array.from(d),F:Array.from(F),free,Kff,Ff,reactions,extrema,balanceForce,balanceMoment,appliedForce,appliedMoment,redundancy:restrained-2,at,field};
+  }
+  return {solve,validate,roots};
+})();
+if(typeof module!=='undefined')module.exports=BeamEngine;
 
-# ==============================
-# EXPORTACIONES DE ARCHIVOS
-# ==============================
-def exportar_csv(resultados):
-    f = filedialog.asksaveasfilename(defaultextension=".csv")
-    if not f: return
-    with open(f,"w",newline="") as file:
-        w = csv.writer(file)
-        w.writerow(["T(s)","Sa_el(g)","Sa_dis(m/s²)","Sd_dis(m)"])
-        for i in range(len(resultados["T"])):
-            w.writerow([
-                f"{resultados['T'][i]:.2f}",
-                f"{resultados['Sa_el'][i]:.5f}",
-                f"{resultados['Sa_dis'][i]:.5f}",
-                f"{resultados['Sd_dis'][i]:.5f}"
-            ])
-    messagebox.showinfo("Éxito","Archivo CSV exportado correctamente.")
-
-def exportar_png(figura):
-    f = filedialog.asksaveasfilename(defaultextension=".png")
-    if not f: return
-    figura.savefig(f,bbox_inches="tight",dpi=200,facecolor="#000000")
-    messagebox.showinfo("Éxito","Gráfica guardada correctamente.")
-
-# ==============================
-# EXPORTAR PDF PROFESIONAL (UCB)
-# ==============================
-def exportar_pdf(resultados, figura_sa, figura_sd, params):
-    f = filedialog.asksaveasfilename(defaultextension=".pdf")
-    if not f: return
-
-    img_sa = "temp_Sa.png"
-    img_sd = "temp_Sd.png"
-    figura_sa.savefig(img_sa,dpi=200,bbox_inches="tight",facecolor="#000")
-    figura_sd.savefig(img_sd,dpi=200,bbox_inches="tight",facecolor="#000")
-
-    doc = SimpleDocTemplate(f,pagesize=letter)
-    styles = getSampleStyleSheet()
-    story = []
-
-    story.append(Paragraph("<b>UNIVERSIDAD CATÓLICA BOLIVIANA SAN PABLO</b>",styles["Title"]))
-    story.append(Paragraph("Proyecto de Grado 2025 – Automatización del Cálculo del Espectro NB-DSR-23",styles["Normal"]))
-    story.append(Spacer(1,8))
-    story.append(Paragraph(f"<b>Autor:</b> Jimmy Alejandro Nina Cari<br/><b>Correo:</b> jimmy.nina@ucb.edu.bo",styles["Normal"]))
-    story.append(Spacer(1,8))
-    story.append(Paragraph(f"<b>Fecha:</b> {datetime.datetime.now().strftime('%d/%m/%Y %H:%M')}",styles["Normal"]))
-    story.append(Spacer(1,10))
-
-    story.append(Paragraph(f"""
-    <b>Parámetros NB-DSR-23:</b><br/>
-    Zona Sísmica S₀ = {params['S0']} g<br/>
-    Tipo de Suelo = {params['suelo']} | Sistema Estructural: {params['sistema']} (R={params['R']})<br/>
-    Iₑ = {params['Ie']} | τ = {params['Tau']} | ξ = {params['xi']}% | η = {resultados['eta']:.3f}<br/>
-    FIT = {resultados['FIT']:.3f} | Cd = {params['Cd']}<br/>
-    T₀ = {resultados['T0']:.3f}s | Tₛ = {resultados['Ts']:.3f}s | Tₗ = {resultados['Tl']:.3f}s
-    """, styles["Normal"]))
-    story.append(Spacer(1,10))
-
-    story.append(Paragraph("<b>Espectro de Aceleración (Sa)</b>",styles["Heading2"]))
-    story.append(RLImage(img_sa,width=430,height=250))
-    story.append(Spacer(1,10))
-
-    story.append(Paragraph("<b>Espectro de Desplazamiento (Sd)</b>",styles["Heading2"]))
-    story.append(RLImage(img_sd,width=430,height=250))
-    story.append(Spacer(1,10))
-
-    story.append(Paragraph("<i>Generado automáticamente por EspectroNBDS23 – Profesional v2.0</i>",styles["Italic"]))
-    doc.build(story)
-    os.remove(img_sa)
-    os.remove(img_sd)
-    messagebox.showinfo("Éxito","PDF exportado correctamente.")
-
-# ==============================
-# INTERFAZ GRÁFICA PRINCIPAL (TKINTER)
-# ==============================
-def iniciar_interfaz():
-    root = tk.Tk()
-    root.title("💠 Espectro de Respuesta Sísmica – NB-DSR-23 Profesional")
-    root.configure(bg=COLOR_BG)
-    root.geometry("1150x700")
-    root.minsize(1000,650)
-
-    # --- ENCABEZADO ---
-    frame_top = tk.Frame(root,bg=COLOR_BG)
-    frame_top.pack(fill=tk.X,pady=6)
-    try:
-        logo = Image.open("img/ucb_logo.png")
-        logo = logo.resize((60,80))
-        logo = ImageTk.PhotoImage(logo)
-        tk.Label(frame_top,image=logo,bg=COLOR_BG).pack(side=tk.LEFT,padx=10)
-    except:
-        pass
-    tk.Label(frame_top,text="UNIVERSIDAD CATÓLICA BOLIVIANA SAN PABLO\nPROYECTO DE GRADO 2025 – NB-DSR-23",
-             bg=COLOR_BG,fg=COLOR_ACCENT,font=FONT_TITLE,justify="center").pack(side=tk.LEFT,anchor="w")
-
-    # --- CUERPO PRINCIPAL ---
-    frame_main = tk.Frame(root,bg=COLOR_BG)
-    frame_main.pack(fill=tk.BOTH,expand=True)
-
-    # PANEL IZQUIERDO (Entradas)
-    panel = tk.Frame(frame_main,bg=COLOR_PANEL,bd=2,relief="ridge")
-    panel.pack(side=tk.LEFT,fill=tk.Y,padx=10,pady=10)
-
-    # Cargar configuración previa
-    cfg = cargar_config()
-
-    campos = [
-        ("S₀ (Pseudoacel. g)", cfg.get("S0",0.24)),
-        ("Factor de Importancia", cfg.get("Ie","II")),
-        ("Sistema estructural", cfg.get("sistema","Marcos dúctiles de hormigón armado")),
-        ("Irregularidad en Planta (Ip)", cfg.get("Ip",0)),
-        ("Irregularidad en Altura (Ia)", cfg.get("Ia",0)),
-        ("Amplificación Topográfica (τ)", cfg.get("Tau",1.0)),
-        ("Tipo de Suelo", cfg.get("suelo","S2")),
-        ("Cd (Ductilidad)", cfg.get("Cd",5.5)),
-        ("ξ (Amortiguamiento %)", cfg.get("xi",5.0)),
-    ]
-
-    entradas = {}
-
-    for i,(txt,val) in enumerate(campos):
-        tk.Label(panel,text=txt,bg=COLOR_PANEL,fg=COLOR_TEXT,font=FONT_LABEL).grid(row=i,column=0,sticky="w",pady=3,padx=4)
-        if "Importancia" in txt:
-            combo = ttk.Combobox(panel,values=list(IE_DICT.keys()),state="readonly",width=8)
-            combo.grid(row=i,column=1,pady=2); combo.set(val)
-            entradas["Ie"]=combo
-        elif "Sistema" in txt:
-            combo = ttk.Combobox(panel,values=list(R_TABLE.keys()),state="readonly",width=30)
-            combo.grid(row=i,column=1,pady=2); combo.set(val)
-            entradas["sistema"]=combo
-        elif "Suelo" in txt:
-            combo = ttk.Combobox(panel,values=list(FA_TABLE.keys()),state="readonly",width=8)
-            combo.grid(row=i,column=1,pady=2); combo.set(val)
-            entradas["suelo"]=combo
-        else:
-            e = tk.Entry(panel,width=10,bg=COLOR_ENTRY,fg="white",insertbackground="white",font=FONT_ENTRY)
-            e.grid(row=i,column=1,pady=2)
-            e.insert(0,str(val))
-            entradas[txt]=e
-
-    # --- Pestañas de gráficos ---
-    notebook = ttk.Notebook(frame_main)
-    notebook.pack(side=tk.RIGHT,fill=tk.BOTH,expand=True,padx=10,pady=10)
-
-    # --- Pestaña 1: Espectro de Aceleración ---
-    tab_sa = tk.Frame(notebook,bg=COLOR_BG)
-    notebook.add(tab_sa,text="Espectro de Aceleración (Sa)")
-    fig_sa = plt.Figure(figsize=(6,5),dpi=100,facecolor="#000000")
-    ax_sa = fig_sa.add_subplot(111)
-    canvas_sa = FigureCanvasTkAgg(fig_sa,master=tab_sa)
-    canvas_sa.get_tk_widget().pack(fill=tk.BOTH,expand=True)
-
-    # --- Pestaña 2: Espectro de Desplazamiento ---
-    tab_sd = tk.Frame(notebook,bg=COLOR_BG)
-    notebook.add(tab_sd,text="Espectro de Desplazamiento (Sd)")
-    fig_sd = plt.Figure(figsize=(6,5),dpi=100,facecolor="#000000")
-    ax_sd = fig_sd.add_subplot(111)
-    canvas_sd = FigureCanvasTkAgg(fig_sd,master=tab_sd)
-    canvas_sd.get_tk_widget().pack(fill=tk.BOTH,expand=True)
-
-    # --- Pestaña 3: Comparación ---
-    tab_cmp = tk.Frame(notebook,bg=COLOR_BG)
-    notebook.add(tab_cmp,text="Comparación de Espectros")
-    fig_cmp = plt.Figure(figsize=(6,5),dpi=100,facecolor="#000000")
-    ax_cmp = fig_cmp.add_subplot(111)
-    canvas_cmp = FigureCanvasTkAgg(fig_cmp,master=tab_cmp)
-    canvas_cmp.get_tk_widget().pack(fill=tk.BOTH,expand=True)
-
-    # ==============================
-    # FUNCIONES INTERNAS
-    # ==============================
-    def ejecutar_calculo():
-        try:
-            params = {
-                "S0": float(entradas["S₀ (Pseudoacel. g)"].get()),
-                "Ie": IE_DICT[entradas["Ie"].get()],
-                "sistema": entradas["sistema"].get(),
-                "R": R_TABLE[entradas["sistema"].get()],
-                "Ip": float(entradas["Irregularidad en Planta (Ip)"].get()),
-                "Ia": float(entradas["Irregularidad en Altura (Ia)"].get()),
-                "Tau": float(entradas["Amplificación Topográfica (τ)"].get()),
-                "suelo": entradas["suelo"].get(),
-                "Cd": float(entradas["Cd (Ductilidad)"].get()),
-                "xi": float(entradas["ξ (Amortiguamiento %)"].get()),
-            }
-        except:
-            messagebox.showerror("Error","Por favor ingrese los valores correctamente."); return
-
-        # Guardar configuración
-        guardar_config(params)
-        res = calcular_espectros(params)
-
-        # --- Gráfica Sa ---
-        ax_sa.clear()
-        ax_sa.set_facecolor("#000000")
-        ax_sa.plot(res["T"],res["Sa_el"],"--",color=COLOR_ACCENT,linewidth=2.0,label="Sa Elástico (g)")
-        ax_sa.plot(res["T"],res["Sa_dis"],color=COLOR_PRIMARY,linewidth=2.5,label="Sa Diseño (m/s²)")
-        ax_sa.set_xlabel("Período (s)",color="white"); ax_sa.set_ylabel("Aceleración (m/s²)",color="white")
-        ax_sa.grid(True,linestyle="--",alpha=0.4); ax_sa.tick_params(colors="white")
-        ax_sa.legend(facecolor="#222",edgecolor="#555",labelcolor="white",fontsize=8)
-        mplcursors.cursor(ax_sa,hover=True)
-        canvas_sa.draw()
-
-        # --- Gráfica Sd ---
-        ax_sd.clear()
-        ax_sd.set_facecolor("#000000")
-        ax_sd.plot(res["T"],res["Sd_dis"],color=COLOR_ACCENT,linewidth=2.5,label="Sd (m)")
-        ax_sd.set_xlabel("Período (s)",color="white"); ax_sd.set_ylabel("Desplazamiento (m)",color="white")
-        ax_sd.grid(True,linestyle="--",alpha=0.4); ax_sd.tick_params(colors="white")
-        ax_sd.legend(facecolor="#222",edgecolor="#555",labelcolor="white",fontsize=8)
-        mplcursors.cursor(ax_sd,hover=True)
-        canvas_sd.draw()
-
-        # Guardar para exportar
-        global resultados_global, params_global, fig_sa_global, fig_sd_global
-        resultados_global = res
-        params_global = params
-        fig_sa_global = fig_sa
-        fig_sd_global = fig_sd
-        messagebox.showinfo("Cálculo completado","El espectro ha sido calculado correctamente según NB-DSR-23.")
-
-    # --- Cargar espectro externo (comparación) ---
-    def cargar_espectro_externo():
-        file = filedialog.askopenfilename(filetypes=[("CSV","*.csv")])
-        if not file: return
-        T, Sa = [], []
-        with open(file,"r") as f:
-            reader = csv.reader(f)
-            next(reader)
-            for row in reader:
-                try:
-                    T.append(float(row[0])); Sa.append(float(row[1]))
-                except: pass
-        ax_cmp.clear()
-        ax_cmp.set_facecolor("#000000")
-        ax_cmp.plot(resultados_global["T"],resultados_global["Sa_dis"],color=COLOR_PRIMARY,linewidth=2.5,label="NB-DSR-23 Diseño")
-        ax_cmp.plot(T,Sa,"--",color=COLOR_ACCENT,linewidth=2,label="Espectro Externo (CSV)")
-        ax_cmp.set_xlabel("Período (s)",color="white"); ax_cmp.set_ylabel("Aceleración (m/s²)",color="white")
-        ax_cmp.grid(True,linestyle="--",alpha=0.4); ax_cmp.tick_params(colors="white")
-        ax_cmp.legend(facecolor="#222",edgecolor="#555",labelcolor="white",fontsize=8)
-        mplcursors.cursor(ax_cmp,hover=True)
-        canvas_cmp.draw()
-
-    # --- BOTONES ---
-    tk.Button(panel,text="Calcular y Graficar",bg=COLOR_ACCENT,fg="white",font=FONT_LABEL,
-              relief="flat",command=ejecutar_calculo).grid(row=10,column=0,columnspan=2,pady=5,ipadx=5)
-    tk.Button(panel,text="Exportar CSV",bg=COLOR_PRIMARY,fg="black",font=FONT_LABEL,relief="flat",
-              command=lambda: exportar_csv(resultados_global)).grid(row=11,column=0,columnspan=2,pady=3)
-    tk.Button(panel,text="Guardar PNG",bg=COLOR_PRIMARY,fg="black",font=FONT_LABEL,relief="flat",
-              command=lambda: exportar_png(fig_sa_global)).grid(row=12,column=0,columnspan=2,pady=3)
-    tk.Button(panel,text="Exportar PDF",bg=COLOR_PRIMARY,fg="black",font=FONT_LABEL,relief="flat",
-              command=lambda: exportar_pdf(resultados_global,fig_sa_global,fig_sd_global,params_global)).grid(row=13,column=0,columnspan=2,pady=3)
-    tk.Button(panel,text="Comparar con CSV externo",bg="#4444FF",fg="white",font=FONT_LABEL,relief="flat",
-              command=cargar_espectro_externo).grid(row=14,column=0,columnspan=2,pady=5)
-
-    root.mainloop()
-
-# ==============================
-# PUNTO DE ENTRADA PRINCIPAL
-# ==============================
-if __name__ == "__main__":
-    try:
-        iniciar_interfaz()
-    except Exception as e:
-        print("Error en la ejecución:", e)
-        messagebox.showerror("Error crítico", f"Ocurrió un error inesperado:\n{e}")
-
-# --------------------------------------------------------------------
-# 🧱 INSTRUCCIONES PARA COMPILAR A .EXE (Windows)
-# --------------------------------------------------------------------
-# 1️⃣ Instalar dependencias:
-#     pip install matplotlib numpy reportlab pillow mplcursors
-#
-# 2️⃣ Instalar PyInstaller:
-#     pip install pyinstaller
-#
-# 3️⃣ Ubicarte en la carpeta del proyecto y ejecutar:
-#     pyinstaller --noconsole --onefile EspectroNBDS23_Professional.py
-#
-# 4️⃣ Se generará un archivo en /dist:
-#     EspectroNBDS23_Professional.exe
-#
-# 5️⃣ Copiar también las carpetas necesarias:
-#     /img/ucb_logo.png   → logo institucional (opcional)
-#     /export/            → donde se guardan los PDF, CSV y PNG
-#     /config.json        → configuración persistente
-#
-# 6️⃣ Ejecutar el .exe y disfrutar la herramienta profesional
-#     "Espectro de Respuesta Sísmica NB-DSR-23 – Bolivia"
-#
-# --------------------------------------------------------------------
-# Fin del programa – Versión Profesional 2.0
-# --------------------------------------------------------------------
-  </script>
-
-  <script>
-    // Inserta el código en el bloque <code> y activa highlight
-    const src = document.getElementById('pySource').textContent.trimStart();
-    const codeEl = document.getElementById('codeBlock');
-    codeEl.textContent = src;
-    hljs.highlightElement(codeEl);
-
-    // Copiar al portapapeles
-    document.getElementById('copyBtn').addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(src);
-        const b = document.getElementById('copyBtn');
-        const old = b.textContent;
-        b.textContent = '¡Copiado!';
-        setTimeout(()=> b.textContent = old, 1200);
-      } catch(e){ alert('No se pudo copiar: ' + e); }
+'use strict';
+// Orthographic engineering model. Geometry and force positions follow the solved beam.
+const BeamScene=(()=>{
+  const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+  const mix=(a,b,t)=>a.map((v,i)=>v+(b[i]-v)*t);
+  const rgb=(c,a=1)=>`rgba(${c.map(v=>Math.round(clamp(v,0,255))).join(',')},${a})`;
+  const materials={concrete:[165,181,191],steel:[110,160,206],wood:[178,119,66]};
+  function render(ctx,w,h,options){
+    const {model,result}=options,yaw=options.yaw??-.3,elevation=options.elevation??.43;
+    const unit=Math.min(w/12.6,h/5.6)*(options.zoom??1),cy=h*.59;
+    const co=Math.cos(yaw),si=Math.sin(yaw),ce=Math.cos(elevation),se=Math.sin(elevation);
+    const project=p=>{const x=p[0]*co+p[2]*si,z=-p[0]*si+p[2]*co;return {x:w*.5+x*unit,y:cy-(p[1]*ce-z*se)*unit,z:z*ce+p[1]*se};};
+    ctx.clearRect(0,0,w,h);
+    const bg=ctx.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#111d34');bg.addColorStop(.52,'#152842');bg.addColorStop(1,'#17213c');ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
+    const line=(points,color,width=1,dash=[])=>{ctx.beginPath();points.map(project).forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.strokeStyle=color;ctx.lineWidth=width;ctx.setLineDash(dash);ctx.stroke();ctx.setLineDash([]);};
+    const polygon2=(points,color,stroke)=>{ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();ctx.fillStyle=color;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=.65;ctx.stroke();}};
+    for(let x=-8;x<=8;x++)line([[x,-1.12,-5],[x,-1.12,5]],'#b4dbfb10');
+    for(let z=-5;z<=5;z++)line([[-8,-1.12,z],[8,-1.12,z]],'#b4dbfb10');
+    if(!result){ctx.fillStyle='#c8d8ea';ctx.font='16px sans-serif';ctx.textAlign='center';ctx.fillText('Define un modelo estable para ver la viga.',w/2,h/2);return;}
+    const L=result.L,WX=x=>10*x/L-5,mat=options.material||'concrete',beamColor=materials[mat],maxD=Math.abs(result.extrema.v.abs.v),maxM=Math.abs(result.extrema.M.abs.M);
+    const amplification=maxD>1e-14?(0.08+(options.amplitude??40)/100*1.2)/(maxD*10/L):0;
+    const def=options.deformed?amplification*(options.phase??1):0;
+    const displacement=x=>result.at(x).v*10/L*def;
+    const sceneFaces=[];
+    function face(points,color,texture='',edge=false){
+      const a=points[0],b=points[1],c=points[2],u=b.map((v,i)=>v-a[i]),v=c.map((v,i)=>v-a[i]);
+      let n=[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]],nl=Math.hypot(...n);n=n.map(x=>x/(nl||1));
+      const brightness=.58+.42*Math.abs(n[0]*(-.4)+n[1]*.82+n[2]*.42),projected=points.map(project);
+      sceneFaces.push({points:projected,color:color.map(c=>c*brightness),depth:projected.reduce((v,p)=>v+p.z,0)/points.length,texture,edge});
+    }
+    function box(x0,x1,y0,y1,z0,z1,color,texture='',d0=0,d1=0,cap0=true,cap1=true){
+      const p=[[x0,y0+d0,z0],[x1,y0+d1,z0],[x1,y1+d1,z0],[x0,y1+d0,z0],[x0,y0+d0,z1],[x1,y0+d1,z1],[x1,y1+d1,z1],[x0,y1+d0,z1]];
+      face([p[0],p[1],p[2],p[3]],color,texture);face([p[4],p[7],p[6],p[5]],color,texture);
+      face([p[3],p[2],p[6],p[7]],color,texture);face([p[0],p[4],p[5],p[1]],color);
+      if(cap0)face([p[0],p[3],p[7],p[4]],color,texture);if(cap1)face([p[1],p[5],p[6],p[2]],color,texture);
+    }
+    function cylinder(x,y,r,z0,z1,color){
+      const rings=[z0,z1].map(z=>Array.from({length:20},(_,i)=>[x+r*Math.cos(i*Math.PI/10),y+r*Math.sin(i*Math.PI/10),z]));
+      face(rings[0],color);face([...rings[1]].reverse(),color);
+      for(let i=0;i<20;i++)face([rings[0][i],rings[0][(i+1)%20],rings[1][(i+1)%20],rings[1][i]],color);
+    }
+    // Soft ground shadow retains the current geometry's true support locations.
+    ctx.save();ctx.shadowColor='#00000066';ctx.shadowBlur=24;
+    polygon2([[-5.15,-1.1,-.3],[5.15,-1.1,-.3],[5.45,-1.1,.55],[-4.85,-1.1,.55]].map(project),'#050f2066');ctx.restore();
+    const supports=model.supports;
+    supports.forEach(s=>{
+      const x=WX(s.x);
+      if(s.type==='fixed'){
+        box(x-.13,x+.13,-1.1,.9,-.65,.65,[143,157,174],'concrete');
+        box(x-.2,x+.2,-.36,.38,-.42,.42,[74,91,111]);
+      }else{
+        box(x-.48,x+.48,-1.1,-.84,-.54,.54,[132,147,162],'concrete');
+        box(x-.4,x+.4,-.84,-.77,-.45,.45,[67,87,106]);
+        if(s.type==='roller'){
+          cylinder(x-.19,-.61,.15,-.4,.4,[153,180,200]);cylinder(x+.19,-.61,.15,-.4,.4,[153,180,200]);
+          box(x-.4,x+.4,-.45,-.37,-.43,.43,[137,158,175]);
+          box(x-.31,x+.31,-.37,-.28,-.35,.35,[73,96,114]);
+        }else{
+          const a=[x,-.30,-.34],b=[x-.34,-.73,-.34],c=[x+.34,-.73,-.34],d=[x,-.30,.34],e=[x-.34,-.73,.34],f=[x+.34,-.73,.34];
+          face([a,b,c],[68,115,143]);face([d,f,e],[68,115,143]);face([a,d,e,b],[80,141,168]);face([a,c,f,d],[80,141,168]);
+          cylinder(x,-.31,.075,-.44,.44,[178,203,218]);
+        }
+      }
     });
-
-    // Descargar como .py
-    document.getElementById('downloadBtn').addEventListener('click', () => {
-      const blob = new Blob([src], { type: 'text/x-python;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'EspectroNBDS23_Professional.py';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+    const n=72;
+    for(let i=0;i<n;i++){
+      const a=L*i/n,b=L*(i+1)/n,xa=WX(a),xb=WX(b),da=displacement(a),db=displacement(b),moment=result.at((a+b)/2).M;
+      const color=options.colorMoment&&maxM>1e-12?mix([109,133,155],moment>=0?[46,213,172]:[172,124,250],Math.abs(moment)/maxM):beamColor;
+      const texture=options.colorMoment?'':mat;
+      if(mat==='steel'){
+        box(xa,xb,.18,.29,-.34,.34,color,texture,da,db,i===0,i===n-1);
+        box(xa,xb,-.29,-.18,-.34,.34,color,texture,da,db,i===0,i===n-1);
+        box(xa,xb,-.18,.18,-.065,.065,color,texture,da,db,i===0,i===n-1);
+      }else box(xa,xb,-.29,.29,-.29,.29,color,texture,da,db,i===0,i===n-1);
+    }
+    sceneFaces.sort((a,b)=>a.depth-b.depth);
+    sceneFaces.forEach((f,j)=>{
+      polygon2(f.points,rgb(f.color));
+      if(f.texture==='concrete'){
+        ctx.save();ctx.beginPath();f.points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();ctx.clip();
+        const xs=f.points.map(p=>p.x),ys=f.points.map(p=>p.y),x=Math.min(...xs),y=Math.min(...ys),bw=Math.max(...xs)-x,bh=Math.max(...ys)-y;
+        const total=Math.min(130,Math.round(bw*bh/85));
+        for(let k=0;k<total;k++){const q=Math.sin((k+1)*(j+3)*12.9898)*43758.5453,v=Math.sin((k+4)*(j+7)*8.213)*11283.12;ctx.fillStyle=k%2?'#f7fcff17':'#14223622';ctx.fillRect(x+(q-Math.floor(q))*bw,y+(v-Math.floor(v))*bh,k%3===0?1.4:.8,.8);}
+        ctx.restore();
+      }
+      if(f.texture==='wood'&&f.points.length===4){
+        for(let k=1;k<6;k++){const t=k/6,a={x:f.points[0].x*(1-t)+f.points[3].x*t,y:f.points[0].y*(1-t)+f.points[3].y*t},b={x:f.points[1].x*(1-t)+f.points[2].x*t,y:f.points[1].y*(1-t)+f.points[2].y*t};ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle='#43230835';ctx.lineWidth=.8;ctx.stroke();}
+      }
     });
-  </script>
-</body>
-</html>
+    if(options.deformed)line(Array.from({length:61},(_,i)=>[-5+i/6,0,.31]),'#d5e8fc55',1,[5,6]);
+    // Beam-edge highlights communicate the actual bent shape.
+    for(const z of [-.29,.29])line(Array.from({length:73},(_,i)=>[-5+10*i/72,.29+displacement(L*i/72),z]),'#e4f5ff4a',.75);
+    const occupiedLabels=[];
+    function label(point,text,color='#dbe8f6',small=false){
+      const p=project(point);ctx.font=`${small?12:14}px "Segoe UI", sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';const tw=ctx.measureText(text).width,cx=clamp(p.x,tw/2+10,w-tw/2-10);let cy=clamp(p.y,15,h-15);
+      for(let attempt=0;attempt<8;attempt++){if(!occupiedLabels.some(b=>Math.abs(cx-b.x)<(tw+b.width)/2+13&&Math.abs(cy-b.y)<27))break;cy=Math.max(15,cy-28);}
+      occupiedLabels.push({x:cx,y:cy,width:tw});
+      if(Math.abs(cy-p.y)>10){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(cx,cy+12);ctx.strokeStyle=color+'55';ctx.lineWidth=.8;ctx.stroke();}
+      ctx.fillStyle='#111e35dc';ctx.beginPath();ctx.roundRect(cx-tw/2-9,cy-12,tw+18,24,5);ctx.fill();ctx.fillStyle=color;ctx.fillText(text,cx,cy);
+    }
+    function arrow(a,b,color,width=2){const p=project(a),q=project(b),dx=q.x-p.x,dy=q.y-p.y,len=Math.hypot(dx,dy);if(len<2)return;ctx.strokeStyle=color;ctx.fillStyle=color;ctx.lineWidth=width;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();const ux=dx/len,uy=dy/len,s=7;ctx.beginPath();ctx.moveTo(q.x,q.y);ctx.lineTo(q.x-ux*s-uy*s*.48,q.y-uy*s+ux*s*.48);ctx.lineTo(q.x-ux*s+uy*s*.48,q.y-uy*s-ux*s*.48);ctx.closePath();ctx.fill();}
+    const nf=n=>n.toLocaleString('es-BO',{maximumFractionDigits:2});
+    if(options.loads!==false){
+      let distributed=0;
+      for(const p of model.loads){
+        if(p.type==='point'){
+          const x=WX(p.x),y=displacement(p.x)+.38,top=y+1.13;
+          if(p.value!==0)arrow([x,p.value>=0?top:y,0],[x,p.value>=0?y:top,0],'#ffb65c',2.5);
+          label([x,top+.3,0],nf(p.value)+' kN','#ffd69e');
+        }else if(p.type==='dist'){
+          const max=Math.max(Math.abs(p.q0),Math.abs(p.q1),1e-12),k=Math.max(2,Math.round((p.b-p.a)/L*18)),base=1.12+distributed*.43;
+          for(let j=0;j<=k;j++){const x=p.a+(p.b-p.a)*j/k,q=p.q0+(p.q1-p.q0)*j/k,tail=base+.50*q/max,tip=base;if(Math.abs(q)>1e-10)arrow([WX(x),tail,-.18],[WX(x),tip,-.18],'#f4ab56',1.4);}
+          line([[WX(p.a),base+.50*p.q0/max,-.18],[WX(p.b),base+.50*p.q1/max,-.18]],'#f7b85a',1.5);
+          label([WX((p.a+p.b)/2),base+.78,-.18],p.q0===p.q1?nf(p.q0)+' kN/m':nf(p.q0)+' → '+nf(p.q1)+' kN/m','#ffd69e',true);distributed++;
+        }else if(p.value!==0){
+          const center=[WX(p.x),.55+displacement(p.x),.15],dir=p.value>0?1:-1,points=Array.from({length:35},(_,i)=>{const a=(-.3+dir*i/34*1.55)*Math.PI;return [center[0]+.36*Math.cos(a),center[1]+.36*Math.sin(a),center[2]];});
+          line(points,'#c3a0ff',2);arrow(points[points.length-2],points.at(-1),'#c3a0ff');label([center[0],center[1]+.65,.15],nf(p.value)+' kN·m','#d5baff',true);
+        }
+      }
+    }
+    supports.forEach((s,i)=>label([WX(s.x),-1.43,.25],String.fromCharCode(65+i%26)+(i>=26?'2':'')+' · '+nf(s.x)+' m','#a8c0d8',true));
+    if(Number.isFinite(options.station)){
+      const x=WX(options.station),d=displacement(options.station);
+      polygon2([[x,-.57+d,-.48],[x,.57+d,-.48],[x,.57+d,.48],[x,-.57+d,.48]].map(project),'#4bdfe530','#62e9ee');
+      label([x,-1.92,.3],'x = '+nf(options.station)+' m','#70edf1',true);
+    }
+    // World-axis glyph, using the same projection as the engineering model.
+    const origin=project([0,0,0]);ctx.save();ctx.translate(42-origin.x,h-45-origin.y);arrow([0,0,0],[.45,0,0],'#fa967a');arrow([0,0,0],[0,.45,0],'#74deb0');arrow([0,0,0],[0,0,.45],'#77b7ff');ctx.restore();
+    return {amplification};
+  }
+  return {render};
+})();
+if(typeof module!=='undefined')module.exports=BeamScene;
+
+'use strict';
+const BeamVisuals=(()=>{
+  const f=(n,d=2)=>(Math.abs(n)<1e-9?0:n).toLocaleString('es-BO',{maximumFractionDigits:d});
+  const text=(x,y,t,color='#536782',size=16,anchor='middle')=>`<text x="${x}" y="${y}" fill="${color}" font-family="Segoe UI,Arial,sans-serif" font-size="${size}" text-anchor="${anchor}">${t}</text>`;
+  const colors={applied:'#d97c22',reaction:'#168daa',couple:'#8650c9'};
+  function markers(prefix){return Object.entries(colors).map(([k,c])=>`<marker id="${prefix+k}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="${c}"/></marker>`).join('');}
+  function moment(cx,cy,value,label,prefix='fb',r=25){
+    const start=-.15*Math.PI,end=start+(value>=0?1:-1)*1.55*Math.PI;
+    return `<path d="M${cx+r*Math.cos(start)} ${cy-r*Math.sin(start)} A${r} ${r} 0 1 ${value>=0?0:1} ${cx+r*Math.cos(end)} ${cy-r*Math.sin(end)}" stroke="${colors.couple}" stroke-width="2.4" fill="none" marker-end="url(#${prefix}couple)"/>`+text(cx,cy+r+25,label,colors.couple,14);
+  }
+  function resultants(p){
+    const intervals=[];
+    if(p.q0*p.q1<0){const z=p.a+(p.b-p.a)*(-p.q0)/(p.q1-p.q0);intervals.push({a:p.a,b:z,q0:p.q0,q1:0},{a:z,b:p.b,q0:0,q1:p.q1});}else intervals.push(p);
+    return intervals.filter(v=>Math.abs(v.q0)+Math.abs(v.q1)>0).map(v=>({Q:(v.q0+v.q1)*(v.b-v.a)/2,x:v.a+(v.b-v.a)*(v.q0+2*v.q1)/(3*(v.q0+v.q1))}));
+  }
+  function freeBody(model,result,asResultants){
+    const ds=model.loads.filter(p=>p.type==='dist'),moments=model.loads.filter(p=>p.type==='moment'&&p.value!==0),y=140+Math.max(0,ds.length-1)*51+moments.length*75,H=y+175,X=x=>72+816*x/result.L;
+    let s=`<defs>${markers('fb')}</defs><line x1="72" x2="888" y1="${y}" y2="${y}" stroke="#2f405a" stroke-width="7" stroke-linecap="round"/>`;
+    const arrow=(x,from,to,type)=>`<line x1="${x}" x2="${x}" y1="${from}" y2="${to}" stroke="${colors[type]}" stroke-width="2.6" marker-end="url(#fb${type})"/>`;
+    ds.forEach((p,i)=>{const base=y-35-i*51;
+      if(asResultants){resultants(p).forEach((q,j)=>{const x=X(q.x);s+=arrow(x,q.Q>=0?base-54:base,q.Q>=0?base:base-54,'applied');s+=text(x,base-66,`Q${i+1}${j?'b':''} = ${f(q.Q)} kN`,colors.applied,15);s+=`<line x1="${x}" x2="${x}" y1="${base}" y2="${y-7}" stroke="#d97c2266" stroke-dasharray="3 4"/>`;});}
+      else{const max=Math.max(Math.abs(p.q0),Math.abs(p.q1),1e-12),n=Math.max(2,Math.round((p.b-p.a)/result.L*23)),x1=X(p.a),x2=X(p.b),Y=q=>base-32*q/max;
+        s+=`<path d="M${x1} ${base} L${x1} ${Y(p.q0)} L${x2} ${Y(p.q1)} L${x2} ${base}Z" fill="#f4a44116"/><line x1="${x1}" x2="${x2}" y1="${Y(p.q0)}" y2="${Y(p.q1)}" stroke="${colors.applied}" stroke-width="1.5"/>`;
+        for(let k=0;k<=n;k++){const q=p.q0+(p.q1-p.q0)*k/n;if(q!==0)s+=arrow(x1+(x2-x1)*k/n,Y(q),base,'applied');}
+        s+=text((x1+x2)/2,Math.min(base,Y(p.q0),Y(p.q1))-13,(p.q0===p.q1?f(p.q0):f(p.q0)+' → '+f(p.q1))+' kN/m',colors.applied,15);
+      }
+    });
+    model.loads.filter(p=>p.type==='point').forEach((p,i)=>{const x=X(p.x),top=y-85-(i%2)*20;if(p.value!==0)s+=arrow(x,p.value>=0?top:y-8,p.value>=0?y-8:top,'applied');s+=text(x+10,top-12,`${f(p.value)} kN`,colors.applied,15,'start');});
+    moments.forEach((p,i)=>{const cy=42+i*75;s+=`<line x1="${X(p.x)}" x2="${X(p.x)}" y1="${cy+28}" y2="${y-8}" stroke="#8650c936" stroke-dasharray="3 5"/>`;s+=moment(X(p.x),cy,p.value,`${f(p.value)} kN·m`);});
+    result.reactions.forEach(r=>{const x=X(r.x),low=y+85;s+=`<circle cx="${x}" cy="${y}" r="5" fill="white" stroke="#2f405a" stroke-width="2"/>`;if(Math.abs(r.R)>1e-9)s+=arrow(x,r.R>=0?low:y+9,r.R>=0?y+9:low,'reaction');s+=text(x,low+23,`${r.label}: ${f(r.R,3)} kN`,colors.reaction,16);s+=text(x,low+46,`x = ${f(r.x)} m`,'#8492a8',13);
+      if(r.type==='fixed'&&Math.abs(r.M)>1e-9){const offset=r.x>result.L/2?-85:85;s+=moment(x+offset,y+30,r.M,`${f(r.M,3)} kN·m`,'fb',22);}
+    });
+    s+=text(72,y+160,'Los apoyos se sustituyen por sus fuerzas y momentos de reacción.','#7b8ba0',13,'start');
+    return {svg:s,height:H};
+  }
+  function plot(result,key,info){
+    const max=Math.max(Math.abs(result.extrema[key].min[key]),Math.abs(result.extrema[key].max[key])),X=x=>72+816*x/result.L,Y=v=>95-(max>1e-15?v/max*60:0);
+    let s='';for(const a of [-1,0,1]){const y=95-a*60;s+=`<line x1="72" x2="888" y1="${y}" y2="${y}" stroke="${a===0?'#a8b7c8':'#e9eef5'}" ${a===0?'':'stroke-dasharray="3 4"'}/>`+text(59,y+5,f(a*max*info.factor), '#74849b',14,'end');}
+    for(let i=0;i<=5;i++){const x=result.L*i/5;s+=text(X(x),185,f(x),'#74849b',14);}
+    result.reactions.forEach(r=>{s+=`<line x1="${X(r.x)}" x2="${X(r.x)}" y1="25" y2="162" stroke="#c2d2e2" stroke-dasharray="4 6"/>`+text(X(r.x),17,r.label,'#7890a8',12);});
+    result.elements.forEach(e=>{const path=Array.from({length:51},(_,i)=>{const v=result.field(e,e.h*i/50);return `${i?'L':'M'}${X(v.x)} ${Y(v[key])}`;}).join(' ');s+=`<path d="${path}L${X(e.b)} 95L${X(e.a)} 95Z" fill="${info.color}" fill-opacity=".1"/><path d="${path}" stroke="${info.color}" stroke-width="2.5" fill="none"/>`;});
+    result.elements.forEach((e,i)=>{if(i){const prev=result.elements[i-1],a=result.field(prev,prev.h)[key],b=result.field(e,0)[key];s+=`<line x1="${X(e.a)}" x2="${X(e.a)}" y1="${Y(a)}" y2="${Y(b)}" stroke="${info.color}" stroke-width="2.5"/>`;}});
+    s+=`<g id="miniCursor${key}"></g>`;return s;
+  }
+  function cut(values){
+    const V=values.V,M=values.M,up=V<0;
+    let s=`<defs>${markers('cut')}<linearGradient id="cutFace" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d6e1ed"/><stop offset="1" stop-color="#94abc3"/></linearGradient></defs>`;
+    s+='<path d="M40 103L265 103L265 171L40 171Z" fill="url(#cutFace)"/><path d="M40 103L65 81L290 81L265 103Z" fill="#edf3fa" stroke="#c1d0e0"/><path d="M265 103L290 81L290 150L265 171Z" fill="#a899df" stroke="#8b75be"/><line x1="290" x2="290" y1="52" y2="205" stroke="#956ee0" stroke-width="1.6" stroke-dasharray="5 5"/>';
+    s+=text(142,212,'CUERPO IZQUIERDO','#74849a',13)+text(294,38,'SECCIÓN DE CORTE','#8c5ec9',13);
+    if(Math.abs(V)>1e-9)s+=`<line x1="315" x2="315" y1="${up?180:82}" y2="${up?82:180}" stroke="${colors.reaction}" stroke-width="3" marker-end="url(#cutreaction)"/>`;
+    s+=text(327,up?195:75,`V = ${f(V,3)} kN`,colors.reaction,15,'start');
+    if(Math.abs(M)>1e-9)s+=moment(425,133,M,`M = ${f(M,3)} kN·m`,'cut',33);
+    else s+=text(425,141,'M = 0',colors.couple,16);
+    const topColor=M>=0?'#fa8d6580':'#50b8e380',bottomColor=M>=0?'#50b8e380':'#fa8d6580';
+    if(Math.abs(M)>1e-9)s+=`<line x1="49" x2="247" y1="113" y2="113" stroke="${topColor}" stroke-width="4"/><line x1="49" x2="247" y1="161" y2="161" stroke="${bottomColor}" stroke-width="4"/>`;
+    return s;
+  }
+  return {freeBody,plot,cut,resultants};
+})();
+if(typeof module!=='undefined')module.exports=BeamVisuals;
+
+'use strict';
+const $=id=>document.getElementById(id);
+const supportNames={pin:'Articulado',roller:'Rodillo',fixed:'Empotrado'};
+const chartInfo={M:{label:'momento flector',unit:'kN·m',color:'#8253c6',factor:1,convention:'M positivo: sagante (tracción abajo). Positivos arriba del eje.'},V:{label:'cortante',unit:'kN',color:'#148ba9',factor:1,convention:'V = dM/dx. Positivos arriba del eje.'},v:{label:'deformada',unit:'mm',color:'#df7a28',factor:1000,convention:'δ positivo hacia arriba. Deformada amplificada; no está a escala real.'}};
+const examples={
+  continuous:{spans:[{L:5,E:25000,I:156250},{L:5,E:25000,I:156250}],supports:[{x:0,type:'pin'},{x:5,type:'roller'},{x:10,type:'roller'}],loads:[{type:'dist',a:0,b:10,q0:8,q1:8},{type:'point',x:7.5,value:12}]},
+  propped:{spans:[{L:6,E:25000,I:156250}],supports:[{x:0,type:'fixed'},{x:6,type:'roller'}],loads:[{type:'dist',a:0,b:6,q0:10,q1:10}]},
+  fixed:{spans:[{L:6,E:25000,I:156250}],supports:[{x:0,type:'fixed'},{x:6,type:'fixed'}],loads:[{type:'dist',a:0,b:6,q0:10,q1:10}]},
+  simple:{spans:[{L:6,E:25000,I:156250}],supports:[{x:0,type:'pin'},{x:6,type:'roller'}],loads:[{type:'point',x:3,value:20}]},
+  cantilever:{spans:[{L:4,E:25000,I:156250}],supports:[{x:0,type:'fixed'}],loads:[{type:'point',x:4,value:15}]},
+  triangular:{spans:[{L:6,E:25000,I:156250}],supports:[{x:0,type:'pin'},{x:6,type:'roller'}],loads:[{type:'dist',a:0,b:6,q0:0,q1:12}]},
+  appliedMoment:{spans:[{L:6,E:25000,I:156250}],supports:[{x:0,type:'fixed'},{x:6,type:'roller'}],loads:[{type:'dist',a:0,b:6,q0:6,q1:6},{type:'point',x:2,value:12},{type:'moment',x:4,value:18}]},
+  variable:{spans:[{L:4,E:25000,I:156250},{L:5,E:25000,I:312500},{L:3,E:25000,I:156250}],supports:[{x:0,type:'pin'},{x:4,type:'roller'},{x:9,type:'roller'},{x:12,type:'roller'}],loads:[{type:'dist',a:0,b:12,q0:8,q1:8},{type:'point',x:6.5,value:25},{type:'moment',x:2,value:12}]}
+};
+let model=structuredClone(examples.continuous),result=null,solvedModel=null,chartKey='M',stationX=2.5,dirty=false;
+const fmt=(n,d=3)=>{if(!Number.isFinite(n))return '—';if(Math.abs(n)<Math.pow(10,-d)/2)n=0;return n.toLocaleString('es-BO',{minimumFractionDigits:0,maximumFractionDigits:d});};
+const num=(v)=>Number.isFinite(v)?String(v):'';
+const length=()=>model.spans.reduce((a,s)=>a+s.L,0);
+const numericInput=(group,index,key,value,label)=>`<label><span class="field-label">${label}</span><input type="number" step="any" value="${num(value)}" data-group="${group}" data-index="${index}" data-key="${key}" aria-label="${group==='spans'?'Tramo':group==='supports'?'Apoyo':'Carga'} ${index+1}: ${label}"></label>`;
+function renderEditor(){
+  $('spans').innerHTML=model.spans.map((s,i)=>`<div class="span-row"><div class="row-heading"><span>TRAMO ${i+1}</span><button class="remove" data-remove="spans" data-index="${i}" aria-label="Eliminar tramo ${i+1}">×</button></div><div class="span-inputs">${numericInput('spans',i,'L',s.L,'L (m)')}${numericInput('spans',i,'E',s.E,'E (MPa)')}${numericInput('spans',i,'I',s.I,'I (cm⁴)')}</div></div>`).join('');
+  $('supports').innerHTML=model.supports.length?model.supports.map((s,i)=>`<div class="support-row"><div class="support-fields"><span class="support-letter">${String.fromCharCode(65+i%26)+(i>=26?'2':'')}</span><label><span class="field-label">Tipo</span><select data-group="supports" data-index="${i}" data-key="type" aria-label="Tipo de apoyo ${i+1}">${Object.entries(supportNames).map(([v,t])=>`<option value="${v}" ${s.type===v?'selected':''}>${t}</option>`).join('')}</select></label>${numericInput('supports',i,'x',s.x,'x (m)')}<button class="remove" data-remove="supports" data-index="${i}" aria-label="Eliminar apoyo ${i+1}">×</button></div></div>`).join(''):'<p class="empty">Añade apoyos para estabilizar la viga.</p>';
+  $('loads').innerHTML=model.loads.length?model.loads.map((p,i)=>`<div class="load-row"><div class="row-heading"><span>${p.type==='point'?'PUNTUAL':p.type==='moment'?'MOMENTO':'DISTRIBUIDA'} ${i+1}</span><button class="remove" data-remove="loads" data-index="${i}" aria-label="Eliminar carga ${i+1}">×</button></div><div class="load-fields">${p.type==='dist'?numericInput('loads',i,'a',p.a,'Inicio (m)')+numericInput('loads',i,'b',p.b,'Fin (m)')+numericInput('loads',i,'q0',p.q0,'q inicial (kN/m)')+numericInput('loads',i,'q1',p.q1,'q final (kN/m)'):numericInput('loads',i,'x',p.x,'x (m)')+numericInput('loads',i,'value',p.value,p.type==='point'?'P (kN)':'M (kN·m)')}</div></div>`).join(''):'<p class="empty">Sin cargas. Las reacciones serán cero.</p>';
+  $('spanCount').textContent=model.spans.length;$('supportCount').textContent=model.supports.length;$('loadCount').textContent=model.loads.length;
+  $('totalLength').textContent=fmt(length())+' m';
+  $('inertiaSpan').innerHTML=model.spans.map((s,i)=>`<option value="${i}">Tramo ${i+1}</option>`).join('');
+  updateInertia();
+}
+function markDirty(){dirty=true;$('stale').hidden=!result;$('editStatus').textContent='Cambios pendientes de cálculo';$('solvedResults').classList.add('muted-results');$('totalLength').textContent=fmt(length())+' m';stopAnimation();updateSceneStateLabel();requestScene();}
+function updateInertia(){const b=$('rectB').valueAsNumber,h=$('rectH').valueAsNumber,I=b*h*h*h/12;$('inertiaOutput').textContent=b>0&&h>0?'I = '+fmt(I,2)+' cm⁴':'Introduce b y h positivos.';return b>0&&h>0?I:NaN;}
+function calculate(){
+  try {
+    const next=BeamEngine.solve(model);result=next;solvedModel=structuredClone(model);dirty=false;
+    $('error').hidden=true;$('stale').hidden=true;$('solvedResults').hidden=false;$('solvedResults').classList.remove('muted-results');
+    $('editStatus').textContent='Cálculo actualizado · equilibrio verificado';
+    $('modelBadge').textContent=result.redundancy?'Hiperestática · grado '+result.redundancy:'Isostática';
+    $('beamLabel').textContent=`${fmt(result.L)} m · ${model.spans.length} tramo${model.spans.length===1?'':'s'} · ${model.supports.length} apoyo${model.supports.length===1?'':'s'}`;
+    stationX=Math.min(Math.max(0,stationX),result.L);
+    $('stationX').max=result.L;$('stationSlider').max=result.L;$('stationSlider').step=result.L/1000;
+    renderBeam();renderResults();renderChart();renderMethod();refreshVisuals();updateStation();
+    return true;
+  } catch(e) {
+    result=null;$('error').textContent=e.message;$('error').hidden=false;$('stale').hidden=true;$('solvedResults').hidden=true;
+    $('modelBadge').textContent='Revisa el modelo';$('beamLabel').textContent='Modelo sin resolver';
+    $('beamSvg').setAttribute('viewBox','0 0 960 200');$('beamSvg').innerHTML='<text x="480" y="105" text-anchor="middle" font-size="20" fill="#687c8c">Corrige los datos para mostrar la viga.</text>';
+    $('editStatus').textContent='No se pudo resolver la viga';refreshVisuals();return false;
+  }
+}
+const svgText=(x,y,text,attrs='')=>`<text x="${x}" y="${y}" ${attrs.includes('font-size=')?'':'font-size="16"'} fill="#526a7a" ${attrs}>${text}</text>`;
+function renderBeam(){
+  const m=solvedModel,L=result.L,X=x=>72+816*x/L,ds=m.loads.filter(p=>p.type==='dist'),beamY=142+Math.max(0,ds.length-1)*45,H=beamY+130;
+  let s='<defs><marker id="loadArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#c76624"/></marker><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><line x1="0" y1="0" x2="0" y2="7" stroke="#6c8190" stroke-width="2"/></pattern></defs>';
+  let offset=0;
+  m.spans.forEach((t,i)=>{const x1=X(offset),x2=X(offset+t.L);s+=`<line x1="${x1}" y1="${beamY}" x2="${x2}" y2="${beamY}" stroke="${i%2?'#2c526c':'#142c40'}" stroke-width="8"/>`;s+=`<line x1="${x1}" y1="${beamY+84}" x2="${x2}" y2="${beamY+84}" stroke="#8fa4b1"/>`;for(const x of [x1,x2])s+=`<line x1="${x}" y1="${beamY+77}" x2="${x}" y2="${beamY+91}" stroke="#8fa4b1"/>`;s+=svgText((x1+x2)/2,beamY+108,`${fmt(t.L)} m · T${i+1}`,'text-anchor="middle"');offset+=t.L;});
+  ds.forEach((p,i)=>{
+    const y=beamY-30-i*45,max=Math.max(Math.abs(p.q0),Math.abs(p.q1),1e-10),Y=q=>y-27*q/max,n=Math.max(2,Math.min(24,Math.round((p.b-p.a)/L*20))),x1=X(p.a),x2=X(p.b);
+    s+=`<path d="M ${x1} ${y} L ${x1} ${Y(p.q0)} L ${x2} ${Y(p.q1)} L ${x2} ${y} Z" fill="#c766240b"/><line x1="${x1}" y1="${Y(p.q0)}" x2="${x2}" y2="${Y(p.q1)}" stroke="#c76624" stroke-width="1.5"/>`;
+    for(let j=0;j<=n;j++){const q=p.q0+(p.q1-p.q0)*j/n,x=x1+(x2-x1)*j/n;if(Math.abs(q)>max*1e-5)s+=`<line x1="${x}" y1="${Y(q)}" x2="${x}" y2="${y}" stroke="#c76624" stroke-width="1.5" marker-end="url(#loadArrow)"/>`;}
+    s+=svgText((x1+x2)/2,Math.min(Y(p.q0),Y(p.q1),y)-12,p.q0===p.q1?`${fmt(p.q0)} kN/m`:`${fmt(p.q0)} → ${fmt(p.q1)} kN/m`,'text-anchor="middle" style="fill:#a95820;font-weight:600"');
+    s+=`<line x1="${x1}" y1="${y}" x2="${x1}" y2="${beamY-6}" stroke="#c76624" stroke-dasharray="3 4" opacity=".35"/><line x1="${x2}" y1="${y}" x2="${x2}" y2="${beamY-6}" stroke="#c76624" stroke-dasharray="3 4" opacity=".35"/>`;
+  });
+  m.loads.filter(p=>p.type==='point').forEach((p,i)=>{const x=X(p.x),top=beamY-75-(i%2)*22;const ya=p.value>=0?top:beamY-9,yb=p.value>=0?beamY-9:top;if(p.value!==0)s+=`<line x1="${x}" y1="${ya}" x2="${x}" y2="${yb}" stroke="#bd571b" stroke-width="2.5" marker-end="url(#loadArrow)"/>`;s+=svgText(x+9,top-9,`${fmt(p.value)} kN`,'style="fill:#a95820;font-weight:600"');});
+  m.loads.filter(p=>p.type==='moment').forEach(p=>{const x=X(p.x),cy=beamY-15,sw=p.value>=0?0:1;s+=`<path d="M ${x+18} ${cy+7} A 21 21 0 1 ${sw} ${x-14} ${cy+13}" fill="none" stroke="#c76624" stroke-width="2.3" marker-end="url(#loadArrow)"/>`;s+=svgText(x,cy-31,`${fmt(p.value)} kN·m`,'text-anchor="middle" style="fill:#a95820;font-weight:600"');});
+  result.reactions.forEach(r=>{const x=X(r.x),y=beamY+6;
+    if(r.type==='fixed') {const right=r.x>L/2;s+=`<rect x="${right?x:x-13}" y="${beamY-24}" width="13" height="64" fill="url(#hatch)"/><line x1="${x}" y1="${beamY-24}" x2="${x}" y2="${beamY+40}" stroke="#3b5263" stroke-width="3"/>`;}
+    else{s+=`<path d="M ${x} ${y} L ${x-14} ${y+23} L ${x+14} ${y+23} Z" fill="white" stroke="#3b5263" stroke-width="2"/>`;if(r.type==='roller')s+=`<circle cx="${x-8}" cy="${y+28}" r="3" fill="white" stroke="#3b5263"/><circle cx="${x+8}" cy="${y+28}" r="3" fill="white" stroke="#3b5263"/>`;const ground=y+(r.type==='roller'?34:27);s+=`<rect x="${x-20}" y="${ground}" width="40" height="7" fill="url(#hatch)"/><line x1="${x-20}" y1="${ground}" x2="${x+20}" y2="${ground}" stroke="#3b5263"/>`;}
+    s+=svgText(x,beamY+66,r.label,'text-anchor="middle" style="font-weight:700;fill:#087f75"');});
+  s+=svgText(72,20,'x = 0','font-size="13"');$('beamSvg').setAttribute('viewBox',`0 0 960 ${H}`);$('beamSvg').innerHTML=s;
+}
+function renderResults(){
+  for(const [key,id,unit,factor] of [['M','M','kN·m',1],['V','V','kN',1],['v','D','mm',1000]]){
+    const e=result.extrema[key].abs;$('max'+id).innerHTML=fmt(Math.abs(e[key])*factor)+' <em>'+unit+'</em>';$('max'+id+'X').textContent=`x = ${fmt(e.x)} m · valor: ${fmt(e[key]*factor)}`;
+  }
+  $('reactions').innerHTML=result.reactions.map(r=>`<tr><td>${r.label}</td><td>${supportNames[r.type]}</td><td>${fmt(r.x)}</td><td>${fmt(r.R,4)}</td><td>${r.type==='fixed'?fmt(r.M,4):'—'}</td></tr>`).join('');
+  $('equilibriumBadge').textContent='Equilibrio verificado';
+}
+let chartGeometry=null;
+function renderChart(){
+  if(!result)return;
+  const info=chartInfo[chartKey],factor=info.factor,X=x=>72+x/result.L*816,base=128,amp=88,max=Math.max(Math.abs(result.extrema[chartKey].min[chartKey]),Math.abs(result.extrema[chartKey].max[chartKey])),scale=max>1e-15?amp/max:0,Y=y=>base-y*scale;
+  chartGeometry={X,Y,base};
+  let s='';
+  for(const frac of [-1,-.5,0,.5,1]) {const y=base-frac*amp;s+=`<line x1="72" y1="${y}" x2="888" y2="${y}" stroke="${frac===0?'#7d93a3':'#e5edf2'}" ${frac===0?'':'stroke-dasharray="3 5"'}/>`;s+=svgText(59,y+5,fmt(frac*max*factor,2),'text-anchor="end" font-size="14"');}
+  for(let i=0;i<=5;i++){const x=result.L*i/5,px=X(x);s+=`<line x1="${px}" y1="30" x2="${px}" y2="223" stroke="#e8eef3"/>`+svgText(px,248,fmt(x,2),'text-anchor="middle"');}
+  s+=svgText(931,248,'x (m)','text-anchor="end" font-size="14"');
+  result.elements.forEach(e=>{const points=Array.from({length:61},(_,j)=>result.field(e,e.h*j/60)),line=points.map((p,j)=>`${j?'L':'M'} ${X(p.x)} ${Y(p[chartKey])}`).join(' ');s+=`<path d="${line} L ${X(e.b)} ${base} L ${X(e.a)} ${base} Z" fill="${info.color}" fill-opacity=".11"/><path d="${line}" fill="none" stroke="${info.color}" stroke-width="2.8"/>`;});
+  for(let i=1;i<result.elements.length;i++){const a=result.elements[i-1],b=result.elements[i],v1=result.field(a,a.h)[chartKey],v2=result.field(b,0)[chartKey];if(Math.abs(v1-v2)>1e-8)s+=`<line x1="${X(b.a)}" x2="${X(b.a)}" y1="${Y(v1)}" y2="${Y(v2)}" stroke="${info.color}" stroke-width="2.8"/>`;}
+  const extreme=result.extrema[chartKey].abs;if(max>1e-12)s+=`<circle cx="${X(extreme.x)}" cy="${Y(extreme[chartKey])}" r="4" fill="${info.color}"/><text x="${Math.max(100,Math.min(850,X(extreme.x)))}" y="${Y(extreme[chartKey])+(extreme[chartKey]>=0?-13:23)}" text-anchor="middle" font-size="17" font-weight="600" fill="${info.color}">${fmt(extreme[chartKey]*factor)}</text>`;
+  s+='<g id="diagramCursor" class="diagram-cursor"></g>';
+  $('chartSvg').innerHTML=s;$('chartSvg').setAttribute('aria-label','Diagrama de '+info.label);$('chartUnit').textContent=info.unit;$('chartConvention').textContent=info.convention;
+  $('chartExtrema').textContent=`Mín. ${fmt(result.extrema[chartKey].min[chartKey]*factor)} · Máx. ${fmt(result.extrema[chartKey].max[chartKey]*factor)} ${info.unit}`;
+  document.querySelectorAll('[data-chart]').forEach(b=>{const selected=b.dataset.chart===chartKey;b.setAttribute('aria-selected',selected);b.tabIndex=selected?0:-1;});$('diagram').setAttribute('aria-labelledby','tab'+chartKey);
+  updateStation();
+}
+function updateStation(){
+  if(!result)return;
+  stationX=Math.max(0,Math.min(result.L,stationX));$('stationX').value=Number(stationX.toFixed(7));$('stationSlider').value=stationX;
+  const f=result.at(stationX,$('stationSide').value);
+  $('stationV').textContent=fmt(f.V)+' kN';$('stationM').textContent=fmt(f.M)+' kN·m';$('stationD').textContent=fmt(f.v*1000,4)+' mm';$('stationT').textContent=fmt(f.theta*1000,4)+' mrad';
+  if(chartGeometry && $('diagramCursor')){const {X,Y}=chartGeometry,x=X(stationX),y=Y(f[chartKey]);$('diagramCursor').innerHTML=`<line x1="${x}" x2="${x}" y1="26" y2="226" stroke="#758996" stroke-dasharray="5 5"/><circle cx="${x}" cy="${y}" r="5.5" fill="white" stroke="${chartInfo[chartKey].color}" stroke-width="2.5"/>`;}
+  syncVisuals();
+}
+const smallNumber=n=>Math.abs(n)<1e-8?n.toExponential(2):fmt(n,7);
+function renderMethod(){
+  const r=result;
+  $('methodContent').innerHTML=`
+  <section class="method-step"><h4>1. Idealización y unidades</h4><p>Viga recta continua con ${r.nodes.length} nodos y ${r.elements.length} elementos. Se crea un nodo en cada apoyo, carga puntual, momento, extremo de carga distribuida y cambio de rigidez. Cada nodo tiene desplazamiento vertical v y giro θ. Los apoyos intermedios no son rótulas internas.</p><p>Unidades internas: kN, m y rad. E [MPa] × 1 000 = E [kN/m²]; I [cm⁴] × 10⁻⁸ = I [m⁴]. El grado de hiperestaticidad en flexión es ${r.redundancy}: restricciones verticales y de giro menos 2. No se analiza el desplazamiento axial.</p><div class="table-scroll"><table><thead><tr><th>Tramo</th><th>L (m)</th><th>E (MPa)</th><th>I (cm⁴)</th><th>EI (kN·m²)</th></tr></thead><tbody>${solvedModel.spans.map((s,i)=>`<tr><td>${i+1}</td><td>${fmt(s.L)}</td><td>${fmt(s.E)}</td><td>${fmt(s.I)}</td><td>${fmt(s.E*1000*s.I*1e-8,5)}</td></tr>`).join('')}</tbody></table></div></section>
+  <section class="method-step"><h4>2. Matriz de rigidez de cada elemento</h4><p>Con dₑ = [vᵢ, θᵢ, vⱼ, θⱼ]ᵀ, v positivo hacia arriba y θ antihorario:</p><div class="formula matrix"><span>kₑ = (EI / ℓ³) ·</span><table aria-label="Matriz de rigidez de un elemento de viga"><tbody><tr><td>12</td><td>6ℓ</td><td>−12</td><td>6ℓ</td></tr><tr><td>6ℓ</td><td>4ℓ²</td><td>−6ℓ</td><td>2ℓ²</td></tr><tr><td>−12</td><td>−6ℓ</td><td>12</td><td>−6ℓ</td></tr><tr><td>6ℓ</td><td>2ℓ²</td><td>−6ℓ</td><td>4ℓ²</td></tr></tbody></table></div><p>Para una carga lineal qᵢ → qⱼ, expresada positiva hacia arriba, las fuerzas nodales consistentes son:</p><div class="formula">fₑ = [ ℓ(7qᵢ + 3qⱼ)/20, ℓ²(3qᵢ + 2qⱼ)/60, ℓ(3qᵢ + 7qⱼ)/20, −ℓ²(2qᵢ + 3qⱼ)/60 ]ᵀ</div><p>Las cargas introducidas positivas hacia abajo cambian de signo en este vector.</p></section>
+  <section class="method-step"><h4>3. Ensamblaje y condiciones de apoyo</h4><div class="formula">K · d = F + R &nbsp; → &nbsp; K<sub>ff</sub> · d<sub>f</sub> = F<sub>f</sub></div><p>Se suman matrices y cargas de todos los elementos. En cada apoyo: v = 0; en empotramientos, además θ = 0. Se resuelven ${r.free.length} grados de libertad libres mediante factorización de Cholesky con escalado diagonal.</p><details><summary>Desplazamientos, giros y cargas nodales</summary><div class="table-scroll"><table><thead><tr><th>Nodo</th><th>x (m)</th><th>v (mm)</th><th>θ (mrad)</th><th>Fy (kN)</th><th>Mz (kN·m)</th></tr></thead><tbody>${r.nodes.map((x,i)=>`<tr><td>${i+1}</td><td>${fmt(x)}</td><td>${fmt(r.d[2*i]*1000,6)}</td><td>${fmt(r.d[2*i+1]*1000,6)}</td><td>${fmt(r.F[2*i],5)}</td><td>${fmt(r.F[2*i+1],5)}</td></tr>`).join('')}</tbody></table></div><p>Fy y Mz incluyen cargas nodales equivalentes de las cargas distribuidas.</p></details>${r.free.length<=24?`<details><summary>Sistema reducido Kff · df = Ff</summary><p>Orden de incógnitas: ${r.free.map(i=>(i%2?'θ':'v')+(Math.floor(i/2)+1)).join(', ')||'ninguna (todos los nodos están restringidos)'}. Los términos conservan unidades compatibles con kN, m y rad.</p>${r.free.length?`<div class="table-scroll"><table><thead><tr><th>GDL</th>${r.free.map(i=>`<th>${i%2?'θ':'v'}${Math.floor(i/2)+1}</th>`).join('')}<th>Ff</th></tr></thead><tbody>${r.Kff.map((row,j)=>`<tr><td>${r.free[j]%2?'θ':'v'}${Math.floor(r.free[j]/2)+1}</td>${row.map(v=>`<td>${fmt(v,3)}</td>`).join('')}<td>${fmt(r.Ff[j],5)}</td></tr>`).join('')}</tbody></table></div>`:''}</details>`:''}</section>
+  <section class="method-step"><h4>4. Reacciones y equilibrio</h4><div class="formula">R = K · d − F</div><p>Resultante vertical aplicada: ${fmt(r.appliedForce,5)} kN. Momento aplicado total respecto a x = 0: ${fmt(r.appliedMoment,5)} kN·m. Al añadir las reacciones se obtiene:</p><div class="balance"><span>ΣFy = ${smallNumber(r.balanceForce)} kN</span><span>ΣM₀ = ${smallNumber(r.balanceMoment)} kN·m</span></div><p>Los residuos cercanos a cero corresponden al redondeo numérico. En los apoyos simples no existe momento de reacción, aunque el momento interno de una viga continua puede ser distinto de cero.</p></section>
+  <section class="method-step"><h4>5. Cortante, momento y deformación</h4><p>En cada elemento, s es la distancia desde su extremo izquierdo; q(s) = qₐ + βs es positiva hacia arriba y β = (qᵦ − qₐ)/ℓ. A partir de las fuerzas de extremo rₑ = kₑdₑ − fₑ:</p><div class="formula">V(s) = r₁ + qₐs + βs²/2<br>M(s) = −r₂ + r₁s + qₐs²/2 + βs³/6<br>v(s) = vᵢ + θᵢs + [−r₂s²/2 + r₁s³/6 + qₐs⁴/24 + βs⁵/120] / EI</div><p>La deformación incluye el efecto de la carga dentro del elemento. Los extremos se buscan en los extremos de cada intervalo y en las raíces de las derivadas; el dibujo solo interpola puntos para visualizar. En una discontinuidad, usa el selector de lado izquierdo o derecho.</p><details><summary>Fuerzas de extremo por elemento</summary><div class="table-scroll"><table><thead><tr><th>Elemento</th><th>Intervalo (m)</th><th>r₁ (kN)</th><th>r₂ (kN·m)</th><th>r₃ (kN)</th><th>r₄ (kN·m)</th></tr></thead><tbody>${r.elements.map((e,i)=>`<tr><td>${i+1}</td><td>${fmt(e.a)} → ${fmt(e.b)}</td>${e.r.map(v=>`<td>${fmt(v,5)}</td>`).join('')}</tr>`).join('')}</tbody></table></div><p>Fuerzas nodales locales: verticales positivas hacia arriba, momentos positivos antihorarios.</p></details><p>Referencia de formulación: <a href="https://teachbooks.tudelft.nl/computational-modelling/structural_linear/euler_bernouilli.html" target="_blank" rel="noopener noreferrer">TU Delft · Elementos de viga Euler–Bernoulli</a>.</p></section>`;
+}
+document.querySelector('.editor').addEventListener('input',e=>{const t=e.target;if(!t.dataset.group)return;const v=t.tagName==='SELECT'?t.value:(t.value.trim()===''?NaN:Number(t.value));model[t.dataset.group][Number(t.dataset.index)][t.dataset.key]=v;markDirty();});
+document.querySelector('.editor').addEventListener('click',e=>{const t=e.target.closest('[data-remove]');if(!t)return;model[t.dataset.remove].splice(Number(t.dataset.index),1);renderEditor();markDirty();});
+$('addSpan').addEventListener('click',()=>{if(model.spans.length>=20)return;model.spans.push({...model.spans.at(-1)||{L:5,E:25000,I:156250}});renderEditor();markDirty();});
+$('addSupport').addEventListener('click',()=>{if(model.supports.length>=40)return;const L=length(),candidates=[0,L,L/2,L/3,2*L/3];const x=candidates.find(x=>!model.supports.some(s=>Math.abs(s.x-x)<1e-8))??L*.75;model.supports.push({x,type:'roller'});renderEditor();markDirty();});
+$('addLoad').addEventListener('click',()=>{if(model.loads.length>=80)return;const type=$('newLoadType').value,L=length();model.loads.push(type==='dist'?{type,a:0,b:L,q0:10,q1:10}:{type,x:L/2,value:10});renderEditor();markDirty();});
+$('solve').addEventListener('click',()=>{calculate();if(window.innerWidth<801)document.querySelector('.results').scrollIntoView({behavior:'smooth',block:'start'});});
+$('loadExample').addEventListener('click',()=>{model=structuredClone(examples[$('example').value]);stationX=length()/4;renderEditor();calculate();});
+$('rectB').addEventListener('input',updateInertia);$('rectH').addEventListener('input',updateInertia);
+$('useInertia').addEventListener('click',()=>{const I=updateInertia(),i=Number($('inertiaSpan').value);if(Number.isFinite(I)&&model.spans[i]){model.spans[i].I=I;renderEditor();markDirty();}});
+document.querySelectorAll('[data-chart]').forEach(b=>{b.addEventListener('click',()=>{chartKey=b.dataset.chart;renderChart();});b.addEventListener('keydown',e=>{const keys=['M','V','v'];let i=keys.indexOf(chartKey);if(e.key==='ArrowRight')i=(i+1)%3;else if(e.key==='ArrowLeft')i=(i+2)%3;else if(e.key==='Home')i=0;else if(e.key==='End')i=2;else return;e.preventDefault();chartKey=keys[i];renderChart();$('tab'+chartKey).focus();});});
+$('stationX').addEventListener('change',()=>{const x=$('stationX').valueAsNumber;if(Number.isFinite(x)){stationX=x;updateStation();}});
+$('stationSlider').addEventListener('input',()=>{stationX=Number($('stationSlider').value);updateStation();});$('stationSide').addEventListener('change',updateStation);
+$('chartSvg').addEventListener('pointerdown',e=>{if(!result)return;const box=$('chartSvg').getBoundingClientRect(),px=(e.clientX-box.left)/box.width*960;stationX=(px-72)/816*result.L;updateStation();});
+// Optional browser-native agent API. Uses the same model and solver as the UI.
+if(document.modelContext?.registerTool){
+  const life=new AbortController();window.addEventListener('pagehide',()=>life.abort(),{once:true});
+  const register=tool=>{try{Promise.resolve(document.modelContext.registerTool(tool,{signal:life.signal})).catch(()=>{});}catch{}};
+  register({name:'read_beam_model',title:'Leer modelo de viga',description:'Lee los datos actuales y los resultados, indicando si existen cambios sin calcular.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true},execute:()=>({model:structuredClone(model),pendingChanges:dirty,results:result?{length:result.L,reactions:result.reactions,extrema:result.extrema}:null})});
+  register({name:'calculate_beam',title:'Calcular viga',description:'Resuelve el modelo actualmente introducido y actualiza los diagramas y reacciones visibles.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:false},execute:(input)=>{if(!input||Object.keys(input).length)throw new Error('No se admiten parámetros.');if(!calculate())throw new Error($('error').textContent);return {reactions:result.reactions,extrema:result.extrema,balanceForce:result.balanceForce,balanceMoment:result.balanceMoment};}});
+}
+
+'use strict';
+const sceneState={yaw:-.3,elevation:.43,material:'concrete',deformed:false,colorMoment:false,loads:true,amplitude:40,phase:1,animating:false,frame:0};
+let sceneVisible=true,lastFrame=0,sceneStart=0,redrawQueued=false;
+function drawScene(){
+  const canvas=$('beamCanvas'),rect=canvas.getBoundingClientRect(),width=Math.max(rect.width,300),height=Math.max(rect.height,280),dpr=Math.min(window.devicePixelRatio||1,2);
+  if(canvas.width!==Math.round(width*dpr)||canvas.height!==Math.round(height*dpr)){canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);}
+  const ctx=canvas.getContext('2d');if(!ctx)return;ctx.setTransform(dpr,0,0,dpr,0,0);
+  const v=BeamScene.render(ctx,width,height,{...sceneState,model:solvedModel,result,station:stationX});
+  $('amplificationValue').textContent='× '+(v?fmt(v.amplification,0):'0');
+}
+function requestScene(){if(redrawQueued)return;redrawQueued=true;requestAnimationFrame(()=>{redrawQueued=false;drawScene();});}
+function animationFrame(time){
+  if(!sceneState.animating)return;
+  if(!document.hidden&&sceneVisible&&time-lastFrame>32){sceneState.phase=(1-Math.cos((time-sceneStart)/1100))/2;drawScene();lastFrame=time;}
+  sceneState.frame=requestAnimationFrame(animationFrame);
+}
+function stopAnimation(){sceneState.animating=false;sceneState.phase=1;cancelAnimationFrame(sceneState.frame);$('animateScene').textContent='▶ Animar deformación';$('animateScene').setAttribute('aria-pressed','false');}
+function refreshVisuals(){
+  stopAnimation();
+  if(!result){requestScene();return;}
+  const fb=BeamVisuals.freeBody(solvedModel,result,$('showResultants').checked);$('freeBodySvg').innerHTML=fb.svg;$('freeBodySvg').setAttribute('viewBox',`0 0 960 ${fb.height}`);
+  $('balanceFy').textContent='ΣFy = '+fmt(result.balanceForce,7)+' kN';$('balanceMz').textContent='ΣM₀ = '+fmt(result.balanceMoment,7)+' kN·m';
+  $('sceneSpanLabel').textContent=`${fmt(result.L)} m · ${solvedModel.spans.length} tramo${solvedModel.spans.length===1?'':'s'}`;
+  $('extraDiagrams').innerHTML=['V','M','v'].map(k=>`<div class="mini-chart"><div class="mini-heading"><span style="--chart-color:${chartInfo[k].color}">${k==='v'?'δ':k}</span><h4>${k==='M'?'Momento flector':k==='V'?'Fuerza cortante':'Deformada'}</h4><b>${chartInfo[k].unit}</b></div><div class="mini-scroll"><svg data-mini="${k}" viewBox="0 0 960 205" role="img" aria-label="Diagrama alineado de ${chartInfo[k].label}">${BeamVisuals.plot(result,k,chartInfo[k])}</svg></div></div>`).join('');
+  syncVisuals();updateSceneStateLabel();
+}
+function syncVisuals(){
+  if(!result)return;const values=result.at(stationX,$('stationSide').value);
+  for(const k of ['V','M','v']){const el=$('miniCursor'+k);if(!el)continue;const max=Math.abs(result.extrema[k].abs[k]),x=72+816*stationX/result.L,y=95-(max>1e-15?values[k]/max*60:0);el.innerHTML=`<line x1="${x}" x2="${x}" y1="25" y2="165" stroke="#7d96ad" stroke-dasharray="4 5"/><circle cx="${x}" cy="${y}" r="5" fill="white" stroke="${chartInfo[k].color}" stroke-width="2.5"/>`;}
+  $('cutSvg').innerHTML=BeamVisuals.cut(values);$('cutLocation').textContent='x = '+fmt(stationX)+' m · '+($('stationSide').value==='right'?'derecha':'izquierda');
+  $('cutV').textContent=fmt(values.V,3)+' kN';$('cutM').textContent=fmt(values.M,3)+' kN·m';
+  $('cutExplanation').textContent=Math.abs(values.M)<1e-8?'En esta sección el momento es nulo.':values.M>0?'Momento sagante: las fibras inferiores están a tracción y las superiores a compresión.':'Momento negativo: las fibras superiores están a tracción y las inferiores a compresión.';
+  requestScene();
+}
+function updateSceneStateLabel(){
+  $('sceneStateLabel').textContent=sceneState.animating?'Animación ilustrativa · flecha amplificada':sceneState.deformed?'Deformada amplificada':'Geometría sin deformar';
+  $('momentColorLegend').hidden=!sceneState.colorMoment;
+}
+function toast(message,error=false){let el=$('toast');if(!el){el=document.createElement('div');el.id='toast';el.setAttribute('role','status');document.body.append(el);}el.textContent=message;el.className='toast'+(error?' toast-error':'');el.hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(()=>{el.hidden=true;},5500);}
+document.querySelectorAll('[data-material]').forEach(b=>b.addEventListener('click',()=>{sceneState.material=b.dataset.material;document.querySelectorAll('[data-material]').forEach(x=>x.setAttribute('aria-pressed',x===b));requestScene();}));
+$('showDeformed').addEventListener('change',e=>{stopAnimation();sceneState.deformed=e.target.checked;updateSceneStateLabel();requestScene();});
+$('colorMoment').addEventListener('change',e=>{sceneState.colorMoment=e.target.checked;updateSceneStateLabel();requestScene();});
+$('showSceneLoads').addEventListener('change',e=>{sceneState.loads=e.target.checked;requestScene();});
+$('amplification').addEventListener('input',e=>{sceneState.amplitude=Number(e.target.value);sceneState.deformed=true;$('showDeformed').checked=true;updateSceneStateLabel();requestScene();});
+$('animateScene').addEventListener('click',()=>{if(!result)return;if(sceneState.animating){stopAnimation();requestScene();}else{sceneState.deformed=true;$('showDeformed').checked=true;sceneState.animating=true;sceneStart=performance.now();$('animateScene').textContent='Ⅱ Pausar animación';$('animateScene').setAttribute('aria-pressed','true');sceneState.frame=requestAnimationFrame(animationFrame);}updateSceneStateLabel();});
+$('frontView').addEventListener('click',()=>{sceneState.yaw=0;sceneState.elevation=0;requestScene();});
+$('resetView').addEventListener('click',()=>{sceneState.yaw=-.3;sceneState.elevation=.43;requestScene();});
+let drag=null;const sceneCanvas=$('beamCanvas');
+sceneCanvas.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,yaw:sceneState.yaw,elevation:sceneState.elevation};sceneCanvas.setPointerCapture(e.pointerId);});
+sceneCanvas.addEventListener('pointermove',e=>{if(!drag)return;sceneState.yaw=Math.max(-1.15,Math.min(1.15,drag.yaw+(e.clientX-drag.x)*.006));sceneState.elevation=Math.max(0,Math.min(.85,drag.elevation+(e.clientY-drag.y)*.005));requestScene();});
+sceneCanvas.addEventListener('pointerup',()=>drag=null);sceneCanvas.addEventListener('pointercancel',()=>drag=null);
+sceneCanvas.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key))return;e.preventDefault();sceneState.yaw=Math.max(-1.15,Math.min(1.15,sceneState.yaw+(e.key==='ArrowRight'?.07:e.key==='ArrowLeft'?-.07:0)));sceneState.elevation=Math.max(0,Math.min(.85,sceneState.elevation+(e.key==='ArrowUp'?.05:e.key==='ArrowDown'?-.05:0)));requestScene();});
+if(typeof ResizeObserver!=='undefined')new ResizeObserver(requestScene).observe(sceneCanvas);else window.addEventListener('resize',requestScene);
+if(typeof IntersectionObserver!=='undefined')new IntersectionObserver(entries=>{sceneVisible=entries[0].isIntersecting;}).observe(sceneCanvas);
+$('showResultants').addEventListener('change',()=>{if(!result)return;const fb=BeamVisuals.freeBody(solvedModel,result,$('showResultants').checked);$('freeBodySvg').innerHTML=fb.svg;$('freeBodySvg').setAttribute('viewBox',`0 0 960 ${fb.height}`);});
+$('showAllDiagrams').addEventListener('change',e=>$('extraDiagrams').hidden=!e.target.checked);
+$('extraDiagrams').addEventListener('pointerdown',e=>{const svg=e.target.closest('svg[data-mini]');if(!svg||!result)return;const box=svg.getBoundingClientRect();stationX=((e.clientX-box.left)/box.width*960-72)/816*result.L;updateStation();});
+function goCritical(key){if(!result)return;stationX=result.extrema[key].abs.x;updateStation();$('stationX').focus({preventScroll:true});}
+$('goMaxMoment').addEventListener('click',()=>goCritical('M'));$('goMaxDeflection').addEventListener('click',()=>goCritical('v'));
+$('saveModel').addEventListener('click',()=>{try{BeamEngine.validate(model);const url=URL.createObjectURL(new Blob([JSON.stringify({format:'cari-beam-v1',model},null,2)],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download='Mi_viga_CARI.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('Modelo descargado. Puedes abrirlo aquí cuando quieras.');}catch(e){toast('Revisa el modelo antes de guardarlo: '+e.message,true);}});
+$('openModel').addEventListener('click',()=>$('modelFile').click());
+$('modelFile').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>1024*1024)throw new Error('El archivo supera 1 MB.');const data=JSON.parse(await file.text());if(data.format!=='cari-beam-v1')throw new Error('Selecciona un modelo guardado desde esta calculadora.');BeamEngine.solve(data.model);const safe={spans:data.model.spans.map(s=>({L:s.L,E:s.E,I:s.I})),supports:data.model.supports.map(s=>({x:s.x,type:s.type})),loads:data.model.loads.map(p=>p.type==='dist'?{type:p.type,a:p.a,b:p.b,q0:p.q0,q1:p.q1}:{type:p.type,x:p.x,value:p.value})};model=safe;stationX=0;renderEditor();calculate();toast('Modelo abierto y calculado.');}catch(error){toast('No se pudo abrir: '+error.message,true);}finally{e.target.value='';}});
+$('printReport').addEventListener('click',()=>{if(dirty&&!calculate())return;if(!result){toast('Calcula un modelo válido antes de imprimir.',true);return;}stopAnimation();drawScene();document.querySelector('.method-panel').open=true;window.print();});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)requestScene();});
+window.addEventListener('pagehide',stopAnimation);
+renderEditor();
+if(window.innerWidth<801)document.querySelectorAll('.input-section').forEach(section=>section.open=false);
+calculate();
+</script>
+</body></html>
