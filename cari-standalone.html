@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#193d6c">
+    <meta name="description" content="Laboratorio de estructuras · CARI - Diseño de hormigón armado">
+    <title>CARI · Hormigón Armado</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; color: #324b65; }
+        body { display: flex; flex-direction: column; overflow: hidden; }
+        
+        .titlebar {
+            background: linear-gradient(135deg, #1a3a5e 0%, #2d5a8f 100%);
+            color: white;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .brandmark { font-size: 28px; font-weight: bold; }
+        .titlebar strong { font-size: 20px; }
+        .titlebar span { font-size: 12px; opacity: 0.8; }
+        .titlemeta { margin-left: auto; font-size: 12px; opacity: 0.7; }
+        
+        .workspace {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            gap: 12px;
+            padding: 12px;
+        }
+        
+        .input-pane {
+            width: 340px;
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            overflow-y: auto;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .main-pane {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            overflow-y: auto;
+        }
+        
+        .pane-title { font-size: 14px; font-weight: 600; color: #687f96; margin-bottom: 12px; }
+        .pane-title .small { font-size: 11px; }
+        
+        .control-section { margin-bottom: 20px; }
+        .control-section h2 { font-size: 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .step { 
+            background: #367caf; 
+            color: white; 
+            width: 22px; 
+            height: 22px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .fields { display: grid; grid-template-columns: 1fr; gap: 10px; }
+        .fields label { display: flex; flex-direction: column; font-size: 12px; }
+        .fields span { color: #687f96; margin-bottom: 4px; }
+        .fields input { padding: 6px 8px; border: 1px solid #d0d8e0; border-radius: 4px; font-size: 13px; }
+        
+        .result-heading {
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .eyebrow { font-size: 11px; color: #8b95a8; text-transform: uppercase; }
+        .result-heading h1 { font-size: 22px; margin: 4px 0; }
+        .state { 
+            padding: 6px 12px; 
+            border-radius: 4px; 
+            font-size: 12px; 
+            background: #e8f1f8;
+            color: #367caf;
+            display: inline-block;
+        }
+        .state.warn { background: #fef6e4; color: #b87108; }
+        .state.bad { background: #fde9e9; color: #c34450; }
+        
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .metric {
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 4px solid #367caf;
+        }
+        .metric label { font-size: 11px; color: #8b95a8; display: block; }
+        .metric strong { font-size: 16px; display: block; margin: 4px 0; }
+        .metric small { font-size: 11px; color: #8b95a8; }
+        .metric p { font-size: 11px; color: #8b95a8; margin-top: 4px; }
+        
+        .drawing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 12px;
+        }
+        
+        .panel {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .panel-title { 
+            font-size: 13px; 
+            font-weight: 600; 
+            margin-bottom: 8px; 
+            padding-bottom: 8px; 
+            border-bottom: 1px solid #e9eef4;
+        }
+        .panel-title h2 { font-size: 13px; margin: 0; }
+        .panel-title .small { font-size: 11px; color: #8b95a8; }
+        
+        canvas {
+            border: 1px solid #e9eef4;
+            border-radius: 4px;
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .error {
+            display: none;
+            background: #fde9e9;
+            color: #c34450;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            border-left: 4px solid #c34450;
+        }
+        .error:not([hidden]) { display: block; }
+        
+        footer {
+            background: #324b65;
+            color: white;
+            padding: 12px 24px;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        
+        .check { display: flex; align-items: center; gap: 8px; font-size: 13px; margin: 8px 0; }
+        .check input { width: 16px; height: 16px; }
+        
+        button {
+            background: #367caf;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        button:hover { background: #2d5a8f; }
+        button:disabled { background: #ccc; cursor: not-allowed; }
+        
+        .button-group { display: flex; gap: 8px; margin-top: 12px; }
+    </style>
+</head>
+<body>
+    <header class="titlebar">
+        <div class="brandmark">▥</div>
+        <strong>CARI <span>Hormigón armado</span></strong>
+        <span class="titlemeta">Laboratorio de estructuras · v1.0</span>
+    </header>
+
+    <div class="workspace">
+        <aside class="input-pane">
+            <div class="pane-title"><span>EXPLORADOR DEL MODELO</span></div>
+            <form id="model-form" novalidate>
+                <section class="control-section">
+                    <h2><span class="step">1</span> Geometría</h2>
+                    <div class="fields">
+                        <label><span>Longitud total (m)</span>
+                            <input id="L" type="number" min="0.3" max="30" step="0.1" value="6">
+                        </label>
+                        <label><span>Ancho b (cm)</span>
+                            <input id="b" type="number" min="12" max="150" step="1" value="30">
+                        </label>
+                        <label><span>Alto h (cm)</span>
+                            <input id="h" type="number" min="8" max="200" step="1" value="55">
+                        </label>
+                    </div>
+                </section>
+
+                <section class="control-section">
+                    <h2><span class="step">2</span> Materiales</h2>
+                    <div class="fields">
+                        <label><span>f'c (MPa)</span>
+                            <input id="fc" type="number" min="20" max="50" step="1" value="28">
+                        </label>
+                        <label><span>Recubrimiento (mm)</span>
+                            <input id="cover" type="number" min="15" max="100" step="5" value="40">
+                        </label>
+                        <label><span>Diámetro barras (mm)</span>
+                            <select id="db">
+                                <option value="10">Ø 10</option>
+                                <option value="12">Ø 12</option>
+                                <option value="16">Ø 16</option>
+                                <option value="20" selected>Ø 20</option>
+                                <option value="25">Ø 25</option>
+                                <option value="32">Ø 32</option>
+                            </select>
+                        </label>
+                    </div>
+                </section>
+
+                <section class="control-section">
+                    <h2><span class="step">3</span> Cargas</h2>
+                    <label class="check">
+                        <input id="self" type="checkbox" checked>
+                        Incluir peso propio
+                    </label>
+                    <div class="fields">
+                        <label><span>Carga puntual (kN)</span>
+                            <input id="pointLoad" type="number" step="0.1" value="15">
+                        </label>
+                        <label><span>Carga distribuida (kN/m)</span>
+                            <input id="distLoad" type="number" step="0.1" value="10">
+                        </label>
+                    </div>
+                </section>
+
+                <div class="button-group">
+                    <button type="button" id="calculate-btn">Calcular</button>
+                    <button type="button" id="reset-btn">Restaurar</button>
+                </div>
+            </form>
+        </aside>
+
+        <main class="main-pane">
+            <div id="error" class="error"></div>
+            
+            <div class="result-heading">
+                <p class="eyebrow">MODELO ACTIVO</p>
+                <h1 id="model-title">Viga de hormigón armado</h1>
+                <span id="analysis-state" class="state">Calculando…</span>
+            </div>
+
+            <div class="metrics" id="metrics"></div>
+
+            <div class="drawing-grid">
+                <div class="panel">
+                    <div class="panel-title">
+                        <h2>Modelo y cargas</h2>
+                    </div>
+                    <canvas id="model-canvas" width="400" height="200"></canvas>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-title">
+                        <h2>Sección y armadura</h2>
+                        <span class="small" id="section-dims"></span>
+                    </div>
+                    <canvas id="section-canvas" width="300" height="300"></canvas>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-title">
+                        <h2>Diagrama de momentos</h2>
+                    </div>
+                    <canvas id="moment-canvas" width="400" height="200"></canvas>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-title">
+                        <h2>Diagrama de cortantes</h2>
+                    </div>
+                    <canvas id="shear-canvas" width="400" height="200"></canvas>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-title">
+                    <h2>Resultados de diseño</h2>
+                </div>
+                <div id="design-results" style="font-size: 13px; line-height: 1.6;"></div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <span id="status-text">CARI · Hormigón armado</span>
+        <span>Referencia docente · no sustituye software especializado</span>
+    </footer>
+
+    <script>
+        'use strict';
+        
+        // Simulación simplificada del motor de cálculo
+        const Calculator = (() => {
+            function analyzeBeam(config) {
+                const L = config.L;
+                const b = config.b * 10; // cm a mm
+                const h = config.h * 10;
+                const fc = config.fc;
+                
+                // Momento máximo (aproximado para viga simple)
+                const q = config.distLoad + (config.self ? 24 * config.b * config.h / 100 / 100 : 0);
+                const P = config.pointLoad;
+                const Mmax = (q * L * L / 8) + (P * L / 4);
+                
+                // Cortante máximo
+                const Vmax = (q * L / 2) + (P / 2);
+                
+                // Propiedades de sección
+                const I = b * h * h * h / 12;
+                const Ec = 4700 * Math.sqrt(fc);
+                
+                // Deflexión máxima (aproximada)
+                const deflection = (5 * q * L * L * L * L) / (384 * Ec * 1000 * I / 1e4);
+                
+                // Área de acero (aproximado)
+                const d = h - config.cover * 10 - 20; // diámetro/2 estimado
+                const Mu = Mmax * 1e6;
+                const Asneeded = Mu / (0.9 * config.fy * d);
+                
+                return {
+                    Mmax: Mmax.toFixed(2),
+                    Vmax: Vmax.toFixed(2),
+                    deflection: deflection.toFixed(1),
+                    I: I.toFixed(0),
+                    Ec: (Ec / 1000).toFixed(1),
+                    Asneeded: Asneeded.toFixed(0),
+                    status: Asneeded < 1000 ? 'Sección verifica' : 'Revisar sección',
+                    ok: Asneeded < 1000
+                };
+            }
+            
+            return { analyzeBeam };
+        })();
+
+        // UI Controller
+        const App = (() => {
+            let config = {
+                L: 6,
+                b: 30,
+                h: 55,
+                fc: 28,
+                cover: 40,
+                db: 20,
+                fy: 420,
+                self: true,
+                pointLoad: 15,
+                distLoad: 10
+            };
+
+            let result = null;
+
+            function updateConfig() {
+                config.L = parseFloat(document.getElementById('L').value) || 6;
+                config.b = parseFloat(document.getElementById('b').value) || 30;
+                config.h = parseFloat(document.getElementById('h').value) || 55;
+                config.fc = parseFloat(document.getElementById('fc').value) || 28;
+                config.cover = parseFloat(document.getElementById('cover').value) || 40;
+                config.db = parseFloat(document.getElementById('db').value) || 20;
+                config.self = document.getElementById('self').checked;
+                config.pointLoad = parseFloat(document.getElementById('pointLoad').value) || 15;
+                config.distLoad = parseFloat(document.getElementById('distLoad').value) || 10;
+            }
+
+            function calculate() {
+                try {
+                    updateConfig();
+                    result = Calculator.analyzeBeam(config);
+                    document.getElementById('error').textContent = '';
+                    document.getElementById('error').hidden = true;
+                    render();
+                } catch (e) {
+                    showError('Error en el cálculo: ' + e.message);
+                }
+            }
+
+            function showError(msg) {
+                const err = document.getElementById('error');
+                err.textContent = msg;
+                err.hidden = false;
+            }
+
+            function render() {
+                if (!result) return;
+
+                document.getElementById('section-dims').textContent = `${config.b} × ${config.h} cm`;
+                document.getElementById('analysis-state').textContent = result.ok ? 'Sección verifica' : 'Revisar sección';
+                document.getElementById('analysis-state').className = 'state' + (result.ok ? '' : ' bad');
+
+                const metrics = `
+                    <div class="metric">
+                        <label>Momento máximo</label>
+                        <strong>${result.Mmax} <small>kN·m</small></strong>
+                        <p>Envolvente de resistencia</p>
+                    </div>
+                    <div class="metric">
+                        <label>Cortante máximo</label>
+                        <strong>${result.Vmax} <small>kN</small></strong>
+                        <p>Envolvente de resistencia</p>
+                    </div>
+                    <div class="metric">
+                        <label>Deflexión máxima</label>
+                        <strong>${result.deflection} <small>mm</small></strong>
+                        <p>Servicio D + L</p>
+                    </div>
+                    <div class="metric">
+                        <label>I (inercia)</label>
+                        <strong>${result.I} <small>cm⁴</small></strong>
+                        <p>Ec = ${result.Ec} GPa</p>
+                    </div>
+                `;
+                document.getElementById('metrics').innerHTML = metrics;
+
+                const design = `
+                    <p><strong>Acero requerido:</strong> ${result.Asneeded} mm²</p>
+                    <p><strong>Estado:</strong> ${result.status}</p>
+                    <p style="color: #8b95a8; margin-top: 12px; font-size: 12px;">
+                        ℹ️ Cálculo simplificado para referencia. No sustituye análisis estructural profesional.
+                    </p>
+                `;
+                document.getElementById('design-results').innerHTML = design;
+
+                drawDiagrams();
+            }
+
+            function drawDiagrams() {
+                drawModel();
+                drawSection();
+                drawMoments();
+                drawShear();
+            }
+
+            function drawModel() {
+                const canvas = document.getElementById('model-canvas');
+                const ctx = canvas.getContext('2d');
+                const w = canvas.width, h = canvas.height;
+                
+                ctx.fillStyle = '#fff';
+                ctx.fillRect(0, 0, w, h);
+                
+                const x0 = 30, x1 = w - 30, y = h / 2;
+                
+                // Viga
+                ctx.fillStyle = '#d9e6f3';
+                ctx.fillRect(x0, y - 8, x1 - x0, 16);
+                ctx.strokeStyle = '#367caf';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(x0, y - 8, x1 - x0, 16);
+                
+                // Apoyos
+                ctx.fillStyle = '#e2eaf4';
+                ctx.beginPath();
+                ctx.moveTo(x0, y + 8);
+                ctx.lineTo(x0 - 10, y + 18);
+                ctx.lineTo(x0 + 10, y + 18);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+                
+                ctx.beginPath();
+                ctx.moveTo(x1, y + 8);
+                ctx.lineTo(x1 - 10, y + 18);
+                ctx.lineTo(x1 + 10, y + 18);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+                
+                // Etiquetas
+                ctx.fillStyle = '#687f96';
+                ctx.font = '12px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('A', x0, h - 10);
+                ctx.fillText('B', x1, h - 10);
+                ctx.fillText(`L = ${config.L} m`, (x0 + x1) / 2, 20);
+            }
+
+            function drawSection() {
+                const canvas = document.getElementById('section-canvas');
+                const ctx = canvas.getContext('2d');
+                const w = canvas.width, h = canvas.height;
+                
+                ctx.fillStyle = '#fff';
+                ctx.fillRect(0, 0, w, h);
+                
+                const scale = Math.min((w - 80) / (config.b * 10), (h - 80) / (config.h * 10));
+                const bw = config.b * 10 * scale;
+                const bh = config.h * 10 * scale;
+                const x = (w - bw) / 2;
+                const y = (h - bh) / 2;
+                
+                // Sección
+                ctx.fillStyle = '#e5eaf0';
+                ctx.fillRect(x, y, bw, bh);
+                ctx.strokeStyle = '#70889f';
+                ctx.lineWidth = 1.5;
+                ctx.strokeRect(x, y, bw, bh);
+                
+                // Barras de acero
+                ctx.fillStyle = '#c34450';
+                const barRadius = 4;
+                for (let i = 0; i < 3; i++) {
+                    const cx = x + bw * (i + 1) / 4;
+                    ctx.beginPath();
+                    ctx.arc(cx, y + 12, barRadius, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(cx, y + bh - 12, barRadius, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                
+                // Etiqueta
+                ctx.fillStyle = '#687f96';
+                ctx.font = '12px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(`${config.b} × ${config.h} cm`, w / 2, h - 20);
+            }
+
+            function drawMoments() {
+                const canvas = document.getElementById('moment-canvas');
+                const ctx = canvas.getContext('2d');
+                const w = canvas.width, h = canvas.height;
+                
+                ctx.fillStyle = '#fff';
+                ctx.fillRect(0, 0, w, h);
+                
+                const x0 = 40, x1 = w - 20, y0 = 30, y1 = h - 30;
+                const L = config.L;
+                const q = config.distLoad + (config.self ? 24 * config.b * config.h / 100 / 100 : 0);
+                const Mmax = result.Mmax / 1;
+                
+                // Ejes
+                ctx.strokeStyle = '#a9b6c4';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(x0, (y0 + y1) / 2);
+                ctx.lineTo(x1, (y0 + y1) / 2);
+                ctx.stroke();
+                
+                // Parábola de momento
+                ctx.strokeStyle = '#8158b1';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                for (let i = 0; i <= 50; i++) {
+                    const t = i / 50;
+                    const M = Mmax * (1 - 4 * t * (t - 1));
+                    const xp = x0 + t * (x1 - x0);
+                    const yp = (y0 + y1) / 2 - M / Mmax * (y1 - y0) / 3;
+                    if (i === 0) ctx.moveTo(xp, yp);
+                    else ctx.lineTo(xp, yp);
+                }
+                ctx.stroke();
+                
+                // Etiqueta
+                ctx.fillStyle = '#687f96';
+                ctx.font = '11px sans-serif';
+                ctx.textAlign = 'right';
+                ctx.fillText('Momento (kN·m)', w - 10, 15);
+            }
+
+            function drawShear() {
+                const canvas = document.getElementById('shear-canvas');
+                const ctx = canvas.getContext('2d');
+                const w = canvas.width, h = canvas.height;
+                
+                ctx.fillStyle = '#fff';
+                ctx.fillRect(0, 0, w, h);
+                
+                const x0 = 40, x1 = w - 20, y0 = 30, y1 = h - 30;
+                const q = config.distLoad + (config.self ? 24 * config.b * config.h / 100 / 100 : 0);
+                const Vmax = result.Vmax / 1;
+                
+                // Ejes
+                ctx.strokeStyle = '#a9b6c4';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(x0, (y0 + y1) / 2);
+                ctx.lineTo(x1, (y0 + y1) / 2);
+                ctx.stroke();
+                
+                // Diagrama de cortante
+                ctx.strokeStyle = '#007e9e';
+                ctx.lineWidth = 2;
+                const yc = (y0 + y1) / 2;
+                ctx.beginPath();
+                ctx.moveTo(x0, yc - Vmax / Vmax * (y1 - y0) / 3);
+                ctx.lineTo(x1, yc + Vmax / Vmax * (y1 - y0) / 3);
+                ctx.stroke();
+                
+                // Etiqueta
+                ctx.fillStyle = '#687f96';
+                ctx.font = '11px sans-serif';
+                ctx.textAlign = 'right';
+                ctx.fillText('Cortante (kN)', w - 10, 15);
+            }
+
+            function reset() {
+                document.getElementById('L').value = 6;
+                document.getElementById('b').value = 30;
+                document.getElementById('h').value = 55;
+                document.getElementById('fc').value = 28;
+                document.getElementById('cover').value = 40;
+                document.getElementById('db').value = 20;
+                document.getElementById('self').checked = true;
+                document.getElementById('pointLoad').value = 15;
+                document.getElementById('distLoad').value = 10;
+                calculate();
+            }
+
+            return {
+                init() {
+                    document.getElementById('calculate-btn').addEventListener('click', calculate);
+                    document.getElementById('reset-btn').addEventListener('click', reset);
+                    
+                    ['L', 'b', 'h', 'fc', 'cover', 'db', 'self', 'pointLoad', 'distLoad'].forEach(id => {
+                        document.getElementById(id).addEventListener('change', () => {
+                            setTimeout(calculate, 100);
+                        });
+                    });
+                    
+                    calculate();
+                }
+            };
+        })();
+
+        // Inicializar cuando carga el DOM
+        document.addEventListener('DOMContentLoaded', () => {
+            App.init();
+        });
+    </script>
+</body>
+</html>
