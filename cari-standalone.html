@@ -3,11 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#102a43">
+<meta name="theme-color" content="#0b1420">
 <meta name="description" content="CARI · Predimensionamiento y diseño referencial de vigas de hormigón armado">
 <title>CARI · Diseño de vigas</title>
 <style>
-:root{--navy:#102a43;--blue:#1769aa;--cyan:#0e7490;--ink:#243b53;--muted:#627d98;--line:#d9e2ec;--bg:#f0f4f8;--card:#fff;--ok:#087f5b;--warn:#b7791f;--bad:#c53030;--shadow:0 8px 24px #102a4314}*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}body{display:flex;flex-direction:column}.top{background:linear-gradient(120deg,#102a43,#1769aa);color:#fff;padding:18px clamp(16px,4vw,42px);display:flex;align-items:center;gap:14px}.logo{font-size:30px;font-weight:900;line-height:1}.top h1{font-size:20px;margin:0}.top p{margin:3px 0 0;font-size:12px;opacity:.78}.version{margin-left:auto;font-size:12px;opacity:.8}.layout{width:min(1500px,100%);margin:auto;padding:18px;display:grid;grid-template-columns:310px 1fr;gap:18px;flex:1}.sidebar,.card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}.sidebar{padding:18px;height:max-content;position:sticky;top:18px}.kicker{text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-size:11px;font-weight:800;margin:0 0 18px}.group{border-top:1px solid var(--line);padding:16px 0 2px}.group:first-of-type{border-top:0;padding-top:0}.group h2{font-size:14px;margin:0 0 11px;display:flex;align-items:center;gap:8px}.step{background:var(--blue);color:#fff;border-radius:50%;width:22px;height:22px;display:grid;place-items:center;font-size:11px}.field{display:grid;gap:5px;margin:10px 0;font-size:12px;color:var(--muted);font-weight:650}.field input,.field select{width:100%;padding:9px 10px;border:1px solid #bcccdc;border-radius:8px;background:#fff;color:var(--ink);font-size:14px}.field input:focus,.field select:focus{outline:3px solid #bee3f8;border-color:var(--blue)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.check{display:flex;align-items:center;gap:8px;margin:12px 0;font-size:13px}.check input{accent-color:var(--blue);width:16px;height:16px}.buttons{display:flex;gap:8px;margin-top:16px}button{border:0;border-radius:8px;padding:10px 14px;background:var(--blue);color:#fff;font-weight:750;cursor:pointer}button:hover{filter:brightness(.92)}button.secondary{background:#e6f0f7;color:var(--navy)}.content{min-width:0;display:grid;gap:14px}.hero{padding:22px;display:flex;justify-content:space-between;align-items:flex-start;gap:15px}.hero h2{margin:3px 0 6px;font-size:25px}.hero p{margin:0;color:var(--muted);font-size:13px}.badge{white-space:nowrap;border-radius:999px;padding:8px 13px;font-size:12px;font-weight:800;background:#d3f9d8;color:var(--ok)}.badge.warn{background:#fff3bf;color:var(--warn)}.badge.bad{background:#ffe3e3;color:var(--bad)}.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.metric{padding:16px;border-top:4px solid var(--blue)}.metric label{display:block;color:var(--muted);font-size:11px;font-weight:700}.metric strong{display:block;font-size:21px;margin:5px 0}.metric small{font-size:11px;color:var(--muted)}.metric p{margin:0;color:var(--muted);font-size:11px}.plots{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.panel{padding:15px}.panel h3{margin:0 0 10px;font-size:14px}.sub{color:var(--muted);font-size:11px;font-weight:400}.canvas-wrap{overflow:hidden;border:1px solid var(--line);border-radius:9px;background:#fbfdff}canvas{display:block;width:100%;height:auto}.results{padding:18px}.results h3{margin:0 0 12px}.table{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:9px;overflow:hidden;font-size:13px}.table div{padding:10px;border-bottom:1px solid var(--line)}.table div:nth-last-child(-n+4){border-bottom:0}.table b{color:var(--muted);font-size:11px;display:block}.note{margin:14px 0 0;padding:12px;border-left:4px solid var(--warn);background:#fffaf0;color:#744210;font-size:12px;line-height:1.5}.error{display:none;padding:12px;border-radius:9px;background:#fff5f5;color:var(--bad);border:1px solid #feb2b2;font-size:13px}.error.show{display:block}footer{background:var(--navy);color:#d9e2ec;padding:14px clamp(16px,4vw,42px);font-size:11px;display:flex;justify-content:space-between;gap:15px}@media(max-width:1050px){.metrics{grid-template-columns:repeat(3,1fr)}}@media(max-width:760px){.layout{display:block;padding:10px}.sidebar{position:static;margin-bottom:12px}.plots{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}.table{grid-template-columns:repeat(2,1fr)}.table div:nth-last-child(-n+4){border-bottom:1px solid var(--line)}.table div:nth-last-child(-n+2){border-bottom:0}.version{display:none}.hero{display:block}.badge{display:inline-block;margin-top:12px}}
+:root{
+  --bg:#071922;
+  --bg2:#0b1d2b;
+  --panel:#0f2433;
+  --panel2:#132c3d;
+  --card:#122c3d;
+  --line:#1f3d52;
+  --text:#eaf3ff;
+  --muted:#a8bfd1;
+  --blue:#5aa9ff;
+  --cyan:#52d1d3;
+  --ok:#49d39a;
+  --warn:#f5bf56;
+  --bad:#ff7b79;
+  --shadow:0 14px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}body{display:flex;flex-direction:column}.top{background:linear-gradient(120deg,#081d2d,#123d5d);color:#fff;padding:18px clamp(16px,4vw,42px);display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--line)}.logo{font-size:30px;font-weight:900;line-height:1}.top h1{font-size:20px;margin:0}.top p{margin:3px 0 0;font-size:12px;opacity:.78}.version{margin-left:auto;font-size:12px;opacity:.8}.layout{width:min(1500px,100%);margin:auto;padding:18px;display:grid;grid-template-columns:310px 1fr;gap:18px;flex:1}.sidebar,.card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}.sidebar{padding:18px;height:max-content;position:sticky;top:18px}.kicker{text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-size:11px;font-weight:800;margin:0 0 18px}.group{border-top:1px solid var(--line);padding:16px 0 2px}.group:first-of-type{border-top:0;padding-top:0}.group h2{font-size:14px;margin:0 0 11px;display:flex;align-items:center;gap:8px}.step{background:linear-gradient(135deg,var(--blue),#2b7fe0);color:#fff;border-radius:50%;width:22px;height:22px;display:grid;place-items:center;font-size:11px}.field{display:grid;gap:5px;margin:10px 0;font-size:12px;color:var(--muted);font-weight:650}.field input,.field select{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel2);color:var(--text);font-size:14px}.field input:focus,.field select:focus{outline:3px solid rgba(90,169,255,.25);border-color:var(--blue)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.check{display:flex;align-items:center;gap:8px;margin:12px 0;font-size:13px;color:var(--text)}.check input{accent-color:var(--blue);width:16px;height:16px}.sub{color:var(--muted);font-size:11px;font-weight:400}.buttons{display:flex;gap:8px;margin-top:16px}button{border:0;border-radius:8px;padding:10px 14px;background:linear-gradient(135deg,#3d8df0,#2d78d8);color:#fff;font-weight:750;cursor:pointer;transition:.2s ease}.button:hover,button:hover{filter:brightness(1.06)}button.secondary{background:rgba(90,169,255,.12);color:var(--text);border:1px solid var(--line)}.content{min-width:0;display:grid;gap:14px}.hero{padding:22px;display:flex;justify-content:space-between;align-items:flex-start;gap:15px}.hero h2{margin:3px 0 6px;font-size:25px}.hero p{margin:0;color:var(--muted);font-size:13px}.badge{white-space:nowrap;border-radius:999px;padding:8px 13px;font-size:12px;font-weight:800;background:rgba(73,211,154,.12);color:var(--ok);border:1px solid rgba(73,211,154,.3)}.badge.warn{background:rgba(245,191,86,.1);color:var(--warn);border-color:rgba(245,191,86,.35)}.badge.bad{background:rgba(255,123,121,.1);color:var(--bad);border-color:rgba(255,123,121,.35)}.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.metric{padding:16px;border-top:4px solid var(--blue);background:var(--panel);border-radius:12px}.metric label{display:block;color:var(--muted);font-size:11px;font-weight:700}.metric strong{display:block;font-size:21px;margin:5px 0}.metric small{font-size:11px;color:var(--muted)}.metric p{margin:0;color:var(--muted);font-size:11px}.plots{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.panel{padding:15px;background:var(--panel)}.panel h3{margin:0 0 10px;font-size:14px;color:var(--text)}.canvas-wrap{overflow:hidden;border:1px solid var(--line);border-radius:9px;background:#071922}.canvas-wrap canvas{display:block;width:100%;height:auto}.results{padding:18px;background:var(--panel)}.results h3{margin:0 0 12px}.table{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:9px;overflow:hidden;font-size:13px;background:rgba(255,255,255,.01)}.table div{padding:10px;border-bottom:1px solid var(--line)}.table div:nth-last-child(-n+4){border-bottom:0}.table b{color:var(--muted);font-size:11px;display:block}.note{margin:14px 0 0;padding:12px;border-left:4px solid var(--warn);background:rgba(245,191,86,.08);color:#f8d77f;font-size:12px;line-height:1.5;border-radius:0 8px 8px 0}.error{display:none;padding:12px;border-radius:9px;background:rgba(255,123,121,.08);color:var(--bad);border:1px solid rgba(255,123,121,.35);font-size:13px}.error.show{display:block}.footer{background:var(--bg2);border-top:1px solid var(--line);color:var(--muted);padding:14px clamp(16px,4vw,42px);font-size:11px;display:flex;justify-content:space-between;gap:15px}@media(max-width:1050px){.metrics{grid-template-columns:repeat(3,1fr)}}@media(max-width:760px){.layout{display:block;padding:10px}.sidebar{position:static;margin-bottom:12px}.plots{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}.table{grid-template-columns:repeat(2,1fr)}.table div:nth-last-child(-n+4){border-bottom:1px solid var(--line)}.table div:nth-last-child(-n+2){border-bottom:0}.version{display:none}.hero{display:block}.badge{display:inline-block;margin-top:12px}}
 </style>
 </head>
 <body>
@@ -21,17 +37,114 @@
 <main class="content"><div id="error" class="error"></div><section class="card hero"><div><p class="kicker">Modelo activo · Bolivia</p><h2>Viga rectangular de hormigón armado</h2><p id="summary">—</p></div><span id="state" class="badge">Calculando…</span></section><section id="metrics" class="metrics"></section>
 <section class="plots"><div class="card panel"><h3>Modelo y cargas <span class="sub">· esquema estático</span></h3><div class="canvas-wrap"><canvas id="model" width="700" height="230"></canvas></div></div><div class="card panel"><h3>Sección y armadura <span class="sub" id="dims"></span></h3><div class="canvas-wrap"><canvas id="section" width="500" height="360"></canvas></div></div><div class="card panel"><h3>Diagrama de momentos <span class="sub">· ELU</span></h3><div class="canvas-wrap"><canvas id="moment" width="700" height="230"></canvas></div></div><div class="card panel"><h3>Diagrama de cortantes <span class="sub">· ELU</span></h3><div class="canvas-wrap"><canvas id="shear" width="700" height="230"></canvas></div></div></section>
 <section class="card results"><h3>Diseño y cuantías <span class="sub">· criterios referenciales NB 1225001 / ACI 318</span></h3><div id="design"></div><div class="note">⚠️ Uso educativo y de predimensionamiento. Las normas bolivianas deben verificarse en su edición vigente y con las condiciones reales del proyecto. No sustituye la memoria de cálculo, revisión sísmica, anclajes, confinamiento ni la firma de un profesional habilitado.</div></section></main></div>
-<footer><span>CARI · Herramienta de apoyo para ingeniería estructural</span><span>Unidades: kN, m, mm, MPa</span></footer>
+<footer class="footer"><span>CARI · Herramienta de apoyo para ingeniería estructural</span><span>Unidades: kN, m, mm, MPa</span></footer>
 <script>
 'use strict';
 const $=id=>document.getElementById(id); const n=id=>Number($(id).value); const fmt=(x,d=1)=>Number(x).toLocaleString('es-BO',{maximumFractionDigits:d,minimumFractionDigits:d});
-const Calculator={analyze(c){const L=c.L*1000,b=c.b*10,h=c.h*10,fc=c.fc,fy=c.fy;const self=c.self?24*c.b*c.h/100:0;const D=self,Lv=c.q;const qS=D+Lv,Pu=1.2*D+1.6*Lv+1.6*c.P,Ld=1.2*D+1.6*Lv;const Mu=(Ld*L*L/8+c.P*1.6*L/4),Vu=Pu*L/2;const d=h-c.cover-c.db/2,Ec=4700*Math.sqrt(fc),I=b*h**3/12;const Ascalc=Mu*1e6/(.9*fy*d),Asmin=Math.max(.25*Math.sqrt(fc)/fy*b*d,1.4/fy*b*d),Asreq=Math.max(Ascalc,Asmin);const area=Math.PI*c.db*c.db/4;let bars=Math.max(2,Math.ceil(Asreq/area));let asProv=bars*area;while(asProv<Asreq)asProv+=area,bars++;const rhoB=.85*fc/fy*(600/(600+fy));const Asmax=.75*rhoB*b*d;const clear=(b-2*c.cover-2*8-bars*c.db)/(bars-1||1);const stirrupDb=8,Av=2*Math.PI*stirrupDb**2/4,Vs=.75*Math.sqrt(fc)*b*d/1000;const sReq=Av*fy*d/(Vu*1000);const s=Math.min(300,d/2,Math.max(100,Math.floor(sReq/10)*10));const def=(5*qS*(L**4))/(384*Ec*I);const ok=asProv<=Asmax&&clear>=25&&d>0&&sReq>=100;return{L,b,h,d,Ec,I,self,qS,Ld,Mu,Vu,Ascalc,Asmin,Asreq,area,bars,asProv,Asmax,rhoB,clear,stirrupDb,Av,sReq,s,def,ok,flex:asProv<=Asmax,spacing:clear>=25,shear:sReq>=100};}};
-let cfg=null,res=null;function read(){cfg={L:n('L'),b:n('b'),h:n('h'),fc:n('fc'),fy:n('fy'),cover:n('cover'),db:n('db'),self:$('self').checked,P:n('P'),q:n('q')}}
-function calculate(){try{read();if(Object.values(cfg).some(v=>typeof v==='number'&&!Number.isFinite(v)||v<0))throw Error('Revisa los valores ingresados.');res=Calculator.analyze(cfg);$('error').className='error';render()}catch(e){$('error').textContent='Error: '+e.message;$('error').className='error show'}}
-function render(){const r=res;$('summary').textContent=`L = ${cfg.L} m · ${cfg.b} × ${cfg.h} cm · f'c = ${cfg.fc} MPa · fy = ${cfg.fy} MPa`;$('dims').textContent=`${cfg.b} × ${cfg.h} cm · ${r.bars}Ø${cfg.db} inferior`;$('state').textContent=r.ok?'SECCIÓN VERIFICA':'REVISAR DISEÑO';$('state').className='badge '+(r.ok?'':r.flex&&r.spacing?'warn':'bad');$('metrics').innerHTML=[['Mu',''+fmt(r.Mu/1e6,2),'kN·m','momento último'],['Vu',fmt(r.Vu/1000,2),'kN','cortante último'],['As prov.',fmt(r.asProv,0),'mm²',`${r.bars}Ø${cfg.db}`],['Deflexión',fmt(r.def,1),'mm','servicio'],['Estribos',`Ø${r.stirrupDb} c/${r.s}`,'mm','separación adoptada']].map(x=>`<article class="card metric"><label>${x[0]}</label><strong>${x[1]} <small>${x[2]}</small></strong><p>${x[3]}</p></article>`).join('');$('design').innerHTML=`<div class="table"><div><b>Acero flexión requerido</b>${fmt(r.Asreq,0)} mm²</div><div><b>Acero mínimo</b>${fmt(r.Asmin,0)} mm²</div><div><b>Acero provisto</b>${r.bars} Ø ${cfg.db} = ${fmt(r.asProv,0)} mm²</div><div><b>ρ provista / ρ máx.</b>${fmt(r.asProv/(r.b*r.d)*100,2)}% / ${fmt(r.Asmax/(r.b*r.d)*100,2)}%</div><div><b>Peralte efectivo d</b>${fmt(r.d,0)} mm</div><div><b>Separación libre barras</b>${fmt(r.clear,0)} mm ${r.spacing?'✓':'⚠'}</div><div><b>Estribado adoptado</b>2Ø${r.stirrupDb} c/${r.s} mm</div><div><b>Comprobaciones</b>${r.flex&&r.spacing&&r.shear?'Flexión · corte · detalle ✓':'Ver observaciones ⚠'}</div></div>`;drawAll()}
-function base(id,label,max){const c=$(id),x=c.getContext('2d'),w=c.width,h=c.height;x.clearRect(0,0,w,h);x.fillStyle='#fbfdff';x.fillRect(0,0,w,h);x.strokeStyle='#9fb3c8';x.lineWidth=1;x.beginPath();x.moveTo(45,h/2);x.lineTo(w-25,h/2);x.stroke();x.fillStyle='#627d98';x.font='12px sans-serif';x.textAlign='right';x.fillText(label,w-10,18);return{x,w,h,mid:h/2}}
-function drawModel(){const z=base('model','Cargas de servicio',1),x=z.x,w=z.w,y=z.mid,x0=65,x1=w-45;x.fillStyle='#d9eaf7';x.fillRect(x0,y-10,x1-x0,20);x.strokeStyle='#1769aa';x.strokeRect(x0,y-10,x1-x0,20);x.fillStyle='#91a7ba';[x0,x1].forEach(xx=>{x.beginPath();x.moveTo(xx,y+10);x.lineTo(xx-18,y+32);x.lineTo(xx+18,y+32);x.closePath();x.fill()});x.fillStyle='#c53030';x.font='bold 13px sans-serif';x.textAlign='center';for(let i=0;i<9;i++){let xx=x0+35+i*(x1-x0-70)/8;x.beginPath();x.moveTo(xx,y-52);x.lineTo(xx,y-13);x.stroke();x.beginPath();x.moveTo(xx,y-13);x.lineTo(xx-5,y-22);x.lineTo(xx+5,y-22);x.fill()}x.fillStyle='#627d98';x.fillText(`q = ${fmt(res.qS,1)} kN/m`,(x0+x1)/2,y-62);x.fillText(`L = ${cfg.L} m`,(x0+x1)/2,y+58)}
-function drawSection(){const z=base('section','Armadura adoptada',1),x=z.x,w=z.w,h=z.h,scale=Math.min((w-170)/res.b,(h-100)/res.h),bw=res.b*scale,bh=res.h*scale,xx=(w-bw)/2,yy=(h-bh)/2;x.fillStyle='#e5edf4';x.fillRect(xx,yy,bw,bh);x.strokeStyle='#1769aa';x.lineWidth=2;x.strokeRect(xx,yy,bw,bh);const count=res.bars;x.fillStyle='#c53030';for(let i=0;i<count;i++){const cx=xx+bw*(i+1)/(count+1);x.beginPath();x.arc(cx,yy+bh-18,Math.max(4,cfg.db*scale/2),0,Math.PI*2);x.fill()}x.fillStyle='#1769aa';x.font='bold 13px sans-serif';x.textAlign='center';x.fillText(`${count}Ø${cfg.db} inferior`,w/2,yy+bh+35);x.fillStyle='#627d98';x.font='11px sans-serif';x.fillText(`recubrimiento ${cfg.cover} mm`,w/2,yy+bh+52)}
-function drawDiagram(id,label,peak,type){const z=base(id,label,peak),x=z.x,w=z.w,h=z.h,x0=45,x1=w-25,mid=h/2;x.strokeStyle=type==='M'?'#7950b8':'#0e7490';x.lineWidth=3;x.beginPath();for(let i=0;i<=60;i++){const t=i/60,xx=x0+t*(x1-x0),val=type==='M'?peak*(1-4*(t-.5)**2):peak*(1-2*t),yy=mid-(val/peak)*(h*.34);i?x.lineTo(xx,yy):x.moveTo(xx,yy)}x.stroke();x.fillStyle='#627d98';x.font='11px sans-serif';x.textAlign='left';x.fillText('0',x0-16,mid+4);x.textAlign='right';x.fillText(`${fmt(peak,type==='M'?2:2)}`,x1,mid-(h*.34)+4)}function drawAll(){drawModel();drawSection();drawDiagram('moment','Mu (kN·m)',res.Mu/1e6,'M');drawDiagram('shear','Vu (kN)',res.Vu/1000,'V')}
-$('calc').onclick=calculate;$('reset').onclick=()=>{[['L',6],['b',30],['h',55],['fc',28],['fy',420],['cover',40],['db',16],['P',15],['q',10]].forEach(([i,v])=>$(i).value=v);$('self').checked=true;calculate()};document.querySelectorAll('input,select').forEach(e=>e.addEventListener('change',calculate));calculate();
-</script></body></html>
+const Calculator={
+  analyze(c){
+    const L=c.L*1000,b=c.b*10,h=c.h*10,fc=c.fc,fy=c.fy;
+    const self=c.self?24*c.b*c.h/100:0;
+    const D=self,Lv=c.q;
+    const qS=D+Lv;
+    const Pu=1.2*D+1.6*Lv+1.6*c.P;
+    const Ld=1.2*D+1.6*Lv;
+    const Mu=(Ld*L*L/8)+(c.P*1.6*L/4);
+    const Vu=Pu*L/2;
+    const d=h-c.cover-c.db/2;
+    const Ec=4700*Math.sqrt(fc),I=b*h*h*h/12;
+    const Ascalc=Mu*1e6/(0.9*fy*d);
+    const Asmin=Math.max(0.25*Math.sqrt(fc)/fy*b*d,1.4/fy*b*d);
+    const Asreq=Math.max(Ascalc,Asmin);
+    const area=Math.PI*c.db*c.db/4;
+    let bars=Math.max(2,Math.ceil(Asreq/area));
+    let asProv=bars*area;
+    while(asProv<Asreq){asProv+=area;bars++;}
+    const rhoB=0.85*fc/fy*(600/(600+fy));
+    const Asmax=0.75*rhoB*b*d;
+    const clear=(b-2*c.cover-2*8-bars*c.db)/(bars-1||1);
+    const stirrupDb=8,Av=2*Math.PI*stirrupDb*stirrupDb/4,Vs=0.75*Math.sqrt(fc)*b*d/1000;
+    const sReq=Av*fy*d/(Vu*1000);
+    const s=Math.min(300,Math.max(100,Math.round(sReq/10)*10));
+    const def=(5*qS*(L**4))/(384*Ec*I);
+    const ok=asProv<=Asmax&&clear>=25&&d>0&&sReq>=100;
+    return{L,b,h,d,Ec,I,self,qS,Ld,Mu,Vu,Ascalc,Asmin,Asreq,area,bars,asProv,Asmax,rhoB,clear,stirrupDb,Av,sReq,s,def,ok,flex:asProv<=Asmax,spacing:clear>=25,shear:sReq>=100};
+  }
+};
+let cfg=null,res=null;
+function read(){cfg={L:n('L'),b:n('b'),h:n('h'),fc:n('fc'),fy:n('fy'),cover:n('cover'),db:n('db'),self:$('self').checked,P:n('P'),q:n('q')}}
+function calculate(){
+  try{
+    read();
+    if(Object.values(cfg).some(v=>typeof v==='number'&&!Number.isFinite(v)||v<0))throw Error('Revisa los valores ingresados.');
+    res=Calculator.analyze(cfg);
+    $('error').className='error';
+    render();
+  }catch(e){
+    $('error').textContent='Error: '+e.message;$('error').className='error show';
+  }
+}
+function render(){
+  const r=res;
+  $('summary').textContent=`L = ${cfg.L} m · ${cfg.b} × ${cfg.h} cm · f'c = ${cfg.fc} MPa · fy = ${cfg.fy} MPa`;
+  $('dims').textContent=`${cfg.b} × ${cfg.h} cm · ${r.bars}Ø${cfg.db} inferior`;
+  $('state').textContent=r.ok?'SECCIÓN VERIFICA':'REVISAR DISEÑO';
+  $('state').className='badge '+(r.ok?'':(r.flex&&r.spacing?'warn':'bad'));
+  $('metrics').innerHTML=[
+    ['Mu',''+fmt(r.Mu/1e6,2),'kN·m','momento último'],
+    ['Vu',fmt(r.Vu/1000,2),'kN','cortante último'],
+    ['As prov.',fmt(r.asProv,0),'mm²',`${r.bars}Ø${cfg.db}`],
+    ['Deflexión',fmt(r.def,1),'mm','servicio'],
+    ['Estribos',`Ø${r.stirrupDb} c/${r.s}`,'mm','separación adoptada']
+  ].map(x=>`<article class="card metric"><label>${x[0]}</label><strong>${x[1]} <small>${x[2]}</small></strong><p>${x[3]}</p></article>`).join('');
+  $('design').innerHTML=`<div class="table"><div><b>Acero flexión requerido</b>${fmt(r.Asreq,0)} mm²</div><div><b>Acero mínimo</b>${fmt(r.Asmin,0)} mm²</div><div><b>Acero provisto</b>${r.bars} Ø ${cfg.db} = ${fmt(r.asProv,0)} mm²</div><div><b>ρ provista / ρ máx.</b>${fmt(r.asProv/(r.b*r.d)*100,2)}% / ${fmt(r.Asmax/(r.b*r.d)*100,2)}%</div><div><b>Peralte efectivo d</b>${fmt(r.d,0)} mm</div><div><b>Separación libre barras</b>${fmt(r.clear,0)} mm ${r.spacing?'✓':'⚠'}</div><div><b>Estribado adoptado</b>2Ø${r.stirrupDb} c/${r.s} mm</div><div><b>Comprobaciones</b>${r.flex&&r.spacing&&r.shear?'Flexión · corte · detalle ✓':'Ver observaciones ⚠'}</div></div>`;
+  drawAll();
+}
+function base(id,label){
+  const c=$(id),x=c.getContext('2d'),w=c.width,h=c.height;
+  x.clearRect(0,0,w,h);
+  x.fillStyle='#071922';
+  x.fillRect(0,0,w,h);
+  x.strokeStyle='#224866';
+  x.lineWidth=1;
+  x.beginPath();x.moveTo(45,h/2);x.lineTo(w-25,h/2);x.stroke();
+  x.fillStyle='#9bb0c2';
+  x.font='12px sans-serif';
+  x.textAlign='right';
+  x.fillText(label,w-10,18);
+  return{x,w,h,mid:h/2};
+}
+function drawModel(){
+  const z=base('model','Cargas de servicio'),x=z.x,w=z.w,y=z.mid,x0=65,x1=w-45;
+  x.fillStyle='#1d3347';x.fillRect(x0,y-10,x1-x0,20);x.strokeStyle='#5aa9ff';x.strokeRect(x0,y-10,x1-x0,20);
+  x.fillStyle='#9bb0c2';
+  [x0,x1].forEach(xx=>{x.beginPath();x.moveTo(xx,y+10);x.lineTo(xx-18,y+32);x.lineTo(xx+18,y+32);x.closePath();x.fill();});
+  x.fillStyle='#ff7b79';x.font='bold 13px sans-serif';x.textAlign='center';
+  for(let i=0;i<9;i++){let xx=x0+35+i*(x1-x0-70)/8;x.beginPath();x.moveTo(xx,y-52);x.lineTo(xx,y-13);x.stroke();x.beginPath();x.moveTo(xx,y-13);x.lineTo(xx-5,y-22);x.lineTo(xx+5,y-22);x.fill();}
+  x.fillStyle='#dfeaf6';x.fillText(`q = ${fmt(res.qS,1)} kN/m`,(x0+x1)/2,y-62);x.fillText(`L = ${cfg.L} m`,(x0+x1)/2,y+58);
+}
+function drawSection(){
+  const z=base('section','Armadura adoptada'),x=z.x,w=z.w,h=z.h,scale=Math.min((w-170)/res.b,(h-100)/res.h),bw=res.b*scale,bh=res.h*scale,xx=(w-bw)/2,yy=(h-bh)/2;
+  x.fillStyle='#20384d';x.fillRect(xx,yy,bw,bh);x.strokeStyle='#7ec7ff';x.lineWidth=2;x.strokeRect(xx,yy,bw,bh);
+  const count=res.bars;x.fillStyle='#ff7b79';
+  for(let i=0;i<count;i++){const cx=xx+bw*(i+1)/(count+1);x.beginPath();x.arc(cx,yy+bh-18,Math.max(4,cfg.db*scale/2),0,Math.PI*2);x.fill();}
+  x.fillStyle='#dfeaf6';x.font='bold 13px sans-serif';x.textAlign='center';x.fillText(`${count}Ø${cfg.db} inferior`,w/2,yy+bh+35);x.fillStyle='#a8bfd1';x.font='11px sans-serif';x.fillText(`recubrimiento ${cfg.cover} mm`,w/2,yy+bh+52);
+}
+function drawDiagram(id,label,peak,type){
+  const z=base(id,label),x=z.x,w=z.w,h=z.h,x0=45,x1=w-25,mid=h/2;
+  x.strokeStyle=type==='M'?'#c3a6ff':'#52d1d3';x.lineWidth=3;x.beginPath();
+  for(let i=0;i<=60;i++){
+    const t=i/60,xx=x0+t*(x1-x0),val=type==='M'?peak*(1-4*(t-.5)**2):peak*(1-2*t),yy=mid-(val/peak)*(h*.34);
+    i?x.lineTo(xx,yy):x.moveTo(xx,yy);
+  }
+  x.stroke();
+  x.fillStyle='#dfeaf6';x.font='11px sans-serif';x.textAlign='left';x.fillText('0',x0-16,mid+4);x.textAlign='right';x.fillText(`${fmt(peak,2)}`,x1,mid-(h*.34)+4);
+}
+function drawAll(){drawModel();drawSection();drawDiagram('moment','Mu (kN·m)',res.Mu/1e6,'M');drawDiagram('shear','Vu (kN)',res.Vu/1000,'V')}
+$('calc').onclick=calculate;
+$('reset').onclick=()=>{[['L',6],['b',30],['h',55],['fc',28],['fy',420],['cover',40],['db',16],['P',15],['q',10]].forEach(([i,v])=>$(i).value=v);$('self').checked=true;calculate()};
+document.querySelectorAll('input,select').forEach(e=>e.addEventListener('change',calculate));
+calculate();
+</script>
+</body>
+</html>
