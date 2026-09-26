@@ -1,323 +1,558 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informe Proyecto Sísmico</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Body y fondo */
-        body {
-            font-family: 'Arial', sans-serif;
-            background: url('FONDO REVIT.png') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
-            line-height: 1.6;
-            padding: 40px 20px;
-            background-attachment: fixed;
-            background-position: center center;
-            background-size: cover;
-            overflow-x: hidden;
-        }
-
-        /* Header */
-        header {
-            background-color: rgba(0, 77, 153, 0.8);
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-            border-radius: 10px;
-            margin-bottom: 40px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
-            transform: translateY(-50px);
-            animation: fadeIn 1s ease-out forwards;
-        }
-
-        header h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            color: #ffcc00;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        header nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            padding: 10px 0;
-            margin-top: 20px;
-            animation: slideUp 1s ease-out forwards;
-        }
-
-        header nav ul li {
-            font-size: 1.2em;
-            position: relative;
-        }
-
-        header nav ul li a {
-            text-decoration: none;
-            color: white;
-            padding: 10px 20px;
-            background-color: rgba(255, 204, 0, 0.7);
-            border-radius: 5px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        header nav ul li a:hover {
-            background-color: #ffcc00;
-            color: #003366;
-            transform: translateY(-5px);
-        }
-
-        /* Animación de entrada del contenido */
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideUp {
-            0% {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Main section */
-        main {
-            max-width: 1100px;
-            margin: 0 auto;
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
-            transform: translateY(30px);
-            animation: slideUp 1s ease-out forwards;
-        }
-
-        main h2 {
-            font-size: 2.2em;
-            color: #ffcc00;
-            margin-bottom: 20px;
-            text-align: center;
-            text-transform: uppercase;
-            border-bottom: 3px solid #ffcc00;
-            padding-bottom: 10px;
-        }
-
-        section {
-            margin-bottom: 40px;
-            opacity: 0;
-            animation: fadeIn 1s ease-out forwards;
-        }
-
-        section h3 {
-            font-size: 1.8em;
-            margin-bottom: 15px;
-            color: #ffcc00;
-            text-transform: uppercase;
-            border-bottom: 2px solid #ffcc00;
-            padding-bottom: 10px;
-            letter-spacing: 1px;
-            transition: color 0.3s ease, letter-spacing 0.3s ease;
-        }
-
-        section h3:hover {
-            color: #ffdd00;
-            letter-spacing: 3px;
-        }
-
-        section p {
-            font-size: 1.1em;
-            color: #ddd;
-            margin-bottom: 15px;
-            line-height: 1.6;
-            transition: color 0.3s ease;
-        }
-
-        section p:hover {
-            color: #ffcc00;
-        }
-
-        section ul {
-            padding-left: 20px;
-            margin-bottom: 20px;
-        }
-
-        section ul li {
-            font-size: 1.1em;
-            color: #ddd;
-            margin-bottom: 10px;
-            transition: color 0.3s ease;
-        }
-
-        section ul li:hover {
-            color: #ffcc00;
-        }
-
-        /* Botón de Volver */
-        .back-btn {
-            display: inline-block;
-            background-color: #ffcc00;
-            color: #003366;
-            font-size: 1.3em;
-            font-weight: bold;
-            padding: 15px 30px;
-            border-radius: 5px;
-            margin-top: 40px;
-            text-align: center;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            transform: translateY(10px);
-            animation: fadeIn 1s ease-out forwards;
-        }
-
-        .back-btn:hover {
-            background-color: #003366;
-            color: #ffcc00;
-            transform: translateY(0);
-        }
-
-        /* Footer */
-        footer {
-            background-color: rgba(0, 51, 102, 0.8);
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 50px;
-            border-radius: 10px;
-            animation: fadeIn 1.5s ease-out forwards;
-        }
-
-        footer a {
-            color: #ffcc00;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-
-        footer a:hover {
-            color: #003366;
-        }
-
-        /* Estilos para pantallas pequeñas */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2em;
-            }
-
-            header nav ul {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            main {
-                padding: 20px;
-            }
-
-            main h2 {
-                font-size: 1.8em;
-            }
-
-            section h3 {
-                font-size: 1.6em;
-            }
-
-            section p {
-                font-size: 1em;
-            }
-
-            .back-btn {
-                padding: 12px 25px;
-                font-size: 1.1em;
-            }
-        }
-    </style>
-</head>
+<!doctype html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#193d6c"><meta name="description" content="Laboratorio de hormigón armado: cargas, diagramas y predimensionamiento de vigas, columnas y losas unidireccionales."><title>CARI · Hormigón armado</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23193d6c'/%3E%3Cpath d='M7 6h18v20H7z' stroke='%23fff' fill='none' stroke-width='2'/%3E%3Cg fill='%23ffb44a'%3E%3Ccircle cx='11' cy='10' r='2'/%3E%3Ccircle cx='21' cy='10' r='2'/%3E%3Ccircle cx='11' cy='22' r='2'/%3E%3Ccircle cx='21' cy='22' r='2'/%3E%3C/g%3E%3C/svg%3E"><style>:root{color-scheme:light;--navy:#193d6c;--blue:#1767b8;--ink:#243548;--muted:#607085;--line:#c8d1dc;--bg:#e7ebf0;--cyan:#007e9d;--orange:#b76708;--purple:#8052b9;--green:#138166;--red:#c43e48;font-family:Tahoma,"Segoe UI",Arial,sans-serif;font-size:16px;color:var(--ink);background:var(--bg)}*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button,select,input[type=checkbox],input[type=range],summary{cursor:pointer}button,a,input,select,summary{outline-offset:3px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #1d84db}button{color:var(--ink);border:1px solid #abb8c9;border-radius:3px;padding:8px 12px;background:linear-gradient(#fff,#edf0f5);font-size:.875rem;min-height:36px}button:hover{background:#e2effd;border-color:#4a87c1}button:active{transform:translateY(1px)}button.primary{background:var(--blue);color:#fff;border-color:#125493;font-weight:700}button.primary:hover{background:#14568f}button:disabled{opacity:.6;cursor:default}a{color:#155e9e}.titlebar{background:linear-gradient(100deg,#16375f,#285b91);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 18px;min-height:46px}.titlebar strong{font-size:1rem;letter-spacing:.03em}.titlebar strong span{font-weight:400;margin-left:14px;letter-spacing:0;border-left:1px solid #7192b5;padding-left:14px}.brandmark{font-size:24px;color:#ffba64}.titlemeta{margin-left:auto;color:#d7e5f5;font-size:.8125rem}.menubar{display:flex;gap:4px;padding:2px 12px;background:#f6f7f9;border-bottom:1px solid #bcc9d5;flex-wrap:wrap}.menubar a,.menubar button{font-size:.875rem;text-decoration:none;color:#35465b;padding:7px 10px;border:0;background:none;min-height:30px}.menubar a:hover,.menubar button:hover{background:#e1eaf5}.toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px 16px;background:#f1f3f6;border-bottom:1px solid var(--line);flex-wrap:wrap}.modules{display:flex;gap:0;border:1px solid #b7c2d0;border-radius:4px;overflow:hidden}.modules button{min-width:112px;border:0;border-right:1px solid #b7c2d0;border-radius:0;padding:10px 16px}.modules button:last-child{border:0}.modules button[aria-selected=true]{background:#e0ebf8;box-shadow:inset 0 -3px var(--blue);color:#144c80;font-weight:700}.modules button span{font-size:20px;vertical-align:middle;margin-right:4px}.actions{display:flex;gap:8px}.scope{background:#dbe5ef;display:flex;justify-content:space-between;gap:8px;padding:7px 18px;font-size:.8125rem;color:#3d536b;flex-wrap:wrap}.workspace{display:grid;grid-template-columns:296px minmax(0,1fr);align-items:start;max-width:1920px;margin:auto}.input-pane{background:#f5f6f8;border:1px solid var(--line);border-top:0;border-left:0;min-width:0}.pane-title,.panel-title{display:flex;justify-content:space-between;align-items:center;gap:10px;background:linear-gradient(#f7f9fc,#e8edf3);padding:10px 13px;border-bottom:1px solid var(--line);min-height:41px}.pane-title{font-size:.75rem;font-weight:bold;letter-spacing:.05em;color:#526379;background:#e0e6ee}.control-section{padding:15px 14px;border-bottom:1px solid var(--line)}h2{font-size:.875rem;font-weight:700;margin:0}h3{font-size:.875rem;margin:0}.step{display:inline-flex;justify-content:center;align-items:center;width:21px;height:21px;border:1px solid #b0c1d6;color:#19568f;background:#e4ecf7;border-radius:3px;margin-right:6px;font-size:.75rem}.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px 10px;margin-top:12px}label{display:flex;flex-direction:column;gap:6px;font-size:.875rem;line-height:1.35}.full{margin-top:13px}input:not([type=checkbox]):not([type=range]),select{min-width:0;width:100%;min-height:35px;background:#fff;border:1px solid #aebdcd;border-radius:2px;padding:6px 8px;color:#223b52;font-size:.875rem}input[type=number]{font-variant-numeric:tabular-nums}input:disabled{background:#e7ebef!important;color:#606c7d!important}.hint,.caption,.small{font-size:.75rem;color:var(--muted);line-height:1.6}.hint{margin:9px 0 0}.check{flex-direction:row;align-items:flex-start;margin:14px 0 10px;font-size:.875rem}.check input{width:16px;height:16px;margin:2px 5px 0 0;accent-color:var(--blue)}.derived{margin-top:12px;font-size:.75rem;line-height:1.8;background:#e9eef5;padding:8px 10px;border-left:2px solid #90accb}.load-card{margin-top:12px;background:white;border:1px solid #ccd5e1;border-left:3px solid #dfa44a;padding:10px;border-radius:3px}.load-head{display:flex;align-items:center;gap:6px}.load-head strong{font-size:.75rem;white-space:nowrap}.load-head select{padding:4px;min-height:30px}.remove-load{padding:1px 6px;min-height:28px;color:#ab3842;border:0;background:transparent;font-size:20px}.load-card .fields{gap:8px;margin-top:8px}.load-card label{font-size:.75rem}.load-type{margin-top:8px}.add-button{margin-top:12px;width:100%;background:#edf4fb;border-style:dashed;color:#155e9e}.main-pane{padding:18px;min-width:0}.result-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:15px}.eyebrow{font-size:.75rem;letter-spacing:.08em;color:#66778c;margin:0 0 4px}h1{font-size:1.3rem;font-weight:600;margin:0}.state{font-size:.75rem;background:#e0eee8;color:#21664a;border:1px solid #bbd5c8;padding:7px 10px;border-radius:3px;max-width:240px;text-align:center}.state.warn{background:#fff2d8;border-color:#ddc590;color:#805214}.state.bad{background:#fbe7e9;color:#a12a36;border-color:#dfb4ba}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:15px}.metric{background:white;border:1px solid var(--line);border-top:3px solid var(--blue);padding:12px 14px;min-width:0}.metric:nth-child(2){border-top-color:var(--cyan)}.metric:nth-child(3){border-top-color:var(--green)}.metric:nth-child(4){border-top-color:var(--orange)}.metric label{font-size:.75rem;color:var(--muted);display:block}.metric strong{font-size:1.5rem;display:block;margin:6px 0;font-family:Arial,sans-serif;font-weight:500;white-space:nowrap}.metric strong small{font-size:.8rem;font-weight:400;color:#687a90}.metric p{font-size:.75rem;margin:0;color:var(--muted)}.panel{background:white;border:1px solid var(--line);min-width:0;border-radius:3px;overflow:hidden}.drawing-grid{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:14px;margin-bottom:14px}.views{display:grid;gap:14px;min-width:0}.panel-title .small{font-size:.75rem}.inline-control{display:flex;align-items:center;gap:7px;flex-direction:row;max-width:65%;font-size:.75rem}.inline-control select{font-size:.75rem;min-height:28px;padding:4px;max-width:260px}canvas{display:block;width:100%;max-width:100%;height:auto}#plan-canvas{height:168px}#model-canvas{height:228px}#section-canvas{height:236px}#interaction-canvas{height:290px}.legend{display:flex;flex-wrap:wrap;gap:15px;padding:0 14px 7px;font-size:.75rem;color:var(--muted)}.swatch{display:inline-block;width:9px;height:9px;margin-right:5px;vertical-align:middle;border-radius:1px}.swatch.orange{background:var(--orange)}.swatch.red{background:var(--red)}.swatch.blue{background:#457fbb}.swatch.purple{background:var(--purple)}.swatch.cyan{background:var(--cyan)}.swatch.green{background:var(--green)}.caption{padding:0 14px;margin:8px 0 12px}.design-results{padding:0 14px}.rebar-row{padding:12px 0;border-top:1px solid #dbe2eb}.rebar-row .row-head{display:flex;justify-content:space-between;gap:8px;font-size:.75rem;color:#69788c;margin-bottom:6px}.rebar-row strong{font-size:1rem;color:#215885}.rebar-row p{font-size:.75rem;margin:5px 0 0;line-height:1.55;color:#65778a}.ok-tag{color:#23745d}.bad-tag{color:#ab3344}.design-note{font-size:.75rem;padding:10px 14px;background:#edf2f8;color:#566d87;line-height:1.6;margin-top:12px}.diagrams-panel{margin-bottom:14px}.diagram-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:14px 8px 0}.plot{min-width:0;border-right:1px solid #e2e7ee}.plot:last-child{border:0}.plot h3{padding:0 8px;display:flex;align-items:center;flex-wrap:wrap;gap:3px}.plot h3 span{margin-left:auto;color:#6b7e93;font-size:.75rem;font-weight:400}.plot canvas{height:180px}.cut-control{background:#f2f6fa;display:flex;gap:16px;align-items:center;padding:11px 14px;border-top:1px solid #d9e1eb}.cut-control label{font-size:.75rem;min-width:130px}.cut-control strong{font-size:.875rem;color:#205b91}.cut-control input{min-width:40px;flex:1;accent-color:var(--blue)}.side-choice{min-width:85px!important}.side-choice select{font-size:.75rem;min-height:28px}.cut-readout{display:flex;gap:10px 25px;padding:13px 14px;flex-wrap:wrap;font-size:.875rem}.cut-readout span{color:#6a7989}.cut-readout b{color:#294864;font-weight:600}.interaction-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;align-items:center}.interaction-grid>div{padding:18px;font-size:.875rem;line-height:1.7}.bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:.875rem;font-variant-numeric:tabular-nums}th,td{text-align:right;padding:10px 12px;border-bottom:1px solid #e1e6ed;white-space:nowrap}th:first-child,td:first-child{text-align:left}th{font-weight:400;color:#60748a;font-size:.75rem;background:#f8fafc}.checks{padding:8px 14px}.check-row{font-size:.8125rem;display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid #e3e9f0}.check-row:last-child{border:0}.check-row span{color:#5f7389}.check-row strong{text-align:right;font-weight:400}.notes{background:#fff7e7;border:1px solid #e0c899;border-left:3px solid #c69a40;padding:12px 16px;margin:12px 0;border-radius:3px;color:#765221;font-size:.8125rem;line-height:1.7}.notes h2{margin-bottom:4px}.notes p{margin:4px 0}.method{background:#f9fbfd;border:1px solid var(--line);margin:14px 0;border-radius:3px}.method summary{padding:14px;font-size:.875rem;color:#285a86}.method-content{padding:4px 20px 20px;max-width:1000px;line-height:1.7}.method h3{font-size:1rem;margin-top:18px}.method p,.method li{font-size:1rem}.method ul{padding-left:23px}.formula{background:#eaf0f7;padding:14px;font-family:Arial,sans-serif;font-size:.9375rem;line-height:1.85}footer{display:flex;gap:20px;justify-content:space-between;background:#dce4ed;border-top:1px solid #b4c4d6;padding:9px 18px;font-size:.75rem;color:#46617d}.error{background:#ffe6e9;border:1px solid #d78d97;padding:15px;color:#9c263b;margin:12px 18px;line-height:1.5}.invalid-results{opacity:.35;pointer-events:none}.stale-results .state{background:#fff2d8;color:#805214} [hidden]{display:none!important}@media(min-width:1600px){.workspace{grid-template-columns:320px minmax(0,1fr)}.drawing-grid{grid-template-columns:minmax(0,1fr) 360px}.fields{gap:14px}.main-pane{padding:22px}.titlebar{padding-left:22px}#plan-canvas{height:190px}#model-canvas{height:240px}}@media(max-width:1180px){.workspace{grid-template-columns:270px minmax(0,1fr)}.drawing-grid{grid-template-columns:minmax(0,1fr) 270px}.main-pane{padding:12px}.metrics{gap:6px}.metric{padding:10px}.metric strong{font-size:1.2rem}.diagram-grid{grid-template-columns:1fr}.plot{border-right:0;border-bottom:1px solid #d9e1eb;padding-top:8px}.plot canvas{height:156px}.bottom-grid{grid-template-columns:1fr}.interaction-grid{grid-template-columns:1fr}.cut-control{gap:8px}}@media(max-width:950px){.drawing-grid{grid-template-columns:1fr}.design-pane{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.design-pane .panel-title,.design-note{grid-column:1/-1}.design-results{align-self:center}.titlemeta{display:none}.scope{font-size:.75rem}.actions{flex-wrap:wrap}.menubar{gap:0}.menubar a{padding:7px 8px}}@media(max-width:680px){.workspace{display:flex;flex-direction:column}.input-pane{width:100%;border-right:0}.main-pane{width:100%;padding:12px}.input-pane form{display:grid;grid-template-columns:1fr 1fr}.control-section{padding:13px;min-width:0}.control-section:last-child{grid-column:1/-1}#load-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}.load-card{margin-top:10px}.fields{grid-template-columns:1fr 1fr}.titlebar strong{font-size:.9375rem}.titlebar strong span{margin-left:6px;padding-left:8px}.toolbar{padding:10px;gap:9px}.modules{width:100%}.modules button{flex:1;min-width:0}.actions{width:100%}.actions button{flex:1;padding:8px}.scope{padding:8px 12px}.metrics{grid-template-columns:repeat(2,1fr)}.result-heading{align-items:flex-start}h1{font-size:1.15rem}.state{max-width:140px}.bottom-grid{grid-template-columns:1fr}.menubar a,.menubar button{font-size:.75rem;padding:7px}.cut-control{flex-wrap:wrap}.cut-control input{order:3;width:100%;flex:auto}.side-choice{margin-left:auto}.titlebar{padding:8px 12px}.design-pane{grid-template-columns:1fr 1fr}.panel-title{flex-wrap:wrap}.inline-control{max-width:100%}footer{flex-direction:column;gap:5px}}@media(max-width:420px){.input-pane form{display:block}#load-list{display:block}.design-pane{display:block}.result-heading{flex-wrap:wrap}.metrics .metric strong{font-size:1.25rem}.menubar{padding:2px 4px}.actions button{font-size:.75rem}#section-canvas{height:220px}}@media print{body{background:white}.titlebar{background:white;color:#183d6a}.toolbar,.menubar,.input-pane,.scope,.cut-control,footer,.actions,.method summary{display:none}.workspace{display:block}.main-pane{padding:0}.panel,.metric,.notes{break-inside:avoid}.metrics{grid-template-columns:repeat(4,1fr)}.drawing-grid{grid-template-columns:minmax(0,1fr) 280px}.diagram-grid{grid-template-columns:repeat(3,1fr)}.bottom-grid{grid-template-columns:1fr 1fr}.method{border:0}.method:not([open]){display:none}canvas{max-height:230px}.state{display:block}.invalid-results{display:none}.error{display:block}a{color:inherit}.titlemeta{display:none}}
+</style></head>
 <body>
-    <header>
-        <h1>Automatización en el Diseño Sísmico de Edificaciones</h1>
-        <nav>
-            <ul>
-                <li><a href="#generalidades">Generalidades</a></li>
-                <li><a href="#antecedentes">Antecedentes</a></li>
-                <li><a href="#planteamiento">Planteamiento del Problema</a></li>
-                <li><a href="#objetivos">Objetivos</a></li>
-                <li><a href="#justificaciones">Justificaciones</a></li>
-                <li><a href="#alcance">Alcance y Limitaciones</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <section id="generalidades">
-            <h2>1. Generalidades</h2>
-            <h3>1.1 Introducción</h3>
-            <p>El diseño de edificaciones con análisis sísmico es fundamental para asegurar la integridad estructural ante eventos sísmicos. En este proyecto, se busca automatizar el proceso de diseño sísmico, utilizando herramientas computacionales avanzadas que optimicen el cálculo y la simulación de la respuesta sísmica.</p>
-
-            <h3>1.2 Antecedentes</h3>
-            <p>En muchas regiones sísmicamente activas, como Santa Cruz y Cochabamba en Bolivia, el diseño estructural sísmico es un requisito esencial para la seguridad de los habitantes. Sin embargo, los métodos tradicionales de cálculo son lentos y propensos a errores. Este proyecto aborda esa limitación mediante la automatización de los cálculos sísmicos, mejorando la eficiencia del diseño.</p>
-        </section>
-
-        <section id="planteamiento">
-            <h2>1.3 Planteamiento del Problema</h2>
-            <h3>1.3.1 Identificación del Problema</h3>
-            <p>El diseño sísmico manual o mediante herramientas tradicionales es ineficiente y está expuesto a errores humanos. La necesidad de automatizar este proceso, para garantizar diseños más rápidos, precisos y seguros, es crítica en la ingeniería estructural moderna.</p>
-        </section>
-
-        <section id="objetivos">
-            <h2>1.4 Objetivos</h2>
-            <h3>1.4.1 Objetivo General</h3>
-            <p>Crear una plataforma computacional que automatice el análisis sísmico de estructuras de hormigón armado, garantizando mayor precisión y reduciendo el tiempo de diseño.</p>
-
-            <h3>1.4.2 Objetivos Específicos</h3>
-            <ul>
-                <li>Automatizar el cálculo de fuerzas sísmicas y su distribución en la estructura.</li>
-                <li>Desarrollar una herramienta para realizar simulaciones rápidas y detalladas de la respuesta sísmica.</li>
-                <li>Integrar el análisis sísmico y el diseño estructural en un flujo de trabajo automatizado y eficiente.</li>
-            </ul>
-        </section>
-
-        <section id="justificaciones">
-            <h2>1.5 Justificaciones</h2>
-            <h3>1.5.1 Justificación Técnica</h3>
-            <p>La automatización de los cálculos sísmicos reduce significativamente el riesgo de errores y mejora la precisión del diseño estructural. Esto se traduce en edificaciones más seguras y confiables.</p>
-
-            <h3>1.5.2 Justificación Económica</h3>
-            <p>El uso de tecnologías automatizadas permite reducir los costos asociados a los tiempos de cálculo y revisión, lo cual resulta en un ahorro económico a largo plazo.</p>
-        </section>
-
-        <section id="alcance">
-            <h2>1.6 Alcance y Limitaciones</h2>
-            <h3>1.6.1 Alcance</h3>
-            <p>Este proyecto tiene como alcance el desarrollo de una plataforma computacional específica para el análisis sísmico de edificaciones de hormigón armado, considerando las normativas y especificaciones sísmicas vigentes en Bolivia.</p>
-
-            <h3>1.6.2 Limitaciones</h3>
-            <p>El alcance se limita a estructuras de hormigón armado. Otros materiales, como acero o madera, no están incluidos en este proyecto, ni se contemplan simulaciones de eventos sísmicos extremadamente complejos o raros.</p>
-        </section>
-
-        <a href="temario.html" class="back-btn">Volver</a>
-    </main>
-
-    <footer>
-        <p>Proyecto de Diseño Sísmico © 2025 | Civil Alejandro Cari</p>
-        <a href="https://www.linkedin.com" target="_blank">Conéctate conmigo</a>
-    </footer>
-</body>
-</html>
+<header class="titlebar"><div class="brandmark" aria-hidden="true">▥</div><strong>CARI <span>Hormigón armado</span></strong><span class="titlemeta">Laboratorio de estructuras · 01</span></header>
+<nav class="menubar" aria-label="Herramientas"><a href="#model-controls">Definir modelo</a><a href="#loads-panel">Asignar cargas</a><a href="#diagrams">Ver diagramas</a><a href="#design-panel">Diseñar sección</a><button id="method-button">Método y alcance</button></nav>
+<div class="toolbar"><div class="modules" role="tablist" aria-label="Elemento estructural"><button role="tab" aria-selected="true" data-module="beam"><span aria-hidden="true">━</span> Viga</button><button role="tab" aria-selected="false" data-module="column"><span aria-hidden="true">▥</span> Columna</button><button role="tab" aria-selected="false" data-module="slab"><span aria-hidden="true">▱</span> Losa</button></div><div class="actions"><button id="example-button" title="Cargar el ejemplo inicial del módulo">Ejemplo</button><button id="print-button">Imprimir cálculo</button><button class="primary" id="calculate-button"><span aria-hidden="true">▶</span> Analizar y diseñar</button></div></div>
+<div class="scope"><span>ACI 318M-14 · selección de criterios</span><span>Predimensionamiento didáctico · elementos aislados · kN, m, MPa</span></div>
+<div id="error" class="error" role="alert" hidden></div>
+<div class="workspace">
+<aside class="input-pane" id="model-controls">
+<div class="pane-title"><span>EXPLORADOR DEL MODELO</span><span class="small">SI</span></div>
+<form id="model-form" novalidate>
+<section class="control-section"><h2><span class="step">1</span> Geometría y apoyos</h2><p id="element-description" class="hint"></p><div class="fields"><label><span id="length-label">Longitud total ℓ (m)</span><input id="L" type="number" min="0.3" max="30" step="0.1" required></label><label>Ancho b (cm)<input id="b" type="number" min="12" max="150" step="1" required></label><label>Canto h (cm)<input id="h" type="number" min="8" max="200" step="1" required></label><label>Recubrimiento (mm)<input id="cover" type="number" min="15" max="100" step="5" required></label></div><label class="full" id="support-label">Condición de borde<select id="support"><option value="simple">Apoyada en ambos extremos</option><option value="fixed">Empotrada en ambos extremos</option><option value="cantilever">Voladizo · empotramiento izquierdo</option><option value="continuous">Continua · 2 vanos iguales</option></select></label><p id="column-boundary" class="hint" hidden>Base empotrada, extremo libre. Flexión sobre el canto h. Altura medida desde la base.</p></section>
+<section class="control-section"><h2><span class="step">2</span> Materiales y armadura</h2><div class="fields"><label>Hormigón f′c (MPa)<input id="fc" type="number" min="20" max="50" step="1" required></label><label>Acero fy (MPa)<input value="420" disabled aria-label="Acero fy fijo en 420 MPa"></label><label>Barra principal (mm)<select id="db"><option>10</option><option>12</option><option>16</option><option>20</option><option>25</option><option>32</option></select></label><label id="tie-label">Estribo (mm)<select id="tie"><option>10</option><option>12</option></select></label><label>Árido máximo (mm)<input id="agg" type="number" min="10" max="40" step="1" required></label></div><div class="derived" id="material-derived"></div></section>
+<section class="control-section" id="loads-panel"><h2><span class="step">3</span> Cargas aplicadas</h2><label class="check"><input id="self" type="checkbox"> Incluir peso propio · 24 kN/m³</label><p class="hint" id="load-guidance"></p><div id="axial-fields" class="fields" hidden><label>Axial D (kN)<input id="PD" type="number" min="0" step="10"></label><label>Axial L (kN)<input id="PL" type="number" min="0" step="10"></label></div><div id="load-list"></div><button class="add-button" type="button" id="add-load">+ Añadir carga</button><p class="hint">D = permanente · L = variable.<br>Usa signos negativos para invertir el sentido.</p></section>
+</form>
+</aside>
+<main class="main-pane" id="results-root">
+<div class="result-heading"><div><p class="eyebrow">MODELO ACTIVO</p><h1 id="model-title">Viga de hormigón armado</h1></div><span id="analysis-state" class="state" role="status">Calculando…</span></div>
+<div class="metrics" id="metrics"></div>
+<div class="drawing-grid">
+<div class="views">
+<section class="panel"><div class="panel-title"><h2>Planta esquemática</h2><span id="plan-caption" class="small">Elemento aislado</span></div><canvas id="plan-canvas" role="img" aria-label="Planta esquemática del elemento seleccionado"></canvas></section>
+<section class="panel"><div class="panel-title"><h2 id="model-view-title">Modelo y cargas</h2><label class="inline-control">Caso<select id="case-select" aria-label="Caso para los diagramas"></select></label></div><canvas id="model-canvas" role="img" aria-label="Modelo estructural con apoyos y cargas"></canvas><div class="legend"><span><i class="swatch orange"></i> Carga aplicada</span><span><i class="swatch red"></i> Acero</span><span><i class="swatch blue"></i> Hormigón</span></div><div id="case-description" class="caption"></div></section>
+</div>
+<section class="panel design-pane" id="design-panel"><div class="panel-title"><h2>Sección y armadura</h2><span class="small" id="section-dimensions"></span></div><canvas id="section-canvas" role="img" aria-label="Sección transversal con distribución de barras"></canvas><div class="design-results" id="design-results"></div><div class="design-note">Propuesta de sección. No incluye longitudes de anclaje, empalmes ni planos de ejecución.</div></section>
+</div>
+<section id="diagrams" class="panel diagrams-panel"><div class="panel-title"><h2>Diagramas de esfuerzos</h2><span class="small" id="diagram-case"></span></div><div class="diagram-grid"><div class="plot"><h3><i class="swatch purple"></i> Momento flector <span>kN·m</span></h3><canvas id="moment-canvas" role="img" aria-label="Diagrama de momento flector"></canvas></div><div class="plot"><h3><i class="swatch cyan"></i> Cortante <span>kN</span></h3><canvas id="shear-canvas" role="img" aria-label="Diagrama de cortante"></canvas></div><div class="plot"><h3><i class="swatch green"></i> Deformación elástica <span>mm</span></h3><canvas id="deflection-canvas" role="img" aria-label="Diagrama de desplazamiento de servicio con inercia bruta"></canvas></div></div><div class="cut-control"><label for="cut">Explorar sección <strong id="cut-value">x = 0,00 m</strong></label><input type="range" id="cut" min="0" max="1000" value="500"><label class="side-choice">Lado<select id="cut-side"><option value="right">Derecho (+)</option><option value="left">Izquierdo (−)</option></select></label></div><div id="cut-readout" class="cut-readout"></div><p class="caption">Momento positivo: tracción en la cara inferior. Cortante: V = dM/dx. La deformación usa D + L y EcIg; no incluye fisuración, fluencia ni retracción. En columnas, x representa la altura y el desplazamiento es lateral (δ negativo: derecha). σ bruta = P/Ag ± M/W; signo positivo: compresión. No representa tensiones de una sección fisurada.</p></section>
+<section class="panel" id="interaction-panel" hidden><div class="panel-title"><h2>Interacción axial–momento</h2><span class="small">Sección · primer orden</span></div><div class="interaction-grid"><canvas id="interaction-canvas" role="img" aria-label="Diagrama de interacción P M y demandas de las combinaciones"></canvas><div id="column-checks"></div></div></section>
+<div class="bottom-grid"><section class="panel"><div class="panel-title"><h2>Reacciones</h2><span class="small" id="reactions-case"></span></div><div class="table-wrap" id="reactions"></div><p class="caption" id="balance"></p></section><section class="panel"><div class="panel-title"><h2>Lectura del cálculo</h2><span class="small">Comprobaciones incluidas</span></div><div id="checks" class="checks"></div></section></div>
+<section class="notes" id="notes" aria-live="polite"></section>
+<details class="method" id="method"><summary>Cómo se calcula · hipótesis, ecuaciones y límites</summary><div class="method-content">
+<h3>Modelo de análisis</h3><p>Miembros prismáticos con sección rectangular y hormigón de peso normal. Análisis lineal de Euler–Bernoulli por rigidez: cargas puntuales, momentos y cargas distribuidas lineales. Las posiciones de cargas y apoyos son nodos; los campos de esfuerzo y desplazamiento se integran dentro de cada tramo. El plano muestra el miembro aislado: no distribuye cargas de un edificio.</p>
+<p>Resistencia: envolvente de 1,4D y 1,2D + 1,6L. En dos vanos se añade L alternada en cada vano. Servicio: D + L. No se incluyen viento, sismo, torsión, temperatura, asientos ni otras combinaciones reglamentarias. Las acciones deben ser las correspondientes al elemento.</p>
+<h3>Viga y losa</h3><p>Se adoptan criterios seleccionados de ACI 318M-14, una edición histórica explícita, sin certificar cumplimiento integral. Ec = 4700√f′c (MPa); Ig = bh³/12. Bloque rectangular: a = As·fy/(0,85f′c·b), c = a/β₁. Se exige εt ≥ 0,005 y se usa φ = 0,90. Mu ≤ φ·As·fy·(d − a/2). La armadura de compresión no se suma a la resistencia.</p>
+<p>Viga: As mínimo = máx(0,25√f′c/fy; 1,4/fy)·b·d. Cada cara se dimensiona con su extremo de la envolvente, en una sola capa, y se propone continua en toda la longitud. La separación libre considera diámetro, 25 mm y 4/3 del árido. No se verifica ancho de fisura, barras de piel ni cortado y anclaje de barras.</p>
+<p>Losa: franja de 1,00 m, trabajando en una dirección. As mínimo = 0,0018·b·h para fy = 420 MPa. Se propone acero principal en ambas caras y acero transversal mínimo. Separaciones máximas: mín(3h; 450 mm) principal y mín(5h; 450 mm) transversal. No representa una placa bidireccional ni verifica punzonamiento.</p>
+<p>Cortante: φ = 0,75; Vc = 0,17√f′c·b·d. Viga y columna: estribos de dos ramas, Vs = Av·fy·d/s, con acero mínimo y límites de espaciamiento. Se usa el máximo absoluto de V, sin reducirlo a una sección a distancia d del apoyo. En columnas se omite el incremento de Vc por compresión. En losa se verifica solo φVc.</p>
+<h3>Columna</h3><p>Columna aislada en voladizo, empotrada en la base. Carga axial concéntrica superior y cargas laterales en un plano. Se prueban 4 y 8 barras perimetrales del diámetro elegido, con 1 % ≤ As/Ag ≤ 8 %. La curva P–M usa compatibilidad de deformaciones, εcu = 0,003, Es = 200 000 MPa y acero elastoplástico. Se descuenta el hormigón desplazado por el acero en el bloque comprimido; φ varía entre 0,65 y 0,90. P máximo = 0,80·0,65·[0,85f′c(Ag − As) + fyAs].</p>
+<p>Se compara cada combinación de Pu y |Mu| con la curva. Se usa el axial de base, incluyendo el peso propio de la columna, para toda la comprobación de sección. El límite de esbeltez adoptado es kℓ/r ≤ 22, con k = 2 y r mínimo de ambos ejes. Si se supera, no se emite aprobación del miembro: falta segundo orden. No se comprueban flexión biaxial, nudos, cimentación ni confinamiento sísmico.</p>
+<h3>Interpretar los resultados</h3><p>Las tensiones indicadas son elásticas sobre la sección bruta, no tensiones reales del hormigón fisurado. La flecha y el momento de fisuración son orientativos y no constituyen comprobación de servicio. Recubrimientos, exposición, resistencia al fuego y detalle final deben verificarse por separado. Esta herramienta es para aprendizaje y predimensionamiento; un proyecto de obra requiere revisión estructural completa.</p>
+<div id="calculation-steps"></div>
+<h3>Referencias de consulta</h3><ul><li><a href="https://www.concrete.org/store/productdetail.aspx?ItemID=318U14&Language=English&Units=US_Units" target="_blank" rel="noreferrer">ACI · referencia de la edición 318-14</a></li><li><a href="https://structurepoint.org/publication/pdf/DE-Simply-Supported-Reinforced-Concrete-Beam-Analysis-and-Design-ACI-318-14-spBeam-v1000.pdf" target="_blank" rel="noreferrer">StructurePoint · ejemplo de viga, flexión y cortante (318-14)</a></li><li><a href="https://structurepoint.org/publication/pdf/DE-One-Way-Slab-ACI-14-spBeam-v1000.pdf" target="_blank" rel="noreferrer">StructurePoint · ejemplo de losa unidireccional (318-14)</a></li><li><a href="https://structurepoint.org/publication/pdf/Interaction-Diagram-Tied-Reinforced-Concrete-Column-Design-Strength-ACI-318-19.pdf" target="_blank" rel="noreferrer">StructurePoint · procedimiento P–M y comparación del límite de deformación 2014/2019</a></li></ul>
+</div></details>
+</main></div>
+<footer><span id="status-text">CARI · Hormigón armado</span><span>Referencia docente · no sustituye ETABS / SAP2000</span></footer>
+<script>'use strict';
+// All solver quantities use kN, m and radians; positive vertical = upward.
+const BeamEngine = (() => {
+  const fail = message => { throw new Error(message); };
+  function validate(m) {
+    if (!m || !Array.isArray(m.spans) || !Array.isArray(m.supports) || !Array.isArray(m.loads)) fail('El modelo está incompleto.');
+    if (!m.spans.length || m.spans.length > 20) fail('Define entre 1 y 20 tramos.');
+    if (m.supports.length > 40 || m.loads.length > 80) fail('El límite es de 40 apoyos y 80 cargas.');
+    const finite = v => typeof v === 'number' && Number.isFinite(v);
+    m.spans.forEach((s,i) => { if (![s.L,s.E,s.I].every(finite) || s.L <= 0 || s.E <= 0 || s.I <= 0) fail(`Tramo ${i+1}: longitud, E e I deben ser positivos.`); });
+    const L=m.spans.reduce((a,s)=>a+s.L,0), tol=L*1e-9;
+    if (L < 0.001 || L > 10000) fail('La longitud total debe estar entre 0,001 y 10 000 m.');
+    m.supports.forEach((s,i)=>{
+      if (!finite(s.x) || s.x<0 || s.x>L) fail(`Apoyo ${i+1}: la posición debe estar entre 0 y ${L} m.`);
+      if (!['pin','roller','fixed'].includes(s.type)) fail('Tipo de apoyo desconocido.');
+      if (m.supports.some((t,j)=>j<i && Math.abs(t.x-s.x)<tol)) fail('Dos apoyos no pueden ocupar la misma posición.');
+    });
+    const restrained=m.supports.reduce((a,s)=>a+(s.type==='fixed'?2:1),0);
+    if (restrained<2) fail('Viga inestable: añade dos apoyos en posiciones distintas o un empotramiento.');
+    m.loads.forEach((p,i)=>{
+      if (!['point','dist','moment'].includes(p.type)) fail('Tipo de carga desconocido.');
+      if(p.type==='dist') {
+        if (![p.a,p.b,p.q0,p.q1].every(finite) || p.a<0 || p.b>L || p.b-p.a<=tol) fail(`Carga ${i+1}: revisa el intervalo (0 ≤ inicio < fin ≤ ${L} m) y las intensidades.`);
+      } else if (![p.x,p.value].every(finite) || p.x<0 || p.x>L) fail(`Carga ${i+1}: revisa la magnitud y la posición entre 0 y ${L} m.`);
+    });
+    return {L,tol,restrained};
+  }
+  const polynomial = (p,x) => p.reduceRight((v,c)=>v*x+c,0);
+  function roots(p,a,b) {
+    p=p.slice(); while(p.length>1 && p[p.length-1]===0) p.pop();
+    if(p.length<=1) return [];
+    if(p.length===2) {const x=-p[0]/p[1];return x>=a && x<=b?[x]:[];}
+    const turns=roots(p.slice(1).map((v,i)=>v*(i+1)),a,b), cuts=[a,...turns,b], out=[];
+    const scale=Math.max(...p.map((v,i)=>Math.abs(v)*Math.max(1,Math.abs(a),Math.abs(b))**i),1e-30);
+    for (const x of cuts) if(Math.abs(polynomial(p,x))<scale*1e-12) out.push(x);
+    for(let i=1;i<cuts.length;i++) {
+      let lo=cuts[i-1],hi=cuts[i],fl=polynomial(p,lo),fh=polynomial(p,hi);
+      if(fl*fh>=0) continue;
+      for(let j=0;j<65;j++){const mid=(lo+hi)/2,fm=polynomial(p,mid);if(fl*fm<=0){hi=mid;fh=fm;}else{lo=mid;fl=fm;}}
+      out.push((lo+hi)/2);
+    }
+    return out.filter((x,i)=>!out.slice(0,i).some(y=>Math.abs(x-y)<(b-a)*1e-10));
+  }
+  function solveSPD(A,b) {
+    const n=b.length;if(!n)return [];
+    const d=A.map((r,i)=>Math.sqrt(r[i]));
+    if(d.some(x=>!Number.isFinite(x)||x<=0))fail('Viga inestable o rigidez no válida.');
+    const C=Array.from({length:n},()=>new Float64Array(n));
+    for(let i=0;i<n;i++)for(let j=0;j<=i;j++){
+      let sum=A[i][j]/d[i]/d[j];for(let k=0;k<j;k++)sum-=C[i][k]*C[j][k];
+      if(i===j){if(sum<1e-12)fail('El sistema es inestable o está mal condicionado. Revisa apoyos, distancias muy pequeñas y contrastes de rigidez.');C[i][j]=Math.sqrt(sum);}
+      else C[i][j]=sum/C[j][j];
+    }
+    const y=new Float64Array(n),z=new Float64Array(n);
+    for(let i=0;i<n;i++){let v=b[i]/d[i];for(let j=0;j<i;j++)v-=C[i][j]*y[j];y[i]=v/C[i][i];}
+    for(let i=n-1;i>=0;i--){let v=y[i];for(let j=i+1;j<n;j++)v-=C[j][i]*z[j];z[i]=v/C[i][i];}
+    return Array.from(z,(v,i)=>v/d[i]);
+  }
+  function solve(model) {
+    const {L,tol,restrained}=validate(model);
+    let boundaries=[0],length=0;
+    for(const s of model.spans){length+=s.L;boundaries.push(length);}
+    const raw=[...boundaries,...model.supports.map(s=>s.x)];
+    for(const p of model.loads)raw.push(...(p.type==='dist'?[p.a,p.b]:[p.x]));
+    raw.sort((a,b)=>a-b);const nodes=[];
+    for(const x of raw)if(!nodes.length||x-nodes[nodes.length-1]>tol)nodes.push(x);
+    if(nodes.some((x,i)=>i&&x-nodes[i-1]<L*1e-7))fail('Hay posiciones demasiado próximas entre sí. Sepáralas o hazlas coincidir exactamente.');
+    const n=nodes.length*2,K=Array.from({length:n},()=>new Float64Array(n)),F=new Float64Array(n),elements=[];
+    const nodeIndex=x=>nodes.findIndex(y=>Math.abs(x-y)<=tol);
+    for(let e=0;e<nodes.length-1;e++){
+      const a=nodes[e],b=nodes[e+1],h=b-a,mid=(a+b)/2;
+      const si=boundaries.findIndex((x,j)=>j<boundaries.length-1 && mid>=x && mid<boundaries[j+1]);
+      const s=model.spans[si],EI=s.E*1000*s.I*1e-8;
+      if(!Number.isFinite(EI) || EI<=0)fail('Rigidez EI fuera de rango.');
+      let qa=0,qb=0;
+      for(const p of model.loads)if(p.type==='dist'&&mid>p.a&&mid<p.b){
+        qa-=p.q0+(p.q1-p.q0)*(a-p.a)/(p.b-p.a);
+        qb-=p.q0+(p.q1-p.q0)*(b-p.a)/(p.b-p.a);
+      }
+      const k=[[12,6*h,-12,6*h],[6*h,4*h*h,-6*h,2*h*h],[-12,-6*h,12,-6*h],[6*h,2*h*h,-6*h,4*h*h]].map(row=>row.map(v=>v*EI/h**3));
+      const f=[h*(7*qa+3*qb)/20,h*h*(3*qa+2*qb)/60,h*(3*qa+7*qb)/20,-h*h*(2*qa+3*qb)/60];
+      const ids=[2*e,2*e+1,2*e+2,2*e+3];
+      ids.forEach((ii,i)=>{F[ii]+=f[i];ids.forEach((jj,j)=>K[ii][jj]+=k[i][j]);});
+      elements.push({a,b,h,EI,qa,qb,k,f,ids,span:si});
+    }
+    for(const p of model.loads)if(p.type!=='dist')F[2*nodeIndex(p.x)+(p.type==='moment'?1:0)]+=p.type==='moment'?p.value:-p.value;
+    const constrained=new Set();
+    for(const s of model.supports){const i=nodeIndex(s.x);constrained.add(2*i);if(s.type==='fixed')constrained.add(2*i+1);}
+    const free=Array.from({length:n},(_,i)=>i).filter(i=>!constrained.has(i));
+    const Kff=free.map(i=>free.map(j=>K[i][j])),Ff=free.map(i=>F[i]),df=solveSPD(Kff,Ff),d=new Float64Array(n);
+    free.forEach((j,i)=>d[j]=df[i]);
+    const R=K.map((row,i)=>row.reduce((a,v,j)=>a+v*d[j],0)-F[i]);
+    for(const e of elements){
+      e.d=e.ids.map(i=>d[i]);e.r=e.k.map((row,i)=>row.reduce((v,k,j)=>v+k*e.d[j],0)-e.f[i]);
+      const qx=(e.qb-e.qa)/e.h;
+      e.V=[e.r[0],e.qa,qx/2];e.M=[-e.r[1],e.r[0],e.qa/2,qx/6];
+      e.v=[e.d[0],e.d[1],-e.r[1]/(2*e.EI),e.r[0]/(6*e.EI),e.qa/(24*e.EI),qx/(120*e.EI)];
+      e.theta=e.v.slice(1).map((v,i)=>v*(i+1));
+    }
+    const field=(e,t)=>({x:e.a+t,V:polynomial(e.V,t),M:polynomial(e.M,t),v:polynomial(e.v,t),theta:polynomial(e.theta,t)});
+    const extrema={};
+    for(const key of ['V','M','v']){
+      const candidates=elements.flatMap(e=>[0,e.h,...roots(e[key].slice(1).map((v,i)=>v*(i+1)),0,e.h)].map(t=>field(e,t)));
+      extrema[key]={min:candidates.reduce((a,b)=>a[key]<b[key]?a:b),max:candidates.reduce((a,b)=>a[key]>b[key]?a:b),abs:candidates.reduce((a,b)=>Math.abs(a[key])>Math.abs(b[key])?a:b)};
+    }
+    const reactions=model.supports.map((s,i)=>({...s,label:String.fromCharCode(65+i%26)+(i>=26?'2':''),R:R[2*nodeIndex(s.x)],M:s.type==='fixed'?R[2*nodeIndex(s.x)+1]:0}));
+    let appliedForce=0,appliedMoment=0,forceScale=0,momentScale=0;
+    for(const p of model.loads){
+      if(p.type==='point'){appliedForce-=p.value;appliedMoment-=p.value*p.x;forceScale+=Math.abs(p.value);momentScale+=Math.abs(p.value*p.x);}
+      else if(p.type==='moment'){appliedMoment+=p.value;momentScale+=Math.abs(p.value);}
+      else{const h=p.b-p.a,w=h*(p.q0+p.q1)/2,m=w*p.a+h*h*(p.q0+2*p.q1)/6;appliedForce-=w;appliedMoment-=m;forceScale+=h*(Math.abs(p.q0)+Math.abs(p.q1))/2;momentScale+=Math.abs(w*p.a)+h*h*(Math.abs(p.q0)+2*Math.abs(p.q1))/6;}
+    }
+    const balanceForce=appliedForce+reactions.reduce((v,r)=>v+r.R,0),balanceMoment=appliedMoment+reactions.reduce((v,r)=>v+r.R*r.x+r.M,0);
+    if(![...d,...R,balanceForce,balanceMoment].every(Number.isFinite))fail('El cálculo excedió el rango numérico. Revisa las unidades.');
+    if(Math.abs(balanceForce)>1e-6*Math.max(1,forceScale)||Math.abs(balanceMoment)>1e-6*Math.max(1,momentScale))fail('No se alcanzó una precisión suficiente. Revisa la geometría y los valores de rigidez.');
+    function at(x,side='right'){
+      x=Math.max(0,Math.min(L,x));
+      const e=(side==='left'?[...elements].reverse().find(e=>x>e.a+tol&&x<=e.b+tol):elements.find(e=>x>=e.a-tol&&x<e.b-tol))||(x<=tol?elements[0]:elements[elements.length-1]);
+      return field(e,Math.max(0,Math.min(e.h,x-e.a)));
+    }
+    return {L,nodes,elements,d:Array.from(d),F:Array.from(F),free,Kff,Ff,reactions,extrema,balanceForce,balanceMoment,appliedForce,appliedMoment,redundancy:restrained-2,at,field};
+  }
+  return {solve,validate,roots};
+})();
+if(typeof module!=='undefined')module.exports=BeamEngine;
+</script><script>'use strict';
+// Educational subset of ACI 318M-14. All section computations: N, mm, MPa.
+const RCEngine=(()=>{
+ const BE=typeof BeamEngine!=='undefined'?BeamEngine:require('./beam-engine.js');
+ const area=db=>Math.PI*db*db/4;
+ const beta=fc=>Math.max(.65,.85-.05*Math.max(0,fc-28)/7);
+ const defaults=type=>({type,L:type==='column'?3:type==='slab'?4:6,b:type==='column'?40:type==='slab'?100:30,h:type==='column'?40:type==='slab'?18:55,cover:type==='slab'?25:40,fc:28,fy:420,db:type==='slab'?12:20,tie:10,agg:20,support:'simple',self:true,PD:700,PL:250,loads:type==='column'?[{type:'point',cat:'L',x:3,value:15}]:[{type:'dist',cat:'D',a:0,b:type==='slab'?4:6,q0:type==='slab'?2:8,q1:type==='slab'?2:8},{type:'dist',cat:'L',a:0,b:type==='slab'?4:6,q0:type==='slab'?3:5,q1:type==='slab'?3:5}]});
+ function validate(s){
+  if(!['beam','column','slab'].includes(s.type))throw Error('Elige un elemento válido.');
+  for(const [k,lo,hi]of [['L',.3,30],['b',12,150],['h',8,200],['cover',15,100],['fc',20,50],['agg',10,40]])if(!Number.isFinite(s[k])||s[k]<lo||s[k]>hi)throw Error(`${k}: introduce un valor entre ${lo} y ${hi}.`);
+  if(s.fy!==420)throw Error('Este modelo utiliza acero fy = 420 MPa.');
+  if(![10,12,16,20,25,32].includes(s.db)||![10,12].includes(s.tie))throw Error('Diámetro de barra o estribo no válido.');
+  if(s.type==='slab'&&s.b!==100)throw Error('La franja de losa debe tener 100 cm de ancho.');
+  if(!['simple','fixed','cantilever','continuous'].includes(s.support))throw Error('Apoyo no válido.');
+  if(s.type==='column'&&(!Number.isFinite(s.PD)||!Number.isFinite(s.PL)||s.PD<0||s.PL<0||s.PD+s.PL>100000))throw Error('Las cargas axiales deben ser compresiones de 0 a 100 000 kN.');
+  if(!Array.isArray(s.loads)||s.loads.length>30)throw Error('Se admiten hasta 30 cargas.');
+  s.loads.forEach(p=>{if(!['D','L'].includes(p.cat))throw Error('Asigna D o L a cada carga.');});
+  const inner=Math.min(s.b,s.h)*10-2*(s.cover+(s.type==='slab'?0:s.tie)+s.db);
+  if(inner<Math.max(25,4*s.agg/3))throw Error('La sección no deja espacio para el recubrimiento y las barras.');
+  if(s.type==='slab'&&s.h*10-2*s.cover-4*s.db<Math.max(25,4*s.agg/3))throw Error('El espesor no deja espacio para acero principal y transversal en ambas caras.');
+ }
+ function supports(s){return s.type==='column'||s.support==='cantilever'?[{x:0,type:'fixed'}]:s.support==='fixed'?[{x:0,type:'fixed'},{x:s.L,type:'fixed'}]:s.support==='continuous'?[{x:0,type:'pin'},{x:s.L/2,type:'roller'},{x:s.L,type:'roller'}]:[{x:0,type:'pin'},{x:s.L,type:'roller'}];}
+ function clipLoad(p,a,b){
+  if(p.type!=='dist')return p.x>=a-1e-9&&p.x<=b+1e-9?{...p}:null;
+  const l=Math.max(a,p.a),r=Math.min(b,p.b);if(r-l<1e-9)return null;
+  return {...p,a:l,b:r,q0:p.q0+(p.q1-p.q0)*(l-p.a)/(p.b-p.a),q1:p.q0+(p.q1-p.q0)*(r-p.a)/(p.b-p.a)};
+ }
+ function model(s,fd,fl,pattern=null){
+  const b=s.b*10,h=s.h*10,Ec=4700*Math.sqrt(s.fc),I=b*h**3/12/1e4;
+  const loads=s.loads.map(p=>{
+   let q=pattern&&p.cat==='L'?clipLoad(p,...pattern):{...p};if(!q)return null;
+   const f=p.cat==='D'?fd:fl;return q.type==='dist'?{...q,q0:q.q0*f,q1:q.q1*f}:{...q,value:q.value*f};
+  }).filter(Boolean);
+  const weight=24*(s.b/100)*(s.h/100);
+  if(s.self&&s.type!=='column')loads.push({type:'dist',a:0,b:s.L,q0:fd*weight,q1:fd*weight,cat:'D',self:true});
+  return {spans:[{L:s.L,E:Ec,I}],supports:supports(s),loads};
+ }
+ function flexure(s,Mu){
+  const b=s.b*10,h=s.h*10,db=s.db,d=h-s.cover-(s.type==='slab'?0:s.tie)-db/2;
+  const Asmin=s.type==='slab'?.0018*b*h:Math.max(.25*Math.sqrt(s.fc)/s.fy,1.4/s.fy)*b*d;
+  const disc=d*d-2*Mu*1e6/(.9*.85*s.fc*b);
+  const needed=disc>=0?Math.max(Asmin,.85*s.fc*b/s.fy*(d-Math.sqrt(disc))):Infinity;
+  let n=0,spacing=null,As=0,fit=true;
+  if(s.type==='slab'){
+   spacing=Math.floor(Math.min(3*h,450,area(db)*1000/needed)/5)*5;
+   fit=spacing>=Math.max(db+25,db+4*s.agg/3);As=spacing>0?area(db)*1000/spacing:0;
+  }else{
+   n=Number.isFinite(needed)?Math.max(2,Math.ceil(needed/area(db))):0;
+   const clear=n>1?(b-2*(s.cover+s.tie)-n*db)/(n-1):0;
+   fit=n>=2&&clear>=Math.max(25,db,4*s.agg/3);As=n*area(db);
+  }
+  const a=As*s.fy/(.85*s.fc*b),c=a/beta(s.fc),strain=c>0?.003*(d-c)/c:0,capacity=.9*As*s.fy*(d-a/2)/1e6;
+  const ok=fit&&strain>=.005&&capacity+1e-8>=Mu;
+  return {Mu,d,Asmin,needed,As,n,spacing,capacity,strain,ok,fit,label:ok?(s.type==='slab'?`Ø${db} cada ${spacing/10} cm`:`${n} Ø${db}`):'Aumentar sección / cambiar barras',reason:!Number.isFinite(needed)?'La sección es insuficiente a flexión.':!fit?'Las barras no caben en una capa con la separación libre exigida.':strain<.005?'La sección no alcanza el límite de tracción adoptado (εt ≥ 0,005).':''};
+ }
+ function shear(s,Vu,extraLimit=Infinity){
+  const b=s.b*10,d=s.h*10-s.cover-(s.type==='slab'?0:s.tie)-s.db/2,Vc=.17*Math.sqrt(s.fc)*b*d/1000;
+  if(s.type==='slab')return {Vu,Vc,capacity:.75*Vc,ok:Vu<=.75*Vc,label:'Sin armadura de cortante',spacing:null};
+  const Vs=Math.max(0,Vu/.75-Vc),maxVs=.66*Math.sqrt(s.fc)*b*d/1000,Av=2*area(s.tie);
+  const ratio=Math.max(.062*Math.sqrt(s.fc)*b/s.fy,.35*b/s.fy,Vs*1000/(s.fy*d));
+  const high=Vs>.33*Math.sqrt(s.fc)*b*d/1000;
+  const spacing=Math.floor(Math.min(Av/ratio,d/(high?4:2),high?300:600,extraLimit)/10)*10;
+  const capacity=spacing>0?.75*(Vc+Math.min(maxVs,Av*s.fy*d/spacing/1000)):0;
+  const ok=spacing>=50&&Vs<=maxVs&&capacity+1e-8>=Vu;
+  return {Vu,Vc,Vs,Av,spacing,capacity,ok,label:ok?`Ø${s.tie} · 2 ramas · c/${spacing/10} cm`:'Aumentar sección a cortante'};
+ }
+ function columnBars(s,n){
+  // 4 corners, or 8 perimeter bars (one intermediate bar per face).
+  const b=s.b*10,h=s.h*10,o=s.cover+s.tie+s.db/2;
+  const pts=[{x:o,y:o},{x:b-o,y:o},{x:o,y:h-o},{x:b-o,y:h-o}];
+  if(n===8)pts.push({x:b/2,y:o},{x:b/2,y:h-o},{x:o,y:h/2},{x:b-o,y:h/2});
+  return pts;
+ }
+ function sectionPoint(s,bars,c){
+  const b=s.b*10,h=s.h*10,a=Math.min(h,beta(s.fc)*c),Ab=area(s.db),Cc=.85*s.fc*b*a;
+  let P=Cc,M=Cc*(h/2-a/2);
+  for(const bar of bars){const strain=.003*(c-bar.y)/c,fs=Math.max(-s.fy,Math.min(s.fy,200000*strain)),F=(fs-(bar.y<=a?.85*s.fc:0))*Ab;P+=F;M+=F*(h/2-bar.y);}
+  const et=Math.max(0,.003*(Math.max(...bars.map(p=>p.y))-c)/c),ey=s.fy/200000;
+  const phi=.65+.25*Math.min(1,Math.max(0,(et-ey)/(.005-ey)));
+  return {P:phi*P/1000,M:Math.max(0,phi*M/1e6),Pn:P/1000,Mn:M/1e6,phi,c,et};
+ }
+ function interaction(s,n){
+  const bars=columnBars(s,n),h=s.h*10,As=n*area(s.db),P0=.8*.65*(.85*s.fc*(s.b*10*h-As)+s.fy*As)/1000;
+  const curve=[{P:-.9*s.fy*As/1000,M:0}];
+  for(let i=0;i<=650;i++){const c=h*.0001*Math.pow(1e6,i/650),v=sectionPoint(s,bars,c);curve.push({...v,P:Math.min(v.P,P0)});}
+  curve.push({P:P0,M:0});
+  return {bars,curve,P0,As};
+ }
+ function capacityAt(curve,P){
+  let M=0;
+  for(let i=1;i<curve.length;i++){
+   const a=curve[i-1],b=curve[i];if(P<Math.min(a.P,b.P)-1e-8||P>Math.max(a.P,b.P)+1e-8)continue;
+   if(Math.abs(a.P-b.P)<1e-9)M=Math.max(M,a.M,b.M);else M=Math.max(M,a.M+(b.M-a.M)*(P-a.P)/(b.P-a.P));
+  }
+  return M;
+ }
+ function column(s,cases){
+  let best=null;
+  for(const n of [4,8]){
+   const id=interaction(s,n),rho=id.As/(s.b*s.h*100),clear=Math.min(s.b,s.h)*10-2*(s.cover+s.tie)-((n===4?2:3)*s.db),gap=clear/(n===4?1:2);
+   const fit=gap>=Math.max(40,1.5*s.db,4*s.agg/3),range=rho>=.01&&rho<=.08;
+   const checks=cases.map(c=>{const M=Math.abs(c.result.extrema.M.abs.M),cap=capacityAt(id.curve,c.P),ratio=c.P>id.P0?Infinity:(M<1e-8?c.P/id.P0:cap>0?M/cap:Infinity);return {name:c.name,P:c.P,M,cap,ratio};});
+   const ok=fit&&range&&checks.every(c=>c.ratio<=1+1e-8);
+   const item={...id,n,rho,fit,range,checks,ok};best=item;if(ok)break;
+  }
+  const r=Math.min(s.b,s.h)*10/Math.sqrt(12),slenderness=2*s.L*1000/r;
+  return {...best,slenderness,short:slenderness<=22,label:best.ok?`${best.n} Ø${s.db}`:'Cambiar sección o diámetro',scope:'Flexocompresión uniaxial, primer orden, columna en voladizo (K = 2).'};
+ }
+ function calculate(s){
+  validate(s);
+  // Validate unfactored original loads before clipping or scaling.
+  BE.validate(model(s,1,1));
+  const dead=model(s,1,0),live=model(s,0,1),service=model(s,1,1);
+  const axialWeight=s.type==='column'&&s.self?24*s.b/100*s.h/100*s.L:0;
+  const raw=[{name:'1,4D',fd:1.4,fl:0},{name:'1,2D + 1,6L',fd:1.2,fl:1.6}];
+  if(s.type!=='column'&&s.support==='continuous')raw.push({name:'1,2D + 1,6L · vano 1',fd:1.2,fl:1.6,pattern:[0,s.L/2]},{name:'1,2D + 1,6L · vano 2',fd:1.2,fl:1.6,pattern:[s.L/2,s.L]});
+  const cases=raw.map(c=>({...c,model:model(s,c.fd,c.fl,c.pattern),P:s.type==='column'?c.fd*(s.PD+axialWeight)+c.fl*s.PL:0}));
+  cases.forEach(c=>c.result=BE.solve(c.model));
+  const Ms=Math.max(0,...cases.map(c=>c.result.extrema.M.max.M)),Mi=Math.max(0,...cases.map(c=>-c.result.extrema.M.min.M)),Vu=Math.max(...cases.map(c=>Math.abs(c.result.extrema.V.abs.V)));
+  const pos=s.type!=='column'?flexure(s,Ms):null,neg=s.type!=='column'?flexure(s,Mi):null,col=s.type==='column'?column(s,cases):null;
+  const tieLimit=s.type==='column'?Math.min(16*s.db,48*s.tie,s.b*10,s.h*10):Infinity;
+  const sh=shear(s,Vu,tieLimit),sr=BE.solve(service),dr=BE.solve(dead),lr=BE.solve(live),Ec=4700*Math.sqrt(s.fc),Ig=s.b*10*(s.h*10)**3/12;
+  const trans=s.type==='slab'?{As:.0018*1000*s.h*10,spacing:Math.floor(Math.min(5*s.h*10,450,area(s.db)*1000/(.0018*1000*s.h*10))/5)*5}:null;
+  const warnings=[];
+  const beamSpan=s.support==='continuous'?s.L/2:s.L;
+  const deep=s.type!=='column'&&beamSpan*1000<4*s.h*10;
+  if(col){
+   if(!col.ok)warnings.push('No se encontró una armadura de 4 u 8 barras que satisfaga la sección y su separación. Cambia el diámetro o la sección.');
+   if(!col.short)warnings.push(`kℓ/r = ${col.slenderness.toFixed(1)} > 22: hace falta análisis de segundo orden. El acero mostrado solo corresponde a la sección en primer orden.`);
+   warnings.push('Los cercos necesitan detalle de arriostramiento de barras; el dibujo no define ganchos ni grapas. No se verifica sismo ni flexión biaxial.');
+  }else{
+   if(!pos.ok)warnings.push('Cara inferior: '+pos.reason);
+   if(!neg.ok)warnings.push('Cara superior: '+neg.reason);
+   const span=s.support==='continuous'?s.L/2:s.L;
+   if(span*1000<4*s.h*10)warnings.push('La relación luz/canto puede corresponder a un elemento profundo; este modelo esbelto no es aplicable.');
+  }
+  if(!sh.ok)warnings.push(s.type==='slab'?'El espesor no resiste el cortante unidireccional. Aumenta h.':'La sección o los estribos son insuficientes a cortante.');
+  const Mr=.62*Math.sqrt(s.fc)*Ig/(s.h*10/2)/1e6,serviceM=Math.abs(sr.extrema.M.abs.M);
+  if(serviceM>Mr)warnings.push('El momento de servicio supera Mcr. La flecha con inercia bruta puede subestimar la deformación de la sección fisurada.');
+  const validSection=(col?col.ok:pos.ok&&neg.ok)&&sh.ok&&!deep;
+  return {s,Ec,Ig,Ms,Mi,Vu,pos,neg,col,sh,trans,cases,service:sr,dead:dr,live:lr,serviceModel:service,warnings,validSection,deep,Mr,axialWeight,serviceM};
+ }
+ return {area,beta,defaults,validate,model,flexure,shear,columnBars,sectionPoint,interaction,capacityAt,calculate};
+})();
+if(typeof module!=='undefined')module.exports=RCEngine;
+</script><script>'use strict';
+const RCVisuals=(()=>{
+ const C={ink:'#324b65',muted:'#687f96',grid:'#e9eef4',blue:'#367caf',red:'#c34450',orange:'#b87108',purple:'#8158b1',cyan:'#007e9e',green:'#138064'};
+ const f=(v,n=1)=>Number.isFinite(v)?v.toLocaleString('es-ES',{maximumFractionDigits:n,minimumFractionDigits:n}):'—';
+ function line(c,x1,y1,x2,y2,color=C.ink,w=1,dash=[]){c.save();c.strokeStyle=color;c.lineWidth=w;c.setLineDash(dash);c.beginPath();c.moveTo(x1,y1);c.lineTo(x2,y2);c.stroke();c.restore();}
+ function text(c,t,x,y,color=C.ink,size=12,align='left'){c.save();c.font=`${size}px Arial, sans-serif`;c.textAlign=align;c.fillStyle=color;c.fillText(t,x,y);c.restore();}
+ function poly(c,pts,fill,stroke=C.blue,width=1){c.beginPath();pts.forEach((p,i)=>i?c.lineTo(...p):c.moveTo(...p));c.closePath();c.fillStyle=fill;c.fill();c.strokeStyle=stroke;c.lineWidth=width;c.stroke();}
+ function circle(c,x,y,r,fill,stroke=fill){c.beginPath();c.arc(x,y,r,0,Math.PI*2);c.fillStyle=fill;c.fill();c.strokeStyle=stroke;c.stroke();}
+ function arrow(c,x1,y1,x2,y2,color=C.orange,w=1.6){line(c,x1,y1,x2,y2,color,w);const a=Math.atan2(y2-y1,x2-x1);poly(c,[[x2,y2],[x2-7*Math.cos(a-.4),y2-7*Math.sin(a-.4)],[x2-7*Math.cos(a+.4),y2-7*Math.sin(a+.4)]],color,color);}
+ function background(c,w,h,grid=true){c.clearRect(0,0,w,h);c.fillStyle='#fff';c.fillRect(0,0,w,h);if(grid){for(let x=15;x<w;x+=24)line(c,x,0,x,h,C.grid,.5);for(let y=12;y<h;y+=24)line(c,0,y,w,y,C.grid,.5);}}
+ function dim(c,x1,y,x2,t){line(c,x1,y,x2,y,'#7c8fa3');for(const x of [x1,x2]){line(c,x,y-5,x,y+5,'#7c8fa3');line(c,x-3,y+3,x+3,y-3,'#7c8fa3');}text(c,t,(x1+x2)/2,y-7,C.muted,12,'center');}
+ function support(c,x,y,type){
+  if(type==='fixed'){line(c,x,y-18,x,y+18,C.ink,3);for(let z=-18;z<18;z+=7)line(c,x-10,y+z+6,x,y+z,C.muted);}
+  else{poly(c,[[x,y+2],[x-10,y+18],[x+10,y+18]],'#e2eaf4',C.ink);if(type==='roller'){circle(c,x-5,y+22,2.3,'#fff',C.ink);circle(c,x+5,y+22,2.3,'#fff',C.ink);}line(c,x-15,y+(type==='roller'?26:21),x+15,y+(type==='roller'?26:21),C.ink);}
+ }
+ function plan(c,w,h,r){
+  background(c,w,h);const s=r.s,x0=55,x1=w-45,y=75;
+  if(s.type==='column'){
+   const sz=Math.min(74,h-70),cx=w/2;line(c,30,y,w-30,y,'#a7b9ce',1,[6,5]);line(c,cx,15,cx,h-22,'#a7b9ce',1,[6,5]);poly(c,[[cx-sz/2,y-sz/2],[cx+sz/2,y-sz/2],[cx+sz/2,y+sz/2],[cx-sz/2,y+sz/2]],'#d9e7f6',C.blue,2);text(c,'C1',cx,y+5,C.blue,14,'center');text(c,`Columna aislada · ${s.b} × ${s.h} cm`,cx,h-14,C.muted,12,'center');text(c,'Eje de flexión',cx+sz/2+12,y+5,C.muted);return;
+  }
+  const X=x=>x0+x/s.L*(x1-x0),sp=r.serviceModel.supports;
+  for(const [i,p] of sp.entries()){line(c,X(p.x),28,X(p.x),h-34,'#a7b9ce',1,[5,4]);circle(c,X(p.x),19,10,'#fff','#9fb3cb');text(c,String.fromCharCode(65+i),X(p.x),23,C.muted,12,'center');}
+  if(s.type==='slab'){
+   poly(c,[[x0,47],[x1,47],[x1,111],[x0,111]],'#eff5fb','#789bc0');for(let z=x0+12;z<x1;z+=15)line(c,z,50,z,109,'#b2c6dc');poly(c,[[x0,70],[x1,70],[x1,88],[x0,88]],'#c5dcf5',C.blue);for(const p of sp)line(c,X(p.x),47,X(p.x),111,'#456e9b',5);arrow(c,x0+25,80,x1-25,80,C.blue,1);text(c,'Franja analizada · 1,00 m',(x0+x1)/2,64,C.blue,12,'center');
+  }else{
+   poly(c,[[x0,y-8],[x1,y-8],[x1,y+8],[x0,y+8]],'#b9d2ed',C.blue,1.5);for(const p of sp)poly(c,[[X(p.x)-8,y-12],[X(p.x)+8,y-12],[X(p.x)+8,y+12],[X(p.x)-8,y+12]],'#8eaccd',C.blue);text(c,'V1 · '+s.b+' × '+s.h+' cm',(x0+x1)/2,y-18,C.blue,12,'center');}
+  if(s.support==='continuous'){dim(c,x0,h-20,X(s.L/2),f(s.L/2,2)+' m');dim(c,X(s.L/2),h-20,x1,f(s.L/2,2)+' m');}else dim(c,x0,h-20,x1,f(s.L,2)+' m');
+ }
+ function drawLoads(c,loads,X,y,w){
+  const totals=loads.filter(p=>p.type==='dist'),max=Math.max(1,...totals.flatMap(p=>[Math.abs(p.q0),Math.abs(p.q1)]));
+  totals.forEach((p,j)=>{const lane=Math.min(j,3)*13;
+   const ya=q=>y-20-(Math.abs(q)/max*27)-lane;
+   for(let k=0;k<=10;k++){const t=k/10,x=p.a+(p.b-p.a)*t,q=p.q0+(p.q1-p.q0)*t;if(Math.abs(q)<1e-10)continue;const base=y-7,top=ya(q);q>=0?arrow(c,X(x),top,X(x),base,C.orange,1):arrow(c,X(x),base,X(x),top,C.orange,1);}
+   line(c,X(p.a),ya(p.q0),X(p.b),ya(p.q1),C.orange,1);
+  });
+  // Individual labels are in the editable load list; avoid crowded diagram labels.
+  loads.filter(p=>p.type!=='dist').forEach((p,i)=>{
+   const x=X(p.x);if(Math.abs(p.value)<1e-10)return;
+   if(p.type==='point'){if(p.value>=0)arrow(c,x,y-93,x,y-8,C.orange,2.2);else arrow(c,x,y-8,x,y-93,C.orange,2.2);text(c,f(p.value,1)+' kN',Math.max(40,Math.min(w-40,x)),y-101,C.orange,12,'center');}
+   else {c.save();c.strokeStyle=C.purple;c.lineWidth=2;c.beginPath();const ccw=p.value>0,st=ccw?-.2:.2,en=ccw?-Math.PI*1.7:Math.PI*1.7;c.arc(x,y-38,16,st,en,ccw);c.stroke();const xx=x+16*Math.cos(en),yy=y-38+16*Math.sin(en),sign=ccw?-1:1;arrow(c,xx+sign*7*Math.sin(en),yy-sign*7*Math.cos(en),xx,yy,C.purple,2);c.restore();text(c,f(p.value,1)+' kN·m',Math.max(50,Math.min(w-50,x)),y-65,C.purple,12,'center');}
+  });
+  if(totals.length)text(c,totals.length+' carga(s) distribuida(s) · escala relativa',18,20,C.muted,12);
+ }
+ function model(c,w,h,r,active,cut){
+  background(c,w,h);const s=r.s;
+  if(s.type==='column'){
+   const x=w*.43,y0=h-36,y1=40,bw=Math.min(48,w*.1),X=z=>y0-z/s.L*(y0-y1);
+   poly(c,[[x-bw/2,y0],[x+bw/2,y0],[x+bw/2+12,y0-6],[x+bw/2+12,y1-6],[x-bw/2+12,y1-6],[x-bw/2,y1]],'#d9e6f3',C.blue);poly(c,[[x-bw/2,y0],[x+bw/2,y0],[x+bw/2,y1],[x-bw/2,y1]],'#dfeaf5',C.blue);
+   for(const bx of [x-bw/2+8,x+bw/2-8])line(c,bx,y0-6,bx,y1+6,C.red,2);
+   for(let yy=y0-12;yy>y1;yy-=17)line(c,x-bw/2+5,yy,x+bw/2-5,yy,'#c18c94',1);
+   line(c,x-40,y0,x+55,y0,C.ink,3);for(let xx=x-35;xx<x+55;xx+=8)line(c,xx,y0,xx-8,y0+8,C.muted);
+   const P=active.P??(s.PD+s.PL+r.axialWeight);arrow(c,x+4,8,x+4,y1-7,C.orange,2);text(c,'P = '+f(P,1)+' kN',x+25,22,C.orange,12);
+   active.model.loads.filter(p=>p.type!=='dist').forEach(p=>{if(p.type==='point'){const yy=X(p.x);if(p.value>=0)arrow(c,x-95,yy,x-bw/2-5,yy,C.orange,2);else arrow(c,x-bw/2-5,yy,x-95,yy,C.orange,2);text(c,f(p.value,1)+' kN',x-102,yy-8,C.orange,12,'right');}else{const yy=X(p.x);circle(c,x+bw/2+26,yy,12,'#fff',C.purple);text(c,(p.value>=0?'↺ ':'↻ ')+f(p.value,1),x+bw/2+43,yy+4,C.purple,12);}});
+   active.model.loads.filter(p=>p.type==='dist').forEach(p=>{for(let k=0;k<=7;k++){const z=p.a+(p.b-p.a)*k/7,q=p.q0+(p.q1-p.q0)*k/7,yy=X(z);q>=0?arrow(c,x-75,yy,x-bw/2-5,yy,C.orange,1):arrow(c,x-bw/2-5,yy,x-75,yy,C.orange,1);}});
+   line(c,x-40,X(cut*s.L),x+65,X(cut*s.L),C.purple,1.3,[4,4]);text(c,'Corte',x+70,X(cut*s.L)+4,C.purple,12);text(c,'Base',x,y0+26,C.muted,12,'center');text(c,'ℓ = '+f(s.L,2)+' m',w-15,h-16,C.muted,12,'right');return;
+  }
+  const x0=45,x1=w-35,y=h-83,X=x=>x0+(x/s.L)*(x1-x0),depth=Math.max(12,Math.min(30,s.h/100*(x1-x0)/s.L)),dy=10,dx=16;
+  poly(c,[[x0,y],[x1,y],[x1+dx,y-dy],[x0+dx,y-dy]],'#d1e1f1',C.blue);
+  poly(c,[[x0,y],[x1,y],[x1,y+depth],[x0,y+depth]],'#e2edf7',C.blue);
+  poly(c,[[x1,y],[x1+dx,y-dy],[x1+dx,y+depth-dy],[x1,y+depth]],'#afc7df',C.blue);
+  line(c,x0+4,y+5,x1-4,y+5,C.red,1.8);line(c,x0+4,y+depth-4,x1-4,y+depth-4,C.red,1.8);
+  if(s.type!=='slab'){const step=r.sh.ok?Math.max(8,r.sh.spacing/1000*(x1-x0)/s.L):20;for(let xx=x0+8;xx<x1-3;xx+=step)line(c,xx,y+3,xx,y+depth-2,'#c6979e');}
+  for(const p of active.model.supports)support(c,X(p.x),y+depth,p.type);
+  drawLoads(c,active.model.loads,X,y,w);
+  line(c,X(s.L*cut),y-20,X(s.L*cut),y+depth+33,C.purple,1.3,[5,3]);
+  text(c,'A',x0,h-9,C.muted,12,'center');text(c,f(s.L,2)+' m',(x0+x1)/2,h-9,C.muted,12,'center');text(c,s.support==='cantilever'?'Libre':s.support==='continuous'?'C':'B',x1,h-9,C.muted,12,'center');
+ }
+ function section(c,w,h,r){
+  background(c,w,h,false);const s=r.s,b=s.b*10,H=s.h*10,k=Math.min((w-90)/b,(h-62)/H),bw=b*k,bh=H*k,x=(w-bw)/2,y=(h-bh)/2-5;
+  poly(c,[[x,y],[x+bw,y],[x+bw,y+bh],[x,y+bh]],'#e5eaf0','#70889f',1.5);
+  const cover=s.cover*k,off=(s.cover+s.tie/2)*k;
+  // Small deterministic aggregate marks aid reading the concrete section, not a photo.
+  for(let i=0;i<35;i++){const px=x+5+((i*53)%97)/97*(bw-10),py=y+5+((i*37)%101)/101*(bh-10);line(c,px,py,px+2,py+1,'#c6ced8',1);}
+  if(s.type!=='slab'){c.strokeStyle='#8294a9';c.lineWidth=Math.max(1,s.tie*k);c.strokeRect(x+off,y+off,bw-2*off,bh-2*off);}
+  const pts=[];
+  if(s.type==='column')pts.push(...r.col.bars);
+  else{
+   const o=s.cover+(s.type==='slab'?0:s.tie)+s.db/2;
+   for(const [dsg,by] of [[r.neg,o],[r.pos,H-o]]){
+    if(!dsg.ok)continue;
+    const n=s.type==='slab'?Math.max(2,Math.ceil((b-2*o)/dsg.spacing)+1):dsg.n;
+    for(let i=0;i<n;i++)pts.push({x:o+i*(b-2*o)/(n-1),y:by});
+   }
+  }
+  pts.forEach(p=>circle(c,x+p.x*k,y+p.y*k,Math.max(2.2,s.db*k/2),C.red,'#a03541'));
+  dim(c,x,y+bh+22,x+bw,s.b+' cm');line(c,x+bw+18,y,x+bw+18,y+bh,'#8c9baa');line(c,x+bw+13,y,x+bw+23,y,'#8c9baa');line(c,x+bw+13,y+bh,x+bw+23,y+bh,'#8c9baa');c.save();c.translate(x+bw+32,y+bh/2);c.rotate(-Math.PI/2);text(c,s.h+' cm',0,0,C.muted,12,'center');c.restore();
+  if(s.type==='slab')text(c,'Franja de 1 m · acero principal',w/2,16,C.muted,12,'center');
+  else text(c,'Recubrimiento '+s.cover+' mm',12,17,C.muted,12);
+  if(!r.validSection)text(c,'Sección por revisar',w/2,h-5,'#a12d41',12,'center');
+ }
+ function plot(c,w,h,result,key,color,cut,side){
+  background(c,w,h,false);const left=47,right=w-18,top=23,bot=h-33,L=result.L,mult=key==='v'?1000:1;
+  const lo=Math.min(0,result.extrema[key].min[key]*mult),hi=Math.max(0,result.extrema[key].max[key]*mult),range=hi-lo||1;
+  // Positive M and negative deflection drawn below their zero axes.
+  const flip=key==='M';const X=x=>left+x/L*(right-left),Y=v=>flip?top+(v*mult-lo)/range*(bot-top):bot-(v*mult-lo)/range*(bot-top),zero=Y(0);
+  for(let j=0;j<4;j++){const xx=left+(right-left)*j/3;line(c,xx,top,xx,bot,'#e9eef3');text(c,f(L*j/3,1),xx,h-12,C.muted,11,'center');}
+  line(c,left,zero,right,zero,'#a9b6c4');
+  for(const e of result.elements){const pts=[[X(e.a),zero]];for(let j=0;j<=50;j++){const p=result.field(e,e.h*j/50);pts.push([X(p.x),Y(p[key])]);}pts.push([X(e.b),zero]);poly(c,pts,color+'1b',color,1.4);}
+  text(c,f(flip?lo:hi,1),left-7,top+4,C.muted,11,'right');text(c,f(flip?hi:lo,1),left-7,bot+3,C.muted,11,'right');text(c,'x (m)',w-8,h-1,C.muted,10,'right');
+  const p=result.at(cut*L,side),xx=X(p.x),yy=Y(p[key]);line(c,xx,top-5,xx,bot+3,'#9aadc3',1,[3,3]);circle(c,xx,yy,3.3,color);text(c,f(p[key]*mult,2),Math.min(right-15,Math.max(left+16,xx)),Math.max(13,Math.min(h-26,yy-8)),color,12,'center');
+ }
+ function interaction(c,w,h,r){
+  background(c,w,h,false);const col=r.col,left=63,right=w-24,top=25,bot=h-40;
+  const maxM=Math.max(1,...col.curve.map(p=>p.M),...col.checks.map(p=>p.M))*1.17,minP=Math.min(...col.curve.map(p=>p.P)),maxP=Math.max(col.P0,...col.checks.map(p=>p.P))*1.12;
+  const X=M=>left+M/maxM*(right-left),Y=P=>bot-(P-minP)/(maxP-minP)*(bot-top);
+  for(let j=0;j<5;j++){const P=minP+(maxP-minP)*j/4;line(c,left,Y(P),right,Y(P),C.grid);text(c,f(P,0),left-8,Y(P)+4,C.muted,11,'right');const M=maxM*j/4;line(c,X(M),top,X(M),bot,C.grid);text(c,f(M,0),X(M),bot+18,C.muted,11,'center');}
+  poly(c,col.curve.map(p=>[X(p.M),Y(p.P)]),'#dceafb',C.blue,2);
+  col.checks.forEach((p,i)=>{const x=X(p.M),y=Y(p.P),clr=p.ratio<=1?C.orange:C.red;circle(c,x,y,4.5,clr,'#fff');text(c,'U'+(i+1),x+8,y+(i===0?-7:12),clr,12);});
+  text(c,'φPn · kN',12,14,C.ink,12);text(c,'φMn · kN·m',right,h-5,C.ink,12,'right');
+ }
+ return {plan,model,section,plot,interaction};
+})();
+if(typeof module!=='undefined')module.exports=RCVisuals;
+</script><script>'use strict';
+(()=>{
+ const $=id=>document.getElementById(id),fmt=(v,n=2)=>Number.isFinite(v)?v.toLocaleString('es-ES',{minimumFractionDigits:n,maximumFractionDigits:n}):'—';
+ const number=v=>String(v).trim()===''?NaN:Number(v),esc=v=>String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+ const states={beam:RCEngine.defaults('beam'),column:RCEngine.defaults('column'),slab:RCEngine.defaults('slab')};
+ let type='beam',result=null,activeIndex=1,cut=.5,side='right',timer=null;
+ const validLengths={beam:6,column:3,slab:4};
+ const state=()=>states[type];
+ const fields=['L','b','h','cover','fc','db','tie','agg','PD','PL'];
+ const title={beam:'Viga de hormigón armado',column:'Columna de hormigón armado',slab:'Losa unidireccional'};
+ function renderInputs(){
+  const s=state();if(Number.isFinite(s.L)&&s.L>=.3&&s.L<=30)validLengths[type]=s.L;fields.forEach(k=>$(k).value=s[k]);$('support').value=s.support;$('self').checked=s.self;
+  $('b').disabled=type==='slab';$('support-label').hidden=type==='column';$('column-boundary').hidden=type!=='column';$('tie-label').hidden=type==='slab';$('axial-fields').hidden=type!=='column';
+  $('length-label').textContent=type==='column'?'Altura libre ℓ (m)':'Longitud total ℓ (m)';
+  $('element-description').textContent=type==='column'?'Columna aislada con axial y flexión lateral.':type==='slab'?'Franja resistente de 1 m. Cargas repartidas por m².':'Sección rectangular constante. Hasta dos vanos iguales.';
+  $('load-guidance').textContent=type==='column'?'Axial positivo = compresión. Cargas laterales positivas hacia la derecha; momentos positivos antihorarios. Cambiar ℓ reescala las posiciones.':type==='slab'?'q en kN/m²; P y M actúan sobre la franja de 1 m. Positivo hacia abajo; momento antihorario. Cambiar ℓ reescala las posiciones.':'P y q positivas hacia abajo; momentos positivos antihorarios. Cambiar ℓ reescala las posiciones.';
+  document.querySelectorAll('[data-module]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.module===type)));
+  renderLoads();
+ }
+ const loadInput=(i,k,label,value)=>`<label>${label}<input aria-label="Carga ${i+1}: ${label}" data-load="${i}" data-key="${k}" type="number" step="any" value="${Number.isFinite(value)?value:''}"></label>`;
+ function renderLoads(){
+  const units=type==='slab'?'kN/m²':'kN/m';
+  $('load-list').innerHTML=state().loads.map((p,i)=>`<div class="load-card"><div class="load-head"><strong>CARGA ${String(i+1).padStart(2,'0')}</strong><select aria-label="Categoría de carga ${i+1}" data-load="${i}" data-key="cat"><option value="D" ${p.cat==='D'?'selected':''}>D · Permanente</option><option value="L" ${p.cat==='L'?'selected':''}>L · Variable</option></select><button type="button" class="remove-load" data-remove="${i}" aria-label="Eliminar carga ${i+1}">×</button></div><select class="load-type" aria-label="Tipo de carga ${i+1}" data-load="${i}" data-key="type"><option value="dist" ${p.type==='dist'?'selected':''}>Distribuida · uniforme / lineal</option><option value="point" ${p.type==='point'?'selected':''}>Fuerza puntual</option><option value="moment" ${p.type==='moment'?'selected':''}>Momento aplicado</option></select><div class="fields">${p.type==='dist'?loadInput(i,'a','Inicio (m)',p.a)+loadInput(i,'b','Fin (m)',p.b)+loadInput(i,'q0',`q inicio (${units})`,p.q0)+loadInput(i,'q1',`q fin (${units})`,p.q1):loadInput(i,'x',type==='column'?'Altura (m)':'Posición (m)',p.x)+loadInput(i,'value',p.type==='point'?'Fuerza (kN)':'Momento (kN·m)',p.value)}</div></div>`).join('');
+  $('add-load').disabled=state().loads.length>=30;
+ }
+ function choices(){
+  const opts=result.cases.map((c,i)=>`<option value="${i}">${esc(c.name)}</option>`).join('')+'<option value="service">Servicio · D + L</option><option value="dead">Solo D</option><option value="live">Solo L</option>';
+  $('case-select').innerHTML=opts;if(typeof activeIndex==='number'&&activeIndex>=result.cases.length)activeIndex=1;$('case-select').value=String(activeIndex);
+ }
+ function active(){
+  if(typeof activeIndex==='number')return result.cases[activeIndex];
+  const mode=activeIndex,fd=mode==='live'?0:1,fl=mode==='dead'?0:1;
+  return {name:mode==='service'?'Servicio · D + L':mode==='dead'?'Solo D':'Solo L',model:RCEngine.model(state(),fd,fl),result:result[mode],P:type==='column'?fd*(state().PD+result.axialWeight)+fl*state().PL:0};
+ }
+ function metric(label,value,unit,note){return `<div class="metric"><label>${label}</label><strong>${value} <small>${unit}</small></strong><p>${note}</p></div>`;}
+ function rebar(label,design,kind='main'){
+  const ok=design.ok,text=kind==='shear'?design.label:design.label;
+  return `<div class="rebar-row"><div class="row-head"><span>${label}</span><span class="${ok?'ok-tag':'bad-tag'}">${ok?'Sección verifica':'Revisar'}</span></div><strong>${esc(text)}</strong><p>${kind==='shear'?`Vu ${fmt(design.Vu)} kN · φVn ${fmt(design.capacity)} kN`:`As requerida ${fmt(design.needed/100)} cm²${type==='slab'?'/m':''} · propuesta ${ok?fmt(design.As/100):'—'} cm²${type==='slab'?'/m':''}<br>Mu ${fmt(design.Mu)} kN·m · φMn ${ok?fmt(design.capacity):'—'} kN·m`}</p></div>`;
+ }
+ function renderResult(){
+  const r=result,s=state(),col=r.col,Mu=Math.max(r.Ms,r.Mi),maxD=Math.abs(r.service.extrema.v.abs.v)*1000;
+  $('model-title').textContent=title[type];$('section-dimensions').textContent=s.b+' × '+s.h+' cm';
+  $('analysis-state').textContent=!r.validSection?'Revisar sección':col&&!col.short?'Sección verifica · falta 2.º orden':'Sección verifica · alcance parcial';
+  $('analysis-state').className='state'+(!r.validSection?' bad':col&&!col.short?' warn':'');
+  const as=col?col.As:Math.max(r.pos.ok?r.pos.As:0,r.neg.ok?r.neg.As:0),asOK=col?col.ok:r.pos.ok&&r.neg.ok;
+  $('metrics').innerHTML=metric('|Mu| máximo',fmt(Mu),'kN·m','Envolvente de resistencia')+metric('|Vu| máximo',fmt(r.Vu),'kN','Envolvente de resistencia')+metric('|δ| máximo',fmt(maxD),'mm','D + L · sección bruta')+metric(col?'Acero longitudinal':'Acero principal máximo',asOK?fmt(as/100):'—',type==='slab'?'cm²/m':'cm²',col?'Propuesta para primer orden':asOK?'Propuesta por cara':'No se encontró propuesta válida');
+  $('material-derived').innerHTML=`Ec = ${fmt(r.Ec/1000)} GPa<br>Ig = ${fmt(r.Ig/1e4,0)} cm⁴<br>fy = 420 MPa · Es = 200 GPa`;
+  $('plan-caption').textContent=type==='slab'?'Franja de cálculo · sin reparto de edificio':'Elemento aislado · ejes de referencia';
+  $('model-view-title').textContent=type==='column'?'Elevación y cargas':'Modelo y cargas';
+  if(col){
+   $('design-results').innerHTML=`<div class="rebar-row"><div class="row-head"><span>Armadura longitudinal</span><span class="${col.ok?'ok-tag':'bad-tag'}">${col.ok?'Sección verifica':'Revisar'}</span></div><strong>${col.label}</strong><p>${col.ok?'Propuesta':'Última sección probada'}: As = ${fmt(col.As/100)} cm²<br>ρ = ${fmt(col.rho*100)} % · rango 1–8 %</p></div>`+rebar('Cercos · separación orientativa',r.sh,'shear');
+  }else{
+   $('design-results').innerHTML=rebar('Cara inferior · momento positivo',r.pos)+rebar('Cara superior · momento negativo',r.neg)+(type==='slab'?`<div class="rebar-row"><div class="row-head"><span>Reparto transversal mínimo</span></div><strong>Ø${s.db} cada ${r.trans.spacing/10} cm</strong><p>As ≥ ${fmt(r.trans.As/100)} cm²/m · comprobar disposición de capas.</p></div>`:rebar('Estribos en toda la longitud',r.sh,'shear'));
+  }
+  $('interaction-panel').hidden=!col;
+  if(col)$('column-checks').innerHTML=`<h3>${col.ok?'Armadura propuesta':'Sección de prueba'} · ${col.n} Ø${s.db}</h3><p>φPn,máx = <strong>${fmt(col.P0,1)} kN</strong><br>kℓ/r = <strong>${fmt(col.slenderness,1)}</strong> · límite 22<br><span class="${col.short?'ok-tag':'bad-tag'}">${col.short?'Pasa el filtro de esbeltez adoptado.':'Requiere segundo orden; no se aprueba el miembro.'}</span></p>${col.checks.map((c,i)=>`<p>U${i+1} · ${esc(c.name)}<br>Pu = ${fmt(c.P,1)} kN · |Mu| = ${fmt(c.M,1)} kN·m<br>φMn a ese Pu = ${fmt(c.cap,1)} kN·m<br><strong class="${c.ratio<=1?'ok-tag':'bad-tag'}">${Number.isFinite(c.ratio)?'Demanda/capacidad: '+fmt(c.ratio):'Fuera del límite axial'}</strong></p>`).join('')}`;
+  const checks=col?[['Axial máximo',fmt(Math.max(...r.cases.map(c=>c.P)),1)+' kN'],['Interacción de sección',col.ok?'Verifica':'No verifica'],['Esbeltez de miembro',col.short?'kℓ/r ≤ 22':'Segundo orden pendiente'],['Cortante',r.sh.ok?'Verifica':'No verifica']]:[['Momento positivo',fmt(r.Ms)+' kN·m'],['Momento negativo','−'+fmt(r.Mi)+' kN·m'],['Cortante resistente φVn',fmt(r.sh.capacity)+' kN'],['Cortante',r.sh.ok?'Verifica':'No verifica']];
+  checks.push(['Momento de fisuración Mcr',fmt(r.Mr)+' kN·m'],['Deformación de servicio','EcIg · sin fisuración'],['Resultado','Comprobación parcial de sección']);
+  $('checks').innerHTML=checks.map(([k,v])=>`<div class="check-row"><span>${k}</span><strong>${v}</strong></div>`).join('');
+  $('notes').innerHTML='<h2>Aspectos pendientes del proyecto</h2>'+r.warnings.map(m=>'<p>• '+esc(m)+'</p>').join('')+'<p>La propuesta no incluye anclajes, empalmes, exposición ni detalles sísmicos. Uso didáctico; requiere revisión completa antes de construir.</p>';
+  $('calculation-steps').innerHTML='<h3>Valores de este modelo</h3><div class="formula">'+(col?`As = ${fmt(col.As)} mm² · ρ = ${fmt(col.rho*100)} %<br>φPn,máx = ${fmt(col.P0)} kN<br>kℓ/r = 2 × ${fmt(s.L*1000,0)} / ${fmt(Math.min(s.b,s.h)*10/Math.sqrt(12))} = ${fmt(col.slenderness)}`:`d = ${fmt(r.pos.d)} mm<br>As,mín = ${fmt(r.pos.Asmin)} mm²<br>As requerida (+) = ${fmt(r.pos.needed)} mm²<br>As requerida (−) = ${fmt(r.neg.needed)} mm²<br>εt (+) = ${fmt(r.pos.strain,5)} · εt (−) = ${fmt(r.neg.strain,5)}`)+`<br>Vc = ${fmt(r.sh.Vc)} kN · φVn = ${fmt(r.sh.capacity)} kN<br>δ máxima (D + L, Ig) = ${fmt(maxD)} mm</div>`;
+  $('status-text').textContent=title[type]+' · cálculo actualizado · '+r.cases.length+' combinaciones';
+  choices();renderActive();
+ }
+ function renderActive(){
+  if(!result)return;const a=active(),r=a.result,s=state();
+  $('diagram-case').textContent=a.name+' · δ siempre D + L';$('reactions-case').textContent=a.name;
+  $('case-description').textContent=type==='column'?`${a.name}. Cargas laterales sobre columna en voladizo. Axial positivo = compresión.`:`${a.name}. El peso propio ${s.self?'está incluido una sola vez':'está desactivado'}. Las cargas distribuidas se dibujan a escala relativa.`;
+  $('reactions').innerHTML=`<table><thead><tr><th>Apoyo</th><th>${type==='column'?'Altura':'x'} (m)</th><th>${type==='column'?'R lateral*':'R ↑'} (kN)</th><th>M ↺ (kN·m)</th></tr></thead><tbody>${r.reactions.map(p=>`<tr><td>${p.label}</td><td>${fmt(p.x)}</td><td>${fmt(p.R)}</td><td>${fmt(p.M)}</td></tr>`).join('')}</tbody></table>`;
+  $('balance').textContent=`Residuos de equilibrio: ΣF = ${r.balanceForce.toExponential(1)} kN; ΣM = ${r.balanceMoment.toExponential(1)} kN·m.`+(type==='column'?' *Reacción lateral positiva hacia la izquierda. Reacción axial de base = '+fmt(a.P)+' kN.':'');
+  draw();readCut();
+ }
+ function paint(id,fn){const can=$(id),rect=can.getBoundingClientRect();if(rect.width<1||rect.height<1)return;const dpr=Math.min(window.devicePixelRatio||1,2),w=rect.width,h=rect.height;can.width=Math.round(w*dpr);can.height=Math.round(h*dpr);const c=can.getContext('2d');c.scale(dpr,dpr);fn(c,w,h);}
+ function draw(){
+  if(!result)return;const a=active();
+  paint('plan-canvas',(c,w,h)=>RCVisuals.plan(c,w,h,result));paint('model-canvas',(c,w,h)=>RCVisuals.model(c,w,h,result,a,cut));paint('section-canvas',(c,w,h)=>RCVisuals.section(c,w,h,result));
+  paint('moment-canvas',(c,w,h)=>RCVisuals.plot(c,w,h,a.result,'M','#8158b1',cut,side));paint('shear-canvas',(c,w,h)=>RCVisuals.plot(c,w,h,a.result,'V','#007e9e',cut,side));paint('deflection-canvas',(c,w,h)=>RCVisuals.plot(c,w,h,result.service,'v','#138064',cut,side));
+  if(type==='column')paint('interaction-canvas',(c,w,h)=>RCVisuals.interaction(c,w,h,result));
+ }
+ function readCut(){
+  if(!result)return;const a=active(),s=state(),x=cut*s.L,p=a.result.at(x,side),sv=result.service.at(x,side),b=s.b*10,h=s.h*10,stressM=p.M*1e6/(b*h*h/6),ax=type==='column'?a.P*1000/(b*h):0;
+  $('cut-value').textContent=(type==='column'?'z':'x')+' = '+fmt(x)+' m';
+  $('cut-readout').innerHTML=`<span>M <b>${fmt(p.M)} kN·m</b></span><span>V <b>${fmt(p.V)} kN</b></span><span>δ servicio <b>${fmt(sv.v*1000)} mm</b></span><span>σ bruta* <b>${fmt(ax+Math.abs(stressM))} / ${fmt(ax-Math.abs(stressM))} MPa</b></span>`;
+  $('cut-readout').title='*Tensiones extremas elásticas: P/Ag ± M/W. Positivo = compresión. En columna δ negativo = hacia la derecha. No son tensiones de una sección fisurada.';
+ }
+ function recalculate(){
+  clearTimeout(timer);
+  try{result=RCEngine.calculate(state());$('error').hidden=true;$('results-root').classList.remove('invalid-results');$('results-root').removeAttribute('aria-busy');renderResult();return true;}
+  catch(e){result=null;$('error').textContent='No se pudo calcular: '+e.message;$('error').hidden=false;$('analysis-state').textContent='Modelo sin resultado válido';$('analysis-state').className='state bad';$('results-root').classList.add('invalid-results');$('results-root').removeAttribute('aria-busy');$('status-text').textContent='Revisa los datos del modelo. Los resultados anteriores no son válidos.';return false;}
+ }
+ function queue(){
+  result=null;clearTimeout(timer);$('analysis-state').textContent='Actualizando cálculo…';$('analysis-state').className='state warn';$('results-root').setAttribute('aria-busy','true');timer=setTimeout(recalculate,280);
+ }
+ function moduleSelect(t){if(!states[t])return;clearTimeout(timer);type=t;activeIndex=1;renderInputs();recalculate();}
+ fields.forEach(k=>$(k).addEventListener('input',()=>{
+  const s=state(),v=number($(k).value),old=k==='L'?validLengths[type]:s[k];s[k]=v;
+  if(k==='L'&&Number.isFinite(v)&&v>=.3&&v<=30&&old>0){s.loads.forEach(p=>{if(p.type==='dist'){p.a=+(p.a*v/old).toFixed(5);p.b=+(p.b*v/old).toFixed(5);}else p.x=+(p.x*v/old).toFixed(5);});validLengths[type]=v;renderLoads();}
+  queue();
+ }));
+ $('support').addEventListener('change',()=>{state().support=$('support').value;queue();});$('self').addEventListener('change',()=>{state().self=$('self').checked;queue();});
+ $('load-list').addEventListener('input',e=>{
+  const t=e.target;if(!t.dataset.key||['cat','type'].includes(t.dataset.key))return;state().loads[Number(t.dataset.load)][t.dataset.key]=number(t.value);queue();
+ });
+ $('load-list').addEventListener('change',e=>{
+  const t=e.target;if(!['cat','type'].includes(t.dataset.key))return;const i=Number(t.dataset.load),p=state().loads[i];
+  if(t.dataset.key==='cat')p.cat=t.value;
+  else{state().loads[i]=t.value==='dist'?{type:'dist',cat:p.cat,a:0,b:state().L,q0:5,q1:5}:{type:t.value,cat:p.cat,x:type==='column'?state().L:state().L/2,value:10};renderLoads();}
+  recalculate();
+ });
+ $('load-list').addEventListener('click',e=>{const b=e.target.closest('[data-remove]');if(!b)return;state().loads.splice(Number(b.dataset.remove),1);renderLoads();recalculate();});
+ $('add-load').addEventListener('click',()=>{if(state().loads.length>=30)return;state().loads.push({type:'point',cat:'L',x:type==='column'?state().L:state().L/2,value:10});renderLoads();recalculate();});
+ $('model-form').addEventListener('submit',e=>{e.preventDefault();recalculate();});$('calculate-button').addEventListener('click',recalculate);
+ $('example-button').addEventListener('click',()=>{states[type]=RCEngine.defaults(type);activeIndex=1;renderInputs();recalculate();});
+ document.querySelectorAll('[data-module]').forEach(b=>b.addEventListener('click',()=>moduleSelect(b.dataset.module)));
+ $('case-select').addEventListener('change',()=>{const v=$('case-select').value;activeIndex=/^\d+$/.test(v)?Number(v):v;renderActive();});
+ $('cut').addEventListener('input',()=>{cut=Number($('cut').value)/1000;draw();readCut();});$('cut-side').addEventListener('change',()=>{side=$('cut-side').value;draw();readCut();});
+ for(const id of ['moment-canvas','shear-canvas','deflection-canvas'])$(id).addEventListener('pointermove',e=>{if(!result)return;const rect=$(id).getBoundingClientRect();cut=Math.max(0,Math.min(1,(e.clientX-rect.left-47)/(rect.width-65)));$('cut').value=Math.round(cut*1000);draw();readCut();});
+ $('method-button').addEventListener('click',()=>{$('method').open=true;$('method').scrollIntoView({behavior:'smooth'});});
+ $('print-button').addEventListener('click',()=>{if(recalculate())window.print();else $('error').scrollIntoView({behavior:'smooth'});});
+ if(typeof ResizeObserver!=='undefined'){const resize=new ResizeObserver(()=>draw());document.querySelectorAll('canvas').forEach(c=>resize.observe(c));}else window.addEventListener('resize',draw);
+ window.addEventListener('beforeprint',draw);window.addEventListener('afterprint',draw);
+ const summary=()=>result?{elemento:type,modelo:state(),momentoMaximo:Math.max(result.Ms,result.Mi),cortanteMaximo:result.Vu,flechaServicioMm:Math.abs(result.service.extrema.v.abs.v)*1000,seccionVerifica:result.validSection,segundoOrdenPendiente:!!(result.col&&!result.col.short),avisos:result.warnings,alcance:'Predimensionamiento didáctico; no es verificación integral de una estructura.'}:{error:'El modelo no tiene resultados válidos.'};
+ if(document.modelContext?.registerTool){try{document.modelContext.registerTool({name:'consultar_hormigon_armado',description:'Obtiene el modelo y los resultados actuales del laboratorio de hormigón armado, con su alcance y avisos.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true},execute:async()=>({content:[{type:'text',text:JSON.stringify(summary())}]})});}catch(e){/* Ordinary UI remains fully usable when an experimental API differs. */}}
+ window.RCApp={states,moduleSelect,recalculate,summary,getResult:()=>result,draw};
+ renderInputs();recalculate();
+})();
+</script>
+</body></html>
